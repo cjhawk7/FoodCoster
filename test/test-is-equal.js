@@ -19,6 +19,7 @@ describe('isEqual', function() {
             expect(answer).to.be.true;
         });
 
+        
         // range of inputs that the function should return false for
         const unequalInputs = [
             ['1', 1],
