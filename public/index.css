@@ -59,7 +59,7 @@ p {
 .container-search {
     border: 2px solid;
     padding-bottom: 50px;
-    width: 600px;
+    width: 1000px;
     height: 400px;    
     margin: auto;
     margin-top: 200px;
@@ -76,7 +76,7 @@ p {
     color: black;
     margin: auto;
     display: block;
-    }
+}
 
 h2 {
     text-align: center;

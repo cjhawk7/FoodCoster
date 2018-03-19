@@ -1,21 +1,28 @@
 var MOCK_STATUS_UPDATES = {
     "statusUpdates": [
-        
-            "monthLastUpdate":4,
-            "contributors":91,
+        {
             "name":"Belgrade, Serbia",
+        
             "prices":[
                {
                   "average_price":5.443478260869566,
-                  "item_name":"Meal, Inexpensive Restaurant, Restaurants",
-                  "highest_price":7,
-                  "item_id":1,
-                  "lowest_price":4,
-                  "data_points": 50
                }
             ]
+        }
     ]  
 };
+
+$('.signup-btn').on('click', function(){
+    $('.signup-page').addClass("hidden");
+    $('.login-page').removeClass("hidden");
+});
+
+
+function statusUpdates() {
+    $.get('/MOCK_STATUS_UPDATES', function(data) {
+
+    });
+}
 
 function getRecentStatusUpdates(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_STATUS_UPDATES)}, 100);
@@ -39,3 +46,4 @@ function getAndDisplayStatusUpdates() {
 $(function() {
     getAndDisplayStatusUpdates();
 })
+
