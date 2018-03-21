@@ -12,10 +12,10 @@ var MOCK_STATUS_UPDATES = {
     ]  
 };
 
-$('.signup-btn').on('click', function(){
-    $('.signup-page').addClass("hidden");
-    $('.login-page').removeClass("hidden");
-});
+// $('.signup-btn').on('click', function(){
+//     $('.signup-page').addClass("hidden");
+//     $('.login-page').removeClass("hidden");
+// });
 
 
 function statusUpdates() {
