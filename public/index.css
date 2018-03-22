@@ -46,6 +46,19 @@ h1 {
   display: block;
   }
 
+  .js-signup-btn {
+    width: 100px;
+    height: 35px;
+    font-family: Open-sans;
+    font-size:20px;
+    border-radius: 6px;
+    background-color: white;
+    color: black;
+    margin: auto;
+    display: block;
+    }
+
+
 label[for="email"], [for="password"]  {
     display: block;
     text-align: center;
@@ -78,6 +91,18 @@ p {
     display: block;
 }
 
+.js-return-btn {
+    width: 100px;
+    height: 35px;
+    font-family: Open-sans;
+    font-size:20px;
+    border-radius: 6px;
+    background-color: white;
+    color: black;
+    margin: auto;
+    display: block;
+}
+
 h2 {
     text-align: center;
 
@@ -92,3 +117,7 @@ h2 {
     margin-top: 200px;
     border-radius: 3px;
 }
+
+.hidden {
+    display: none;
+  }

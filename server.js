@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(express.static('public'));
 //app.listen(process.env.PORT || 8080);
-// const {MOCK_STATUS_UPDATES} = require('./app');
+const {MOCK_STATUS_UPDATES} = require('./app');
 
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
