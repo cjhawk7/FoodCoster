@@ -1,10 +1,8 @@
-
-
 let MOCK_STATUS_UPDATES = {
     "statusUpdates": [
         {
             "name":"Belgrade, Serbia",
-        
+            
             "prices":[
                {
                   "average_price":5.443478260869566,
@@ -12,26 +10,26 @@ let MOCK_STATUS_UPDATES = {
             ]
         }
     ]  
-  };
-
-
-function statusUpdates(searchTerm) {
-    $.get('/mock_status_updates', function(data) {
-        $('.feedback-js-page').text(data);
-    });
-}
+};
 
 function watchSubmit() {
     $('.js-search-page').submit(event => {
         event.preventDefault();
         const queryTarget = $(event.currentTarget).find('.js-query');
         const query = queryTarget.val();
-        statusUpdates(query);
+        getRecentStatusUpdates(displayStatusUpdates);
     });
 };
 $(watchSubmit);
 
 function getRecentStatusUpdates(callbackFn) {
+    // const settings = {
+    //     url: `mock_status_updates`,
+    //     dataType: 'json',
+    //     type: 'GET',
+    //     success: callback,
+    // }
+    // $.ajax(settings);  
     setTimeout(function(){ callbackFn(MOCK_STATUS_UPDATES)}, 100);
 }
 
@@ -39,8 +37,11 @@ function getRecentStatusUpdates(callbackFn) {
 // to real API later
 function displayStatusUpdates(data) {
     for (index in data.statusUpdates) {
-       $('body').append(
-        '<p>' + data.statusUpdates[index].text + '</p>');
+       $('.container-results').append(
+        '<p>' + data.statusUpdates[index].name + data.statusUpdates[index].prices.map(function(item) {
+            return item.average_price;
+        
+        }).join(', ') + '</p>');
     }
 }
 

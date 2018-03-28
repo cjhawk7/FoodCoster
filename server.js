@@ -12,9 +12,9 @@ app.use(morgan('common'));
 
 
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Projects/travel-app/index.html');
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/Projects/travel-app/index.html');
+// });
 
 app.get('/mock_status_updates', (req, res) => {
     res.json(MOCK_STATUS_UPDATES);
