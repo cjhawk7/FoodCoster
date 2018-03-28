@@ -22,18 +22,11 @@ it('should list items on GET', function() {
 
 
   return chai.request(app)
-      .get('/mock_status_updates')
+      .get('/')
       .then(function(res) {
         console.log('res.body', res.body);
         expect(res).to.have.status(200);
-        expect(res).to.be.json;
-        expect(res.body.statusUpdates).to.be.a('array');
-        expect(res.body.statusUpdates.length).to.be.at.least(0);
-        const expectedKeys = ['name', 'prices'];
-        res.body.statusUpdates.forEach(function(item) {
-          expect(item).to.be.a('object');
-          expect(item).to.include.keys(expectedKeys);
-        });
+        expect(res).to.be.html;
       });
   });
 });
