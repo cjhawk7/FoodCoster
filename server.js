@@ -13,7 +13,7 @@ app.use(morgan('common'));
 
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Projects/travel-app/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 

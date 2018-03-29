@@ -15,8 +15,8 @@
                     <input type= "text" class= "js-query" id= "lname" placeholder = "email/username" required>
                     <label for="password">Password</label>
                     <input type= "text" class= "js-query" id= "lname" placeholder = "password" required>
+                    <button type="button" class="js-signup-btn">Signup</button>
                 </form>
-                <button type="button" class="js-signup-btn">Signup</button>
                 <p><a href="/login">Log in</a> if you already have an account.</p>
             </div>
     </div>      
@@ -27,28 +27,23 @@
                     <input type= "text" class= "js-query" id= "lname" placeholder = "email/username" required>
                     <label for="password">Password</label>
                     <input type= "text" class= "js-query" id= "lname" placeholder = "password" required>
+                    <button type="button" class="js-login-btn">Login</button>
                 </form>
-                <button type="button" class="js-login-btn">Login</button>
             </div>
     </div>    
     <div class="search hidden">
         <div class="container-search">
             <h2>Track your expenses and compare</h2>
-            <form class='form' action="" method ='post'>
-                <input type= "text" class= "js-query" id= "lname" placeholder = "Daily food expenses">
-                <input type= "text" class= "js-query" id= "lname" placeholder = "Desired-Location">
-                <div class="user-data"></div>
+            <form class='search-form' action="" method ='post'>
+                <input type= "text" class= "js-query-number" id= "lname" placeholder = "Budget" >
+                <input type= "text" class= "js-query-name" id= "lname" placeholder = "Desired-Location" required>
+                <button type="submit" class="js-search-btn">Search</button>
             </form>
-            <button type="submit" class="js-search-btn">Search</button>
         </div>
-    </div>
-    <div class="feedback hidden">
         <div class="container-results">
-            <button type="submit" class="js-return-btn">Return</button>
         </div>
     </div>
-
-
+   
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src ="app.js"></script>

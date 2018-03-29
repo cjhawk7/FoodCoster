@@ -10,24 +10,25 @@ chai.use(chaiHttp);
 
 describe('MOCK_STATUS_UPDATES', function() {
 
-    before(function() {
-      return runServer();
-    });
+  before(function() {
+    return runServer();
+  });
 
-    after(function() {
-      return closeServer();
-    });
+  after(function() {
+    return closeServer();
+  });
 
-it('should list items on GET', function() {
+  it('should list items on GET', function() {
 
 
   return chai.request(app)
-      .get('/')
-      .then(function(res) {
-        console.log('res.body', res.body);
-        expect(res).to.have.status(200);
-        expect(res).to.be.html;
-      });
+    .get('/')
+    .then(function(res) {
+      console.log('res.body', res.body);
+      expect(res).to.have.status(200);
+      expect(res).to.be.html;
+      expect(res.body).to.contain('Food Budget Travel Tracker')
+    });
   });
 });
 
