@@ -19,7 +19,10 @@ function getNumbeoData(searchTerm, callback) {
         url: `https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`,
         dataType: 'json',
         type: 'GET',
-        success: callback
+        success: callback,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        }
     };
     $.ajax(settings);  
 }
