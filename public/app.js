@@ -22,16 +22,17 @@ function getNumbeoData(searchTerm, callback) {
         success: callback,
         headers: {
             'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
         }
     };
     $.ajax(settings);  
 }
 
 
-
 function displayNumbeoData(data) {
 
-       $('.container-results').append(data.prices[0].average_price);
+    $('.container-results').append(data.prices[0].average_price);
 }
 
 

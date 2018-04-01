@@ -10,14 +10,20 @@ app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  next();
+});
 
+app.get('/https://www.numbeo.com/api/city_prices', (req, res) => {
+
+});
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-
-
-
 
 
   let server;
