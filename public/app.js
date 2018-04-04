@@ -1,33 +1,31 @@
-// let MOCK_STATUS_UPDATES = {
-//     "statusUpdates": [
-//         {
-//             "name":"Belgrade, Serbia",
-            
-//             "prices":[
-//                {
-//                   "average_price":5.443478260869566,
-//                }
-//             ]
-//         }
-//     ]  
-// };
+
 
 
 
 function getNumbeoData(searchTerm, callback) {
-    console.log(searchTerm);
-    const settings = {
-        url: `https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`,
-        dataType: 'json',
-        type: 'GET',
-        success: callback,
-        // headers: {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Access-Control-Allow-Headers': 'Content-Type',
-        //     'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
-        // }
-    };
-    $.ajax(settings);  
+    axios.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+
+
+
+
+    // const settings = {
+    //     url: `https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`,
+    //     dataType: 'json',
+    //     type: 'GET',
+    //     success: callback,
+    // };
+    //     headers {
+    //         'Access-Control-Allow-Origin':   '*',    
+    //         'Access-Control-Allow-Headers': 'Content-Type',
+    //         'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
+    //     }
+    // $.ajax(settings);  
 }
 
 // function numberOfMeals() {
@@ -55,7 +53,6 @@ function getAndDisplayNumbeoData() {
 $(function() {
     getAndDisplayNumbeoData();
 })
-
 
 
 $('.js-signup-btn').on('click', function(){
