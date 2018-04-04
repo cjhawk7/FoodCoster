@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
+const axios = require('axios');
 const router = express.Router();
 const app = express();
 app.use(express.static('public'));
@@ -11,13 +11,27 @@ app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type');
-//   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-//   next();
-// });
 
+app.get('/makeRequest', function (req, res) {
+  axios.get('https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=Phoenix')
+  .then(function (response) {
+    return response.json()
+    console.log(response);
+  })
+  .then(function (data) {
+    
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+});
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  next();
+});
 
 
 app.get('/', (req, res) => {
