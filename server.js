@@ -2,24 +2,23 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+// const util = require('util');
 const router = express.Router();
 const app = express();
 app.use(express.static('public'));
+const request = require('request-promise');
 
 
 
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
-
+// need to add headers with request to api? 
 app.get('/makeRequest', function (req, res) {
   axios.get('https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=Phoenix')
   .then(function (response) {
-    return response.json()
-    console.log(response);
-  })
-  .then(function (data) {
-    
+    console.log(JSON.stringify(response.data));
+    // res.json(response);
   })
   .catch(function (error) {
     console.log(error);
