@@ -6,19 +6,26 @@ const axios = require('axios');
 const router = express.Router();
 const app = express();
 app.use(express.static('public'));
-const request = require('request-promise');
+
 
 
 
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
-// need to add headers with request to api? 
 app.get('/makeRequest', function (req, res) {
-  axios.get('https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=Phoenix')
+  var instance = axios.create();
+// added headers
+// need to display data after success callback
+  instance.get('https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=Phoenix', {
+    headers: {'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': 'Content-Type',
+              'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
+    }
+  })
   .then(function (response) {
     console.log(JSON.stringify(response.data));
-    // res.json(response);
+    // JSON.stringify(response.data));
   })
   .catch(function (error) {
     console.log(error);
