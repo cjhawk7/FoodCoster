@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-// const util = require('util');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const router = express.Router();
 const app = express();
 app.use(express.static('public'));
@@ -13,10 +14,8 @@ app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
-app.get('/makeRequest', function (req, res) {
+app.get('/makeNumbeoRequest', function (req, res) {
   var instance = axios.create();
-// added headers
-// need to display data after success callback
   instance.get('https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=Phoenix', {
     headers: {'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': 'Content-Type',
@@ -24,8 +23,7 @@ app.get('/makeRequest', function (req, res) {
     }
   })
   .then(function (response) {
-    console.log(JSON.stringify(response.data));
-    // JSON.stringify(response.data));
+    res.json(response.data.prices[0].average_price);
   })
   .catch(function (error) {
     console.log(error);
@@ -47,19 +45,27 @@ app.get('/', (req, res) => {
 
   let server;
 
-  function runServer() {
-    const port = process.env.PORT || 8080;
+  function runServer(makeNumbeoRequest, port=8080) {
+    // const port = process.env.PORT || 8080;
     return new Promise((resolve, reject) => {
+      mongoose.connect(makeNumbeoRequest, err => {
+        if (err) {
+          return reject(err);
+        }
+
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
+        // need to pass in server?
         resolve(server);
       }).on('error', err => {
+        mongoose.disconnect();
         reject(err);
       });
     });
-  }
+  });
+}
 
-
+//config for mongoose, check sample code
   function closeServer() {
     return new Promise((resolve, reject) => {
       console.log('Closing server');
