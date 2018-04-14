@@ -14,20 +14,8 @@ app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
-app.get('/makeNumbeoRequest', function (req, res) {
-  var instance = axios.create();
-  instance.get('https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=Phoenix', {
-    headers: {'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Headers': 'Content-Type',
-              'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
-    }
-  })
-  .then(function (response) {
-    res.json(response.data.prices[0].average_price);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+app.get('/makeRequest', function (req, res) {
+ 
 });
 
 app.use(function (req, res, next) {
@@ -45,13 +33,13 @@ app.get('/', (req, res) => {
 
   let server;
 
-  function runServer(makeNumbeoRequest, port=8080) {
-    // const port = process.env.PORT || 8080;
+  function runServer() {
+    const port = process.env.PORT || 8080;
     return new Promise((resolve, reject) => {
-      mongoose.connect(makeNumbeoRequest, err => {
-        if (err) {
-          return reject(err);
-        }
+      // mongoose.connect(makeRequest, err => {
+      //   if (err) {
+      //     return reject(err);
+      //   }
 
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
@@ -62,7 +50,6 @@ app.get('/', (req, res) => {
         reject(err);
       });
     });
-  });
 }
 
 //config for mongoose, check sample code
