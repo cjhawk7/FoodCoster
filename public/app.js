@@ -3,35 +3,16 @@
 
 
 function getNumbeoData(searchTerm, callback) {
-    axios.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`)
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-
-
-
-
-    // const settings = {
-    //     url: `https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`,
-    //     dataType: 'json',
-    //     type: 'GET',
-    //     success: callback,
-    // };
-    //     headers {
-    //         'Access-Control-Allow-Origin':   '*',    
-    //         'Access-Control-Allow-Headers': 'Content-Type',
-    //         'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
-    //     }
-    // $.ajax(settings);  
+   
+    const settings = {
+        url: '/makeRequest',
+        dataType: 'json',
+        type: 'GET',
+        success: callback,
+    };
+    
+    $.ajax(settings);  
 }
-
-// function numberOfMeals() {
-//     let queryBudget = $()
-//     $('.container-results').append() 
-// }
 
 
 function displayNumbeoData(data) {

@@ -15,7 +15,20 @@ const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
 app.get('/makeRequest', function (req, res) {
- 
+  var instance = axios.create();
+  const searchTerm = 'Phoenix';
+  instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`, {
+    headers: {'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': 'Content-Type',
+              'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
+    }
+  })
+  .then(function (response) {
+    res.json(response.data.prices[0].average_price);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 });
 
 app.use(function (req, res, next) {
