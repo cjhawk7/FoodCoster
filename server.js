@@ -23,7 +23,7 @@ app.get('/makeRequest/:cityName', function (req, res) {
     }
   })
   .then(function (response) {
-    res.json(response.data.prices[0].average_price);
+    res.json(response.data.prices[0]);
   })
   .catch(function (error) {
     console.log(error);

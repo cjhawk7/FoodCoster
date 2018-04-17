@@ -16,8 +16,9 @@ function getNumbeoData(cityName, callback) {
 
 
 function displayNumbeoData(data) {
-    $('.container-results').append(data.prices[0].average_price);
+    $('.container-results').append(data['average_price']);
 }
+
 
 
 function getAndDisplayNumbeoData() {
