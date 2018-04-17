@@ -7,17 +7,16 @@ mongoose.Promise = global.Promise;
 const router = express.Router();
 const app = express();
 app.use(express.static('public'));
-
-
-
-
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 
-app.get('/makeRequest', function (req, res) {
+
+
+
+app.get('/makeRequest/:cityName', function (req, res) {
   var instance = axios.create();
-  const searchTerm = 'Phoenix';
-  instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${searchTerm}`, {
+  console.log(req.params, 'params') 
+  instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${req.params.cityName}`, {
     headers: {'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': 'Content-Type',
               'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
@@ -37,7 +36,6 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   next();
 });
-
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');

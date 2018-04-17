@@ -2,10 +2,10 @@
 
 
 
-function getNumbeoData(searchTerm, callback) {
+function getNumbeoData(cityName, callback) {
    
     const settings = {
-        url: '/makeRequest',
+        url: '/makeRequest/' + cityName,
         dataType: 'json',
         type: 'GET',
         success: callback,
@@ -23,9 +23,9 @@ function displayNumbeoData(data) {
 function getAndDisplayNumbeoData() {
     $('.search').submit(event => {
         event.preventDefault();
-        const queryTarget = $(event.currentTarget).find('.js-query-search'[1]);
+        const queryTarget = $(event.currentTarget).find('.js-location');
         const query = queryTarget.val();
-        console.log('hi', queryTarget.val());
+        console.log(queryTarget.val());
         getNumbeoData(query, displayNumbeoData);
     });
 };
