@@ -24,10 +24,9 @@ describe('MOCK_STATUS_UPDATES', function() {
   return chai.request(app)
     .get('/')
     .then(function(res) {
-      console.log('res.body', res.body);
       expect(res).to.have.status(200);
       expect(res).to.be.html;
-      expect(res.body).to.contain('Food Budget Travel Tracker')
+      expect(res.text).to.contain('Food Budget Finder')
     });
   });
 });
