@@ -31,6 +31,25 @@ describe('MOCK_STATUS_UPDATES', function() {
   });
 });
 
+it('should list average price on GET', function() {
+  return chai.request(app)
+    .get('/makeRequest')
+    .then(function(res) {
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+
+      expect(res.body.length).to.be.at.least(1);
+
+      // const expectedKeys = ['id','name', 'ingredients'];
+      // res.body.forEach(function(item) {
+      //   expect(item).to.be.a('object');
+      //   expect(item).to.include.keys(expectedKeys);
+      // });
+    });
+});
+
+
 // it('should add an item on POST', function() {
 //   const newItem = {name: '', average_price: ''};
 //   return chai.request(app)

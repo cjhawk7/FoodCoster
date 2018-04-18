@@ -2,7 +2,7 @@
 
 
 
-function getNumbeoData(cityName, callback) {
+function getNumbeoData(cityName, budgetTotal, timeTotal, callback) {
    
     const settings = {
         url: '/makeRequest/' + cityName,
@@ -17,6 +17,7 @@ function getNumbeoData(cityName, callback) {
 
 function displayNumbeoData(data) {
     $('.container-results').append(data['average_price']);
+    
 }
 
 
@@ -24,12 +25,19 @@ function displayNumbeoData(data) {
 function getAndDisplayNumbeoData() {
     $('.search').submit(event => {
         event.preventDefault();
-        const queryTarget = $(event.currentTarget).find('.js-location');
-        const query = queryTarget.val();
-        console.log(queryTarget.val());
-        getNumbeoData(query, displayNumbeoData);
+        const location = $(event.currentTarget).find('.js-location').val();
+        const budget = $(event.currentTarget).find('.js-budget').val();
+        const time = $(event.currentTarget).find('.js-length').val();
+        console.log(location);
+        console.log(budget);
+        getNumbeoData(location, budget, time, displayNumbeoData);
     });
 };
+
+function displayBudget() {
+
+}
+
 
 
 $(function() {
