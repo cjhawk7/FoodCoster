@@ -23,7 +23,7 @@ function displayNumbeoData(data) {
 
     $('.container-results').append(data['average_price'] + ' dollars average per meal in ' + location);
     
-    if  (time = 1 && data['average_price'] * 21 <= budget) {
+    if  (time == 1 && data['average_price'] * 21 <= budget) {
         console.log('You are within your budget!') 
         $('.container-results').append(' You are within your budget!') 
     }
