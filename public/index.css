@@ -117,3 +117,9 @@ h2 {
 .hidden {
     display: none;
   }
+
+  .container-results {
+      border: 2px solid;
+      width: 300px;
+      margin: auto;
+  }
