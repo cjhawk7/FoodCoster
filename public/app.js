@@ -14,16 +14,36 @@ function getNumbeoData(cityName, budgetTotal, timeTotal, callback) {
     $.ajax(settings);  
 }
 
+function round(number, precision) {
+    var shift = function (number, precision, reverseShift) {
+      if (reverseShift) {
+        precision = -precision;
+      }  
+      var numArray = ("" + number).split("e");
+      return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+    };
+    return shift(Math.round(shift(number, precision, false)), precision, true);
+  }
 
 function displayNumbeoData(response) {
-
-    const location = $('.js-location').val();
-    const budget = $('.js-budget').val();
-    const time = $('.js-length').val();
-
+    const calcResult = 0;
+    const location = $('#location').val();
+    const budget = $('#budget').val();
+    const time = $('#time').val();
+    const unit = $('#unit').val();
     console.log(response);
-    $('.container-results').append(response.data['average_price'] + response.currency + ' average to eat out in ' + location);
-    if  (time == 1 && response.data['average_price'] * 21 <= budget) {
+    
+    $('.container-results').append(round(response.data['average_price'], 2)  + response.currency + ' average to eat out in ' + location);
+    
+    if  (unit === 'Weeks') {
+        
+      calcResult = response.data['average_price'] * 7 * 3 * time;
+
+    } else if (unit === 'Days') {
+
+        calcResult = response.data['average_price'] * 3 * time;
+    }
+    if (calcResult <= budget) {
         console.log('You are within your budget!') 
         $('.container-results').append('You are within your budget!') 
     }
