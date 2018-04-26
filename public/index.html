@@ -24,9 +24,9 @@
             <div class="container">
                 <form class='form' action="" method ='post'>
                     <label for="email">Email</label>
-                    <input type= "text" class= "js-query" id= "lname" placeholder = "email/username" required>
+                    <input type= "text" class= "js-query" id= "email" placeholder = "email/username" required>
                     <label for="password">Password</label>
-                    <input type= "text" class= "js-query" id= "lname" placeholder = "password" required>
+                    <input type= "text" class= "js-query" id= "password" placeholder = "password" required>
                     <button type="button" class="js-login-btn">Login</button>
                 </form>
             </div>
@@ -35,9 +35,13 @@
         <div class="container-search">
             <h2>Find your food costs</h2>
             <form class='search-form' action="" method ='post'>
-                <input type= "text" class= "query-search js-budget" id= "lname" placeholder = "Budget">
-                <input type= "text" class= "query-search js-location" id= "lname" placeholder = "Desired-Location">
-                <input type= "text" class= "query-search js-length" id= "lname" placeholder = "Length-of-Time">
+                <input type= "number" class= "query-search js-budget" id= "budget" placeholder = "Budget">
+                <input type= "text" class= "query-search js-location" id= "location" placeholder = "Desired-Location">
+                <input type= "number" class= "query-search js-length" id= "time" placeholder = "Length-of-Time(in weeks)">
+                <select name="text" class= "query-search"> <!--Supplement an id here instead of using 'text'-->
+                    <option value="Days">Days</option> 
+                    <option value="Weeks" selected>Weeks</option>
+                </select>
                 <button type="submit" class="js-search-btn">Search</button>
                 <div class="container-results hidden">
                     <!-- <button type="submit" class="js-search-btn">remove</button> -->

@@ -9,9 +9,18 @@ const app = express();
 app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
+const {PORT, DATABASE_URL} = require('./config');
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  next();
+});
 
-
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
 app.get('/makeRequest/:cityName', function (req, res) {
   var instance = axios.create();
@@ -35,6 +44,18 @@ app.get('/makeRequest/:cityName', function (req, res) {
   });
 });
 
+app.get('/userList/:id', (req, res) => {
+  Restaurant
+    // this is a convenience method Mongoose provides for searching
+    // by the object _id property
+    .findById(req.params.id)
+    .then(restaurant => res.json(restaurant.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error' });
+    });
+});
+
 app.post('/userList', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
   const requiredFields = ['budget', 'location', 'time'];
@@ -49,17 +70,6 @@ app.post('/userList', jsonParser, (req, res) => {
   const item = ShoppingList.create(req.body.location, req.body.budget, req.body.time);
   res.status(201).json(item);
 });;
-
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-  next();
-});
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
 
 
   let server;
