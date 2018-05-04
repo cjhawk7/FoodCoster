@@ -54,7 +54,7 @@ describe('userList', function() {
     return closeServer();
   });
 
-
+//not sure if describe is being used here or not
  describe('GET endpoint', function() {
 
   it('should list items on GET', function() {
@@ -87,6 +87,7 @@ describe('userList', function() {
 
   it('should list average price on GET', function() {
     return chai.request(app)
+    //need to get ID for property from database
       .get('/userList/')
       .then(function(res) {
         expect(res).to.have.status(200);
