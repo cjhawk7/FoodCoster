@@ -51,7 +51,6 @@ function displayNumbeoData(response) {
         console.log('Not enough money!')
         $('.container-results').append(' Sorry, not enough money!') 
     }
-
 }
 
 

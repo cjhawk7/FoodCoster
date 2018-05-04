@@ -10,6 +10,7 @@ app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 const {PORT, DATABASE_URL} = require('./config');
+const {userList} = require('./models');
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -17,6 +18,9 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   next();
 });
+
+userList.create(500, 'Phoenix', 1);
+userList.create(300, 'London', 2)
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -40,24 +44,22 @@ app.get('/makeRequest/:cityName', function (req, res) {
     res.json(data);
   })
   .catch(function (error) {
-    console.log(error);
+    
   });
 });
 
 app.get('/userList/:id', (req, res) => {
-  Restaurant
-    // this is a convenience method Mongoose provides for searching
-    // by the object _id property
+  searchSchema
     .findById(req.params.id)
-    .then(restaurant => res.json(restaurant.serialize()))
+    .then(searchSchema => res.json(searchSchema.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
     });
 });
 
-app.post('/userList', jsonParser, (req, res) => {
-  // ensure `name` and `budget` are in request body
+app.post('/userList', (req, res) => {
+
   const requiredFields = ['budget', 'location', 'time'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -67,9 +69,20 @@ app.post('/userList', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  const item = ShoppingList.create(req.body.location, req.body.budget, req.body.time);
-  res.status(201).json(item);
-});;
+
+  searchSchema
+    .create({
+      budget: req.body.budget,
+      location: req.body.location,
+      time: req.body.time,
+    })
+    .then(
+      searchSchema => res.status(201).json(searchSchema.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'});
+    });
+});
 
 
   let server;

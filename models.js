@@ -2,9 +2,22 @@ const mongoose = require('mongoose');
 
 
 
-const foodSchema = mongoose.Schema({
+const searchSchema = mongoose.Schema({
     
-    budget: {type: String, required: true},
+    budget: {type: Number, required: true},
     location: {type: String, required: true},
-    time: {type: String, required: true}
+    time: {type: Date, required: true}
+
   });
+
+searchSchema.methods.serialize = function() {
+  return {
+    budget: this._budget,
+    location: this.location,
+    time: this.time,
+  };
+}
+
+  const userList = mongoose.model('userList', searchSchema);
+
+  module.exports = {userList};
