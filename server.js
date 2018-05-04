@@ -87,44 +87,48 @@ app.post('/userList', (req, res) => {
 
   let server;
 
-  function runServer() {
-    const port = process.env.PORT || 8080;
-    return new Promise((resolve, reject) => {
-      // mongoose.connect(makeRequest, err => {
-      //   if (err) {
-      //     return reject(err);
-      //   }
+function runServer(databaseUrl, port=PORT) {
+  return new Promise((resolve, reject) => {
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
 
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
-        // need to pass in server?
-        resolve(server);
-      }).on('error', err => {
+        resolve();
+      })
+      .on('error', err => {
         mongoose.disconnect();
         reject(err);
       });
     });
-  }
+  });
+}
+  
+  // `closeServer` function is here in original code
+  
 
 //config for mongoose, check sample code
-  function closeServer() {
+function closeServer() {
+  return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
       console.log('Closing server');
       server.close(err => {
         if (err) {
-          reject(err);
-          // so we don't also call `resolve()`
-          return;
+          return reject(err);
         }
         resolve();
       });
     });
-  }
+  });
+}
 
-  if (require.main === module) {
-    runServer().catch(err => console.error(err));
-  };
+if (require.main === module) {
+  runServer(DATABASE_URL).catch(err => console.error(err));
+};
+
   
-  module.exports = {app, runServer, closeServer};
+module.exports = {app, runServer, closeServer};
 
 
