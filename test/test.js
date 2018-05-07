@@ -27,24 +27,6 @@ function seedUserListData() {
   return userList.insertMany(seedData);
 }
 
-// function generateLocation() {
-//   const location = [
-//     'Denver', 'Phoenix', 'London', 'Los Angeles', 'Beijing'];
-//   return location[Math.floor(Math.random() * location.length)];
-// }
-
-// function generateBudget() {
-//   const budget = [100, 300, 500, 1000];
-//   return budget[Math.floor(Math.random() * budget.length)];
-// }
-
-// function generateTime() {
-//   const time = [1, 2, 3, 4, 5];
-//   return budget[Math.floor(Math.random() * budget.length)];
-// }
-
-
-
 function tearDownDb() {
   return new Promise((resolve, reject) => {
     console.warn('Deleting database');
@@ -120,10 +102,5 @@ describe('userList', function() {
         });
       });
   });
-
 });
-
-
-module.exports = {seedUserListData};
-
 });

@@ -11,10 +11,6 @@ const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 const {PORT, DATABASE_URL} = require('./config');
 const {userList} = require('./models');
-const {seedUserListData} = require('./test/test');
-// const router = require('./router');
-// app.use('/router', router);
-
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -22,18 +18,6 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   next();
 });
-// see mongoose docs, needs to return promise
-
-// let mockSearch = {
-//   budget: 500,
-//   location: 'Denver',
-//   time: 1
-// }
-
-// userList.create(mockSearch, function(err) {
-//   if (err)
-// });
-
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -41,7 +25,7 @@ app.get('/', (req, res) => {
 
 app.get('/makeRequest/:cityName', function (req, res) {
   var instance = axios.create();
-  // console.log(req.params, 'params') 
+
   instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${req.params.cityName}&currency=USD`, {
     headers: {'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': 'Content-Type',
@@ -107,7 +91,6 @@ function runServer(databaseUrl, port = PORT) {
         console.log(err);
         return reject(err);
       }
-      seedUserListData();
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
         resolve();
