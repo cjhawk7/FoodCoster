@@ -12,6 +12,39 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
+
+function seedUserListData() {
+  console.info('seeding user list data');
+  const seedData = [];
+  for (let i = 1; i <= 10; i++) {
+    seedData.push({
+      budget: faker.random.number({min:1, max:5000}), 
+      location: faker.address.city(),
+      time: faker.random.number({min:1, max:8})
+    });
+  }
+
+  return userList.insertMany(seedData);
+}
+
+// function generateLocation() {
+//   const location = [
+//     'Denver', 'Phoenix', 'London', 'Los Angeles', 'Beijing'];
+//   return location[Math.floor(Math.random() * location.length)];
+// }
+
+// function generateBudget() {
+//   const budget = [100, 300, 500, 1000];
+//   return budget[Math.floor(Math.random() * budget.length)];
+// }
+
+// function generateTime() {
+//   const time = [1, 2, 3, 4, 5];
+//   return budget[Math.floor(Math.random() * budget.length)];
+// }
+
+
+
 function tearDownDb() {
   return new Promise((resolve, reject) => {
     console.warn('Deleting database');
@@ -19,20 +52,6 @@ function tearDownDb() {
       .then(result => resolve(result))
       .catch(err => reject(err));
   });
-}
-
-function seedUserListData() {
-  console.info('seeding blog post data');
-  const seedData = [];
-  for (let i = 1; i <= 10; i++) {
-    seedData.push({
-      budget: faker.random.number(), 
-      location: faker.address.city(),
-      time: faker.random.number()
-    });
-  }
-  // this will return a promise
-  return BlogPost.insertMany(seedData);
 }
 
 
@@ -88,7 +107,7 @@ describe('userList', function() {
   it('should list average price on GET', function() {
     return chai.request(app)
     //need to get ID for property from database
-      .get('/userList/')
+      .get('/userList/5aecaaa170003aa5b9f40784')
       .then(function(res) {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
@@ -104,24 +123,7 @@ describe('userList', function() {
 
 });
 
-// it('should add an item on POST', function() {
-//   const newItem = {name: 'coffee', checked: false};
-//   return chai.request(app)
-//     .post('/userList')
-//     .send(newItem)
-//     .then(function(res) {
-//       expect(res).to.have.status(201);
-//       expect(res).to.be.json;
-//       expect(res.body).to.be.a('object');
-//       expect(res.body).to.include.keys('budget', 'location', 'time');
-//       expect(res.body.id).to.not.equal(null);
-//       // response should be deep equal to `newItem` from above if we assign
-//       // `id` to it from `res.body.id`
-//       expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
-//     });
-// });
 
+module.exports = {seedUserListData};
 
-
-
-
+});

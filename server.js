@@ -11,6 +11,10 @@ const jsonParser = bodyParser.json();
 app.use(morgan('common'));
 const {PORT, DATABASE_URL} = require('./config');
 const {userList} = require('./models');
+const {seedUserListData} = require('./test/test');
+// const router = require('./router');
+// app.use('/router', router);
+
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -18,9 +22,18 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
   next();
 });
+// see mongoose docs, needs to return promise
 
-userList.create(500, 'Phoenix', 1);
-userList.create(300, 'London', 2)
+// let mockSearch = {
+//   budget: 500,
+//   location: 'Denver',
+//   time: 1
+// }
+
+// userList.create(mockSearch, function(err) {
+//   if (err)
+// });
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -85,21 +98,23 @@ app.post('/userList', (req, res) => {
 });
 
 
-  let server;
+let server;
 
-function runServer(databaseUrl, port=PORT) {
+function runServer(databaseUrl, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {
+        console.log(err);
         return reject(err);
       }
-
+      seedUserListData();
       server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
         resolve();
       })
       .on('error', err => {
         mongoose.disconnect();
+        console.log(err);
         reject(err);
       });
     });

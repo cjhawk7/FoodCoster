@@ -10,6 +10,8 @@ const searchSchema = mongoose.Schema({
 
   });
 
+ // need to use virtuals?  
+
 searchSchema.methods.serialize = function() {
   return {
     budget: this._budget,
@@ -21,3 +23,4 @@ searchSchema.methods.serialize = function() {
   const userList = mongoose.model('userList', searchSchema);
 
   module.exports = {userList};
+  
