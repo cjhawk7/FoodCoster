@@ -2,6 +2,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+const should = chai.should();
 const { userList } = require('../models');
 
 const { app, runServer, closeServer } = require('../server');
@@ -66,7 +67,7 @@ describe('userList', function () {
         });
     });
 
-    it('should list average price', function () {
+    it('should list average price on GET', function () {
       let res;
       return chai.request(app)
         .get('/makeRequest/Phoenix')
@@ -74,9 +75,9 @@ describe('userList', function () {
           res = _res;
           expect(res).to.have.status(200);
           expect(res.body.makeRequest).to.have.length.of.at.least(1);
-          return searchSchema.count();
+          return userList.count();
         })
-        .then(function (count) {
+        .then(count => {
           expect(res.body.makeRequest).to.have.length.of(count);
         });
     });
