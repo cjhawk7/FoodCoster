@@ -11,9 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "faker": "^4.1.0",
-    "mongoose": "^5.0.14",
+    "mongoose": "^5.0.17",
     "morgan": "^1.9.0",
     "request-promise": "^4.2.2"
   },
