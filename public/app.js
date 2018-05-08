@@ -26,7 +26,7 @@ function round(number, precision) {
   }
 
 function displayNumbeoData(response) {
-    const calcResult = 0;
+    let calcResult = 0;
     const location = $('#location').val();
     const budget = $('#budget').val();
     const time = $('#time').val();
@@ -37,7 +37,7 @@ function displayNumbeoData(response) {
     
     if  (unit === 'Weeks') {
         
-      calcResult = response.data['average_price'] * 7 * 3 * time;
+        calcResult = response.data['average_price'] * 7 * 3 * time;
 
     } else if (unit === 'Days') {
 
@@ -58,9 +58,9 @@ function displayNumbeoData(response) {
 function getAndDisplayNumbeoData() {
     $('.search').submit(event => {
         event.preventDefault();
-        const location = $(event.currentTarget).find('.js-location').val();
-        const budget = $(event.currentTarget).find('.js-budget').val();
-        const time = $(event.currentTarget).find('.js-length').val();
+        const location = $(event.currentTarget).find('#location').val();
+        const budget = $(event.currentTarget).find('#budget').val();
+        const time = $(event.currentTarget).find('#time').val();
 
         console.log(location);
         console.log(budget);

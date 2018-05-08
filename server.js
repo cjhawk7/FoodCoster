@@ -104,9 +104,6 @@ function runServer(databaseUrl, port = PORT) {
   });
 }
   
-  // `closeServer` function is here in original code
-  
-
 //config for mongoose, check sample code
 function closeServer() {
   return mongoose.disconnect().then(() => {
