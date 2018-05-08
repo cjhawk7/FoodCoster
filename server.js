@@ -45,15 +45,30 @@ app.get('/makeRequest/:cityName', function (req, res) {
   });
 });
 
-app.get('/userList/:id', (req, res) => {
-  searchSchema
-    .findById(req.params.id)
-    .then(searchSchema => res.json(searchSchema.serialize()))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ message: 'Internal server error' });
+app.get('/searchData', (req, res) => {
+  userList
+    .find()
+    .then(searchData => {
+      res.json(searchData.map(
+          (searchSchema) => searchSchema.serialize())
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
     });
 });
+
+// app.get('/userList/:id', (req, res) => {
+//   searchSchema
+//     .findById(req.params.id)
+//     .then(searchSchema => res.json(searchSchema.serialize()))
+//     .catch(err => {
+//       console.error(err);
+//       res.status(500).json({ message: 'Internal server error' });
+//     });
+// });
 
 app.post('/userList', (req, res) => {
 

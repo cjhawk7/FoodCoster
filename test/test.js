@@ -81,7 +81,7 @@ describe('userList', function () {
     it('should list search data on GET', function () {
       return chai.request(app)
         //need to get ID for property from database
-        .get('/userList/5aecaaa170003aa5b9f40784')
+        .get('/searchData/5aecaaa170003aa5b9f40784')
         .then(function (res) {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
