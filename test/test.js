@@ -74,15 +74,11 @@ describe('userList', function () {
         .then(function (_res) {
           res = _res;
           expect(res).to.have.status(200);
-          expect(res.body.makeRequest).to.have.length.of.at.least(1);
-          return userList.count();
-        })
-        .then(count => {
-          expect(res.body.makeRequest).to.have.length.of(count);
+          expect(res.body.data.average_price).to.be.not.null;
         });
     });
 
-    it('should list average price on GET', function () {
+    it('should list search data on GET', function () {
       return chai.request(app)
         //need to get ID for property from database
         .get('/userList/5aecaaa170003aa5b9f40784')
