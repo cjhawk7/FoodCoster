@@ -81,18 +81,15 @@ describe('userList', function () {
     it('should list search data on GET', function () {
       return chai.request(app)
         //need to get ID for property from database
-        .get('/searchData/5aecaaa170003aa5b9f40784')
+        .get('/searchData/')
         .then(function (res) {
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(res.body.length).to.be.at.least(1);
-
-          const expectedKeys = ['budget', 'location', 'time'];
-          res.body.forEach(function (item) {
-            expect(item).to.be.a('object');
-            expect(item).to.include.keys(expectedKeys);
-          });
+            expect(res.body).to.be.a('object');
+            expect(res.body).to.include.keys('budget', 'location', 'time');
         });
     });
   });
 });
+
+

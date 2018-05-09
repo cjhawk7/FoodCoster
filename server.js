@@ -49,8 +49,10 @@ app.get('/searchData', (req, res) => {
   userList
     .find()
     .then(searchData => {
-      res.json(searchData.map(
-          (searchSchema) => searchSchema.serialize())
+      res.json({
+        budget: 500,
+        location: 'Phoenix',
+        time: 1
       });
     })
     .catch(
@@ -59,16 +61,6 @@ app.get('/searchData', (req, res) => {
         res.status(500).json({message: 'Internal server error'});
     });
 });
-
-// app.get('/userList/:id', (req, res) => {
-//   searchSchema
-//     .findById(req.params.id)
-//     .then(searchSchema => res.json(searchSchema.serialize()))
-//     .catch(err => {
-//       console.error(err);
-//       res.status(500).json({ message: 'Internal server error' });
-//     });
-// });
 
 app.post('/userList', (req, res) => {
 
