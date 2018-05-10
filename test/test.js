@@ -92,4 +92,27 @@ describe('userList', function () {
   });
 });
 
+return chai.request(app)
+  .post('/searchData')
+  .send(newListItem)
+  .then(function(res) {
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.be.a('object');
+    expect(res.body).to.include.keys(
+      'budget', 'location', 'time');
+    // cause Mongo should have created id on insertion
+    expect(res.body.id).to.not.be.null;
+    expect(res.body.budget).to.equal(newListItem.budget);
+    expect(res.body.location).to.equal(newListItem.location);
+    expect(res.body.time).to.equal(newListItem.time);
+
+    return Restaurant.findById(res.body.id);
+  })
+  .then(function(listItem) {
+    expect(listItem.name).to.equal(newListItem.name);
+    expect(listItem.cuisine).to.equal(newListItem.cuisine);
+    expect(listItem.borough).to.equal(newListItem.borough);
+  });
+
 

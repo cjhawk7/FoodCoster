@@ -81,7 +81,8 @@ app.post('/userList', (req, res) => {
       time: req.body.time,
     })
     .then(
-      searchSchema => res.status(201).json(searchSchema.serialize()))
+      searchObject => res.status(201).json(searchObject.serialize()))
+
     .catch(err => {
       console.error(err);
       res.status(500).json({message: 'Internal server error'});
