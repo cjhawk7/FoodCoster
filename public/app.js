@@ -33,7 +33,7 @@ function displayNumbeoData(response) {
     const unit = $('#unit').val();
     console.log(response);
     
-    $('.container-results').append(round(response.data['average_price'], 2)  + response.currency + ' average to eat out in ' + location);
+    $('.container-results').append(round(response.data['average_price'], 2)  + response.currency + ' average to eat out in ' + location + '.');
     
     if  (unit === 'Weeks') {
         

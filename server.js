@@ -86,7 +86,7 @@ console.log(req.body);
 
     .catch(err => {
       console.error(err);
-      res.status(500).json({message: 'Internal server error'});
+      res.status(500).json({error: 'Internal server error'});
     });
 });
 
@@ -114,6 +114,13 @@ app.put('/searchData/:id', (req, res) => {
   userList
     .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
     .then(searchObject => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
+app.delete('/searchData/:id', (req, res) => {
+  userList
+    .findByIdAndRemove(req.params.id)
+    .then(() => res.status(204).end())
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
@@ -161,5 +168,7 @@ if (require.main === module) {
 
   
 module.exports = {app, runServer, closeServer};
+
+
 
 
