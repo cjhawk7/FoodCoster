@@ -90,29 +90,71 @@ describe('userList', function () {
         });
     });
   });
-});
 
-return chai.request(app)
-  .post('/searchData')
-  .send(newListItem)
-  .then(function(res) {
-    expect(res).to.have.status(201);
-    expect(res).to.be.json;
-    expect(res.body).to.be.a('object');
-    expect(res.body).to.include.keys(
-      'budget', 'location', 'time');
-    // cause Mongo should have created id on insertion
-    expect(res.body.id).to.not.be.null;
-    expect(res.body.budget).to.equal(newListItem.budget);
-    expect(res.body.location).to.equal(newListItem.location);
-    expect(res.body.time).to.equal(newListItem.time);
+  describe('POST endpoint', function () {
 
-    return Restaurant.findById(res.body.id);
-  })
-  .then(function(listItem) {
-    expect(listItem.name).to.equal(newListItem.name);
-    expect(listItem.cuisine).to.equal(newListItem.cuisine);
-    expect(listItem.borough).to.equal(newListItem.borough);
+    it('should add search data on post', function () {
+
+      const newListItem = {
+        budget: faker.random.number({ min: 1, max: 5000 }),
+        location: faker.address.city(),
+        time: faker.random.number({ min: 1, max: 8 }) 
+      }
+
+
+      return chai.request(app)
+        .post('/searchData')
+        .send(newListItem)
+        .then(function(res) { 
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'budget', 'location', 'time');
+          // cause Mongo should have created id on insertion
+          expect(res.body.id).to.not.be.null;
+          expect(res.body.budget).to.equal(newListItem.budget);
+          expect(res.body.location).to.equal(newListItem.location);
+          expect(res.body.time).to.equal(newListItem.time);
+
+          return userList.findById(res.body.id);
+        })
+        .then(function(listItem) {
+        expect(listItem.budget).to.equal(newListItem.budget);
+        expect(listItem.location).to.equal(newListItem.location);
+        expect(listItem.time).to.equal(newListItem.time);
+        });
+    })
   });
 
+  describe('PUT endpoint', function () {
 
+    it('should update fields you send over', function () {
+      const updateData = {
+        budget: 500,
+        location: 'Chicago',
+        time: 1
+      };
+
+      return userList
+      .findOne()
+      .then(function(post) {
+        updateData.id = post.id;
+        
+        return chai.request(app)
+          .put(`/searchData/${post.id}`)
+          .send(updateData);
+      })
+      .then(function(res) {
+        expect(res).to.have.status(204);
+    
+        return userList.findById(updateData.id);
+      })
+      .then(function(listItem) {
+        expect(listItem.location).to.equal(updateData.location);
+        expect(listItem.budget).to.equal(updateData.budget);
+        expect(listItem.time).to.equal(updateData.time);
+      });
+    });
+  });
+});

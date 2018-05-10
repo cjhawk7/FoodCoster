@@ -9,6 +9,7 @@ const app = express();
 app.use(express.static('public'));
 const jsonParser = bodyParser.json();
 app.use(morgan('common'));
+app.use(express.json());
 const {PORT, DATABASE_URL} = require('./config');
 const {userList} = require('./models');
 
@@ -62,8 +63,8 @@ app.get('/searchData', (req, res) => {
     });
 });
 
-app.post('/userList', (req, res) => {
-
+app.post('/searchData', jsonParser, (req, res) => {
+console.log(req.body);
   const requiredFields = ['budget', 'location', 'time'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -74,11 +75,11 @@ app.post('/userList', (req, res) => {
     }
   }
 
-  searchSchema
+  userList
     .create({
       budget: req.body.budget,
       location: req.body.location,
-      time: req.body.time,
+      time: req.body.time
     })
     .then(
       searchObject => res.status(201).json(searchObject.serialize()))
@@ -87,6 +88,33 @@ app.post('/userList', (req, res) => {
       console.error(err);
       res.status(500).json({message: 'Internal server error'});
     });
+});
+
+
+app.put('/searchData/:id', (req, res) => {
+
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`);
+    console.error(message);
+    // we return here to break out of this function
+    return res.status(400).json({message: message});
+  }
+
+  const toUpdate = {};
+  const updateableFields = ['budget', 'location', 'time'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+
+  userList
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
+    .then(searchObject => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 

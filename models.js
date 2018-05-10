@@ -6,7 +6,7 @@ const searchSchema = mongoose.Schema({
     
     budget: {type: Number, required: true},
     location: {type: String, required: true},
-    time: {type: Date, required: true}
+    time: {type: Number, required: true}
 
   });
 
@@ -14,7 +14,7 @@ const searchSchema = mongoose.Schema({
 
 searchSchema.methods.serialize = function() {
   return {
-    budget: this._budget,
+    budget: this.budget,
     location: this.location,
     time: this.time,
   };
