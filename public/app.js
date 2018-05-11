@@ -31,26 +31,31 @@ function displayNumbeoData(response) {
     const budget = $('#budget').val();
     const time = $('#time').val();
     const unit = $('#unit').val();
+    const meals = $('#meals').val();
     console.log(response);
-    
-    $('.container-results').append(round(response.data['average_price'], 2)  + response.currency + ' average to eat out in ' + location + '.');
     
     if  (unit === 'Weeks') {
         
-        calcResult = response.data['average_price'] * 7 * 3 * time;
+        calcResult = response.data['average_price'] * 7 * time * meals;
+
+        $('.container-results').append(' It will be roughly ' + round(response.data['average_price'] * meals * 7 * time, 2)  + response.currency + ' to eat out in ' + location + ' for the duration of your stay.' );
 
     } else if (unit === 'Days') {
 
-        calcResult = response.data['average_price'] * 3 * time;
+        calcResult = response.data['average_price'] * time * meals;
+
+        $('.container-results').append(' It will be roughly ' + round(response.data['average_price'] * meals * time, 2)  + response.currency + ' to eat out in ' + location + ' for the duration of your stay.')
     }
     if (calcResult <= budget) {
         console.log('You are within your budget!') 
-        $('.container-results').append('You are within your budget!') 
+        $('.container-results').append('Nice, you are within your budget!') 
+        
     }
     else {
         console.log('Not enough money!')
-        $('.container-results').append(' Sorry, not enough money!') 
+        $('.container-results').append(' Whoops, you won\'t have enough money!') 
     }
+
 }
 
 
@@ -61,6 +66,7 @@ function getAndDisplayNumbeoData() {
         const location = $(event.currentTarget).find('#location').val();
         const budget = $(event.currentTarget).find('#budget').val();
         const time = $(event.currentTarget).find('#time').val();
+        const meals = $(event.currentTarget).find('#meals').val();
 
         console.log(location);
         console.log(budget);
@@ -85,7 +91,10 @@ $('.js-login-btn').on('click', function(){
 });
 
 $('.js-search-btn').on('click', function(){
+
+  
     $('.container-results').removeClass('hidden');
+    
 });
 
 $('.js-remove-btn',).on('click', function(){

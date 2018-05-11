@@ -7,7 +7,7 @@
     <link href="index.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
-<h1>Food Budget Finder</h1>
+<h1>Eating Out App</h1>
     <div class="signup">
             <div class="container">
                 <form class='form' action="" method ='post'>
@@ -35,9 +35,10 @@
         <div class="container-search">
             <h2>Find your food costs</h2>
             <form class='search-form' action="" method ='post'>
-                <input type= "number" class= "query-search" id= "budget" placeholder = "Budget">
-                <input type= "text" class= "query-search" id= "location" placeholder = "Desired-Location">
-                <input type= "number" class= "query-search" id= "time" placeholder = "Length-of-Time(in weeks)">
+                <input type= "number" class= "query-search" id= "budget" placeholder = "Budget" required>
+                <input type= "text" class= "query-search" id= "location" placeholder = "Desired location" required>
+                <input type= "number" class= "query-search" id= "meals" placeholder = "Meals a day (eating out)" required>
+                <input type= "number" class= "query-search" id= "time" placeholder = "Length of time" required>
                 <select name="text" class= "query-search" id="unit"> <!--Supplement an id here instead of using 'text'-->
                     <option value="Days">Days</option> 
                     <option value="Weeks" selected>Weeks</option>
