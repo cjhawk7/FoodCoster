@@ -46,23 +46,6 @@ app.get('/makeRequest/:cityName', function (req, res) {
   });
 });
 
-app.get('/searchData', (req, res) => {
-  userList
-    .find()
-    .then(searchData => {
-      res.json({
-        budget: 500,
-        location: 'Phoenix',
-        time: 1
-      });
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
-    });
-});
-
 app.post('/searchData', jsonParser, (req, res) => {
 console.log(req.body);
   const requiredFields = ['budget', 'location', 'time'];

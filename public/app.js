@@ -88,6 +88,14 @@ $('.js-search-btn').on('click', function(){
     $('.container-results').removeClass('hidden');
 });
 
+$('.js-remove-btn',).on('click', function(){
+    $('.container-results').addClass('hidden');
+});
+
+$('.js-save-btn',).on('click', function(){
+    $('.container-results').addClass('hidden');
+});
+
 
 
 

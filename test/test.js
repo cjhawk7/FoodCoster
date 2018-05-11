@@ -77,55 +77,42 @@ describe('userList', function () {
           expect(res.body.data.average_price).to.be.not.null;
         });
     });
-
-    it('should list search data on GET', function () {
-      return chai.request(app)
-        //need to get ID for property from database
-        .get('/searchData/')
-        .then(function (res) {
-          expect(res).to.have.status(200);
-          expect(res).to.be.json;
-            expect(res.body).to.be.a('object');
-            expect(res.body).to.include.keys('budget', 'location', 'time');
-        });
-    });
   });
 
-  // describe('POST endpoint', function () {
+  describe('POST endpoint', function () {
 
-  //   it('should add search data on post', function () {
+    it('should add search data on post', function () {
 
-  //     const newListItem = {
-  //       budget: faker.random.number({ min: 1, max: 5000 }),
-  //       location: faker.address.city(),
-  //       time: faker.random.number({ min: 1, max: 8 }) 
-  //     }
+      const newListItem = {
+        budget: faker.random.number({ min: 1, max: 5000 }),
+        location: faker.address.city(),
+        time: faker.random.number({ min: 1, max: 8 }) 
+      }
 
 
-  //     return chai.request(app)
-  //       .post('/searchData')
-  //       .send(newListItem)
-  //       .then(function(res) { 
-  //         expect(res).to.have.status(201);
-  //         expect(res).to.be.json;
-  //         expect(res.body).to.be.a('object');
-  //         expect(res.body).to.include.keys(
-  //           'budget', 'location', 'time');
-  //         // cause Mongo should have created id on insertion
-  //         expect(res.body.id).to.not.be.null;
-  //         expect(res.body.budget).to.equal(newListItem.budget);
-  //         expect(res.body.location).to.equal(newListItem.location);
-  //         expect(res.body.time).to.equal(newListItem.time);
+      return chai.request(app)
+        .post('/searchData')
+        .send(newListItem)
+        .then(function(res) { 
+          expect(res).to.have.status(201);
+          expect(res).to.be.json;
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.include.keys(
+            'budget', 'location', 'time');
+          expect(res.body.id).to.not.be.null;
+          expect(res.body.budget).to.equal(newListItem.budget);
+          expect(res.body.location).to.equal(newListItem.location);
+          expect(res.body.time).to.equal(newListItem.time);
 
-  //         return userList.findById(res.body.id);
-  //       })
-  //       .then(function(listItem) {
-  //       expect(listItem.budget).to.equal(newListItem.budget);
-  //       expect(listItem.location).to.equal(newListItem.location);
-  //       expect(listItem.time).to.equal(newListItem.time);
-  //       });
-  //   })
-  // });
+          return userList.findById(res.body.id);
+        })
+        .then(function(listItem) {
+        expect(listItem.budget).to.equal(newListItem.budget);
+        expect(listItem.location).to.equal(newListItem.location);
+        expect(listItem.time).to.equal(newListItem.time);
+        });
+    })
+  });
 
   describe('PUT endpoint', function () {
 
@@ -159,11 +146,7 @@ describe('userList', function () {
   });
 
   describe('DELETE endpoint', function () {
-    // strategy:
-    //  1. get a post
-    //  2. make a DELETE request for that post's id
-    //  3. assert that response has right status code
-    //  4. prove that post with the id doesn't exist in db anymore
+
     it('should delete a post by id', function () {
 
       let post;
@@ -179,10 +162,6 @@ describe('userList', function () {
           return userList.findById(post.id);
         })
         .then(_post => {
-          // when a variable's value is null, chaining `should`
-          // doesn't work. so `_post.should.be.null` would raise
-          // an error. `should.be.null(_post)` is how we can
-          // make assertions about a null value.
           should.not.exist(_post);
         });
     });
