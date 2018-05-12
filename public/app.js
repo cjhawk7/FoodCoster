@@ -35,7 +35,7 @@ function displayNumbeoData(response) {
     console.log(response);
     
     if  (unit === 'Weeks') {
-        
+                
         calcResult = response.data['average_price'] * 7 * time * meals;
 
         $('.container-results').append(' It will be roughly ' + round(response.data['average_price'] * meals * 7 * time, 2)  + response.currency + ' to eat out in ' + location + ' for the duration of your stay.' );
@@ -48,12 +48,12 @@ function displayNumbeoData(response) {
     }
     if (calcResult <= budget) {
         console.log('You are within your budget!') 
-        $('.container-results').append('Nice, you are within your budget!') 
-        
+        $('.container-results').append(' Nice, you are within your budget!') 
+
     }
     else {
         console.log('Not enough money!')
-        $('.container-results').append(' Whoops, you won\'t have enough money!') 
+        $('.container-results').append(' Whoops, might want to increase your budget!') 
     }
 
 }
@@ -91,17 +91,10 @@ $('.js-login-btn').on('click', function(){
 });
 
 $('.js-search-btn').on('click', function(){
-
-  
     $('.container-results').removeClass('hidden');
-    
 });
 
-$('.js-remove-btn',).on('click', function(){
-    $('.container-results').addClass('hidden');
-});
-
-$('.js-save-btn',).on('click', function(){
+$('.savedelete',).on('click', function(){
     $('.container-results').addClass('hidden');
 });
 
