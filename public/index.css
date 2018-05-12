@@ -23,6 +23,15 @@ body {
     font-size: 17px;
 }
 
+.topnav b {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
 /* Change the color of links on hover */
 .topnav a:hover {
     background-color: #ddd;
@@ -148,12 +157,10 @@ p {
 }
 
 .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 75px;  
-    float: right;
-    
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 .savedelete {
     padding: 5px;
@@ -170,24 +177,18 @@ h2 {
 
 }
 
-.hidden {
-    display: none;
-  }
-
   .container-results {
     background-color: rgb(59, 57, 57);
       display: block;
       border: 2px solid;
       width: 300px;
-      height: 100px;
+      height: 120px;
       margin: auto;
       margin-top: 15px;
       opacity: 0.90;
+      position: relative;
   }
 
-
-    display: block;
-  color: grey;
-  font-style: italic;
-  font-size: 20px;
-  margin-bottom: 15px;
+  .hidden {
+    display: none;
+  }
