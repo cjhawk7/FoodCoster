@@ -20,6 +20,7 @@ function seedUserListData() {
     seedData.push({
       budget: faker.random.number({ min: 1, max: 5000 }),
       location: faker.address.city(),
+      meals: faker.random.number({ min : 1, max: 4 }),
       time: faker.random.number({ min: 1, max: 8 })
     });
   }
@@ -63,7 +64,7 @@ describe('userList', function () {
         .then(function (res) {
           expect(res).to.have.status(200);
           expect(res).to.be.html;
-          expect(res.text).to.contain('Food Budget Finder')
+          expect(res.text).to.contain('Food Cost Finder')
         });
     });
 
@@ -86,6 +87,7 @@ describe('userList', function () {
       const newListItem = {
         budget: faker.random.number({ min: 1, max: 5000 }),
         location: faker.address.city(),
+        meals: faker.random.number({ min : 1, max: 4 }),
         time: faker.random.number({ min: 1, max: 8 }) 
       }
 
@@ -98,7 +100,7 @@ describe('userList', function () {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'budget', 'location', 'time');
+            'budget', 'location', 'time', 'meals');
           expect(res.body.id).to.not.be.null;
           expect(res.body.budget).to.equal(newListItem.budget);
           expect(res.body.location).to.equal(newListItem.location);
@@ -109,6 +111,7 @@ describe('userList', function () {
         .then(function(listItem) {
         expect(listItem.budget).to.equal(newListItem.budget);
         expect(listItem.location).to.equal(newListItem.location);
+        expect(listItem.meals).to.equal(newListItem.meals);
         expect(listItem.time).to.equal(newListItem.time);
         });
     })
@@ -120,6 +123,7 @@ describe('userList', function () {
       const updateData = {
         budget: 500,
         location: 'Chicago',
+        meals: 2,
         time: 1
       };
 
@@ -140,6 +144,7 @@ describe('userList', function () {
       .then(function(listItem) {
         expect(listItem.location).to.equal(updateData.location);
         expect(listItem.budget).to.equal(updateData.budget);
+        expect(listItem.meals).to.equal(updateData.meals);
         expect(listItem.time).to.equal(updateData.time);
       });
     });

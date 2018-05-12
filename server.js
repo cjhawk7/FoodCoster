@@ -48,7 +48,7 @@ app.get('/makeRequest/:cityName', function (req, res) {
 
 app.post('/searchData', jsonParser, (req, res) => {
 console.log(req.body);
-  const requiredFields = ['budget', 'location', 'time'];
+  const requiredFields = ['budget', 'location', 'time', 'meals'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -62,6 +62,7 @@ console.log(req.body);
     .create({
       budget: req.body.budget,
       location: req.body.location,
+      meals: req.body.meals,
       time: req.body.time
     })
     .then(
@@ -86,7 +87,7 @@ app.put('/searchData/:id', (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['budget', 'location', 'time'];
+  const updateableFields = ['budget', 'location', 'time', 'meals'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {

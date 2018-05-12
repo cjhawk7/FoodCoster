@@ -63,6 +63,7 @@ function displayNumbeoData(response) {
 function getAndDisplayNumbeoData() {
     $('.search').submit(event => {
         event.preventDefault();
+        $('.container-results').append('');
         const location = $(event.currentTarget).find('#location').val();
         const budget = $(event.currentTarget).find('#budget').val();
         const time = $(event.currentTarget).find('#time').val();
