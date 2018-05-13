@@ -13,7 +13,6 @@ body {
     opacity: 0.90;
 }
 
-/* Style the links inside the navigation bar */
 .topnav a {
     float: left;
     color: #f2f2f2;
@@ -32,8 +31,12 @@ body {
     font-size: 17px;
 }
 
-/* Change the color of links on hover */
 .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav b:hover {
     background-color: #ddd;
     color: black;
 }
@@ -43,6 +46,12 @@ body {
     background-color: #4CAF50;
     color: white;
 }
+.topnav b.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
 h1 {
     text-align: center;
 }

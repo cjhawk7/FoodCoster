@@ -32,23 +32,28 @@ function displayNumbeoData(response) {
     const time = $('#time').val();
     const unit = $('#unit').val();
     const meals = $('#meals').val();
-    console.log(response);
+    let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.'
+    let a = $('<p></p>');
     
     if  (unit === 'Weeks') {
-                
-        calcResult = response.data['average_price'] * 7 * time * meals;
 
-        $('.container-results p').append(' It will be roughly ' + round(calcResult, 2)  + response.currency + ' to eat out in ' + location + ' for the duration of your stay.' );
+        calcResult = response.data['average_price'] * 7 * time * meals;
+        // let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.';
+        // let a = $('<p></p>');
+        a.text('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
+        $('.container-results p').html(a); 
+
 
     } else if (unit === 'Days') {
 
         calcResult = response.data['average_price'] * time * meals;
-
-        $('.container-results p').append(' It will be roughly ' + round(calcResult, 2)  + response.currency + ' to eat out in ' + location + ' for the duration of your stay.')
+        // p is coming from index.html
+        //need to remove to prevent duplicate calcResult string below
+        $('.container-results p').append(' It will be roughly ' + round(calcResult, 2)  +   currencyLocation)
     }
     if (calcResult <= budget) {
-        console.log('You are within your budget!') 
-        $('.container-results p').append(' Nice, you are within your budget!') 
+        // console.log('You are within your budget!') 
+        $('.container-results p').append( ' Nice, you are within your budget!'); 
 
     }
     else {
@@ -68,9 +73,6 @@ function getAndDisplayNumbeoData() {
         const time = $(event.currentTarget).find('#time').val();
         const meals = $(event.currentTarget).find('#meals').val();
         $('.container-results p').text('');
-
-        console.log(location);
-        console.log(budget);
         getNumbeoData(location, budget, time, displayNumbeoData);
     });
 };
