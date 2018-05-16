@@ -38,8 +38,8 @@ function displayNumbeoData(response) {
     if  (unit === 'Weeks') {
 
         calcResult = response.data['average_price'] * 7 * time * meals;
-        // let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.';
-        // let a = $('<p></p>');
+        let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.';
+        let a = $('<p></p>');
         a.text('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
         $('.container-results p').html(a); 
 
@@ -48,16 +48,16 @@ function displayNumbeoData(response) {
 
         calcResult = response.data['average_price'] * time * meals;
         // p is coming from index.html
-        //need to remove to prevent duplicate calcResult string below
+        // need to remove to prevent duplicate calcResult string below
         $('.container-results p').append(' It will be roughly ' + round(calcResult, 2)  +   currencyLocation)
     }
     if (calcResult <= budget) {
-        // console.log('You are within your budget!') 
+        
         $('.container-results p').append( ' Nice, you are within your budget!'); 
 
     }
     else {
-        console.log('Not enough money!')
+        
         $('.container-results p').append(' Whoops, might want to increase your budget!') 
     }
 

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-
+mongoose.Promise = global.Promise;
 
 const searchSchema = mongoose.Schema({
     
@@ -21,6 +20,7 @@ searchSchema.methods.serialize = function() {
     time: this.time,
   };
 }
+
 
   const userList = mongoose.model('userList', searchSchema);
 

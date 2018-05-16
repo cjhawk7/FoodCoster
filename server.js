@@ -12,6 +12,23 @@ app.use(morgan('common'));
 app.use(express.json());
 const {PORT, DATABASE_URL} = require('./config');
 const {userList} = require('./models');
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+app.get('/api/protected', jwtAuth, (req, res) => {
+  return res.json({
+    data: 'rosebud'
+  });
+});
+
+app.use('*', (req, res) => {
+  return res.status(404).json({ message: 'Not Found' });
+});
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
