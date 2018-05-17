@@ -1,4 +1,4 @@
-onst { Strategy: LocalStrategy } = require('passport-local');
+const { Strategy: LocalStrategy } = require('passport-local');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { authList } = require('../users/models');
 //config or .env file?
