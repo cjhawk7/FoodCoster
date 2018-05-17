@@ -3,20 +3,24 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 const router = express.Router();
 const app = express();
-app.use(express.static('public'));
 const jsonParser = bodyParser.json();
+const {PORT, DATABASE_URL} = require('./config');
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const {userList} = require('./models');
+const passport = require('passport');
+mongoose.Promise = global.Promise;
+
+app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(express.json());
-const {PORT, DATABASE_URL} = require('./config');
-const {userList} = require('./models');
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
+
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
