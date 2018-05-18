@@ -6,12 +6,14 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const app = express();
 const jsonParser = bodyParser.json();
+require('dotenv').config();
 const {PORT, DATABASE_URL} = require('./config');
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 const {userList} = require('./models');
 const passport = require('passport');
 mongoose.Promise = global.Promise;
+
 
 app.use(express.static('public'));
 app.use(morgan('common'));
