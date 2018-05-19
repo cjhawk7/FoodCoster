@@ -79,7 +79,7 @@ console.log(req.body);
     }
   }
 
-  userList
+  userLists
     .create({
       budget: req.body.budget,
       location: req.body.location,

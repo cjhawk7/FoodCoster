@@ -52,7 +52,7 @@ function displayNumbeoData(response) {
     }
     if (calcResult <= budget) {
         
-        $('.container-results p').append( ' Nice, you are within your budget!'); 
+        $('.container-results p').append(' Nice, you are within your budget!'); 
 
     }
     else {
@@ -93,35 +93,47 @@ function setupClickHandlers() {
         $('.container-results p').text('');
         getNumbeoData(location, budget, time, displayNumbeoData);
     });
-    $('.savedelete').submit(function () { 
+    $('.savedelete').submit(function() { 
+        console.log('hi');
         sendSearchData();
-        console.log(sendSearchData());
     });
-};
 
+    $('.about').on('click', function(){
+        $('.signup').addClass('hidden');
+        $('.login').addClass('hidden');
+        $('.aboutpage').removeClass('hidden');
+        $('.search').addClass('hidden')
+    });
+    $('.home').on('click', function(){
+        $('.login').addClass('hidden');
+        $('.signup').addClass('hidden');
+        $('.search').removeClass('hidden')
+        $('.aboutpage').addClass('hidden');
+    });
+    $('.js-signup-btn').on('click', function(){
+        $('.signup').addClass('hidden');
+        $('.login').removeClass('hidden');
+    });
+    $('.js-login-btn').on('click', function(){
+        $('.login').addClass('hidden');
+        $('.search').removeClass('hidden');
+    });
+    $('.js-search-btn').on('click', function(){
+        $('.container-results').removeClass('hidden');
+    });
+    $('.savedelete').on('click', function(){
+        $('.container-results').addClass('hidden');
+    });
+
+    // $('.loginlink').on('click', function(){
+    //     $('.signup').addClass('hidden');
+    //     $('.login').removeClass('hidden');
+    // });
+};
 
 $(function() {
     setupClickHandlers();
 })
-
-
-$('.js-signup-btn').on('click', function(){
-    $('.signup').addClass('hidden');
-    $('.login').removeClass('hidden');
-});
-
-$('.js-login-btn').on('click', function(){
-    $('.login').addClass('hidden');
-    $('.search').removeClass('hidden');
-});
-
-$('.js-search-btn').on('click', function(){
-    $('.container-results').removeClass('hidden');
-});
-
-$('.savedelete').on('click', function(){
-    $('.container-results').addClass('hidden');
-});
 
 
 
