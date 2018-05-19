@@ -1,7 +1,4 @@
 
-
-
-
 function getNumbeoData(cityName, budgetTotal, timeTotal, callback) {
    
     const settings = {
@@ -13,6 +10,8 @@ function getNumbeoData(cityName, budgetTotal, timeTotal, callback) {
     
     $.ajax(settings);  
 }
+
+
 
 function round(number, precision) {
     var shift = function (number, precision, reverseShift) {
@@ -63,9 +62,28 @@ function displayNumbeoData(response) {
 
 }
 
+function sendSearchData() {
+    
+    let post = {
+        budget: 1,
+        location: "Phoenix",
+        time: 1,
+        meals: 1
+    }
+
+    const settings = {
+        url: '/searchData',
+        dataType: 'json',
+        type: 'POST',
+        data: post,
+        success: callback,
+    };
+    
+    $.ajax(settings);  
+}
 
 
-function getAndDisplayNumbeoData() {
+function setupClickHandlers() {
     $('.search').submit(event => {
         event.preventDefault();
         const location = $(event.currentTarget).find('#location').val();
@@ -75,11 +93,15 @@ function getAndDisplayNumbeoData() {
         $('.container-results p').text('');
         getNumbeoData(location, budget, time, displayNumbeoData);
     });
+    $('.savedelete').submit(function () { 
+        sendSearchData();
+        console.log(sendSearchData());
+    });
 };
 
 
 $(function() {
-    getAndDisplayNumbeoData();
+    setupClickHandlers();
 })
 
 

@@ -5,8 +5,8 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const router = express.Router();
 const app = express();
-const jsonParser = bodyParser.json();
 require('dotenv').config();
+const jsonParser = bodyParser.json();
 const {PORT, DATABASE_URL} = require('./config');
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
@@ -23,6 +23,7 @@ passport.use(jwtStrategy);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 
+console.log('db url', DATABASE_URL);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
@@ -30,10 +31,6 @@ app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({
     data: 'rosebud'
   });
-});
-
-app.use('*', (req, res) => {
-  return res.status(404).json({ message: 'Not Found' });
 });
 
 app.use(function (req, res, next) {
@@ -48,6 +45,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/makeRequest/:cityName', function (req, res) {
+  console.log('/makeRequest/:cityName');
   var instance = axios.create();
 
   instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${req.params.cityName}&currency=USD`, {
@@ -105,7 +103,6 @@ app.put('/searchData/:id', (req, res) => {
       `Request path id (${req.params.id}) and request body id ` +
       `(${req.body.id}) must match`);
     console.error(message);
-    // we return here to break out of this function
     return res.status(400).json({message: message});
   }
 
@@ -154,7 +151,6 @@ function runServer(databaseUrl, port = PORT) {
   });
 }
   
-//config for mongoose, check sample code
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
