@@ -1,3 +1,9 @@
+let postVal = {
+    budget: 0,
+    location: '',
+    time: 1,
+    meals: 1
+}
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -59,18 +65,10 @@ function displayNumbeoData(response) {
         
         $('.container-results p').append(' Whoops, might want to increase your budget!') 
     }
-
 }
 
-function sendSearchData(callback) {
+function sendSearchData(post, callback) {
     
-    let post = {
-        budget: 1,
-        location: "Phoenix",
-        time: 1,
-        meals: 1
-    }
-
     const settings = {
         url: '/searchData',
         dataType: 'json',
@@ -86,55 +84,65 @@ function successFunction() {
     console.log('success');
 }
 
-
 function setupClickHandlers() {
     $('.search').submit(event => {
         event.preventDefault();
-        const location = $(event.currentTarget).find('#location').val();
-        const budget = $(event.currentTarget).find('#budget').val();
-        const time = $(event.currentTarget).find('#time').val();
-        const meals = $(event.currentTarget).find('#meals').val();
+        postVal.location = $(event.currentTarget).find('#location').val();
+        postVal.budget = $(event.currentTarget).find('#budget').val();
+        postVal.time = $(event.currentTarget).find('#time').val();
+        postVal.meals = $(event.currentTarget).find('#meals').val();
+        const unit = $('#unit').val();
         $('.container-results p').text('');
-        getNumbeoData(location, budget, time, meals, displayNumbeoData);
+        $('.container-history').text('');
+        getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
     });
+
     $('.save').on('click', function() { 
-        $('.container-results').addClass('hidden');
-        //create and object with bud/loc/time/meals params to pass into sendsearchdata 
-        const budget = $(event.currentTarget).find('#budget').val();
-        const location = $(event.currentTarget).find('#location').val();
-        const time = $(event.currentTarget).find('#time').val();
-        const meals = $(event.currentTarget).find('#meals').val();
+        $('.container-history').removeClass('hidden');
+        $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
         console.log('hi');
-        sendSearchData(successFunction);
+        sendSearchData(postVal, successFunction);
     });
+
+    $('.historystore').on('click', function(){
+        $('.signup').addClass('hidden');
+        $('.login').addClass('hidden');
+        $('.aboutpage').addClass('hidden');
+        $('.container-history').removeClass('hidden');   
+        $('.search').addClass('hidden');
+    });
+    
     $('.about').on('click', function(){
         $('.signup').addClass('hidden');
         $('.login').addClass('hidden');
         $('.aboutpage').removeClass('hidden');
-        $('.search').addClass('hidden')
+        $('.container-history').removeClass('hidden');   
+        $('.search').addClass('hidden');
     });
+
     $('.home').on('click', function(){
         $('.login').addClass('hidden');
         $('.signup').addClass('hidden');
-        $('.search').removeClass('hidden')
+        $('.search').removeClass('hidden');
         $('.aboutpage').addClass('hidden');
+        $('.container-history').removeClass('hidden');
+        $('.container-results').addClass('hidden');
     });
+
     $('.js-signup-btn').on('click', function(){
         $('.signup').addClass('hidden');
         $('.login').removeClass('hidden');
     });
+
     $('.js-login-btn').on('click', function(){
         $('.login').addClass('hidden');
         $('.search').removeClass('hidden');
     });
+
     $('.js-search-btn').on('click', function(){
         $('.container-results').removeClass('hidden');
     });
-
-    // $('.loginlink').on('click', function(){
-    //     $('.signup').addClass('hidden');
-    //     $('.login').removeClass('hidden');
-    // });
+    
 };
 
 $(function() {
