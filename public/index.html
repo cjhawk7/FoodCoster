@@ -59,10 +59,10 @@
         <div class="container-search">
             <h2>Find your food costs</h2>
             <form class='search-form' action="" method ='post'>
-                <input type= "number" class= "query-search" id= "budget" placeholder = "Budget (USD)" required>
-                <input type= "text" class= "query-search" id= "location" placeholder = "Desired city" required>
-                <input type= "number" class= "query-search" id= "meals" placeholder = "Meals a day (eating out)" required>
-                <input type= "number" class= "query-search" id= "time" placeholder = "Length of stay" required>
+                <input type= "number" class= "query-search" id= "budget" placeholder = "Budget (USD)" >
+                <input type= "text" class= "query-search" id= "location" placeholder = "Desired city" >
+                <input type= "number" class= "query-search" id= "meals" placeholder = "Meals a day (eating out)">
+                <input type= "number" class= "query-search" id= "time" placeholder = "Length of stay">
                 <select name="text" class= "query-search" id="unit"> <!--Supplement an id here instead of using 'text'-->
                     <option value="Days">Days</option> 
                     <option value="Weeks" selected>Weeks</option>
@@ -73,10 +73,10 @@
         <div class="container-results hidden">
             <p></p>
             <div class = "wrapper">
-                <button class="savedelete">
+                <button class="confirm delete">
                     <span class="button-label">remove</span>
                 </button>
-                <button class="savedelete">
+                <button class="confirm save">
                     <span class="button-label">save</span>
                 </button>
             </div>

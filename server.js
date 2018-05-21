@@ -68,7 +68,8 @@ app.get('/makeRequest/:cityName', function (req, res) {
 });
 
 app.post('/searchData', jsonParser, (req, res) => {
-console.log(req.body);
+console.log('reqbody', req.body);
+console.log(req);
   const requiredFields = ['budget', 'location', 'time', 'meals'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -79,7 +80,7 @@ console.log(req.body);
     }
   }
 
-  userLists
+  userList
     .create({
       budget: req.body.budget,
       location: req.body.location,
@@ -143,14 +144,16 @@ function runServer(databaseUrl, port = PORT) {
         resolve();
       })
       .on('error', err => {
-        mongoose.disconnect();
-        console.log(err);
-        reject(err);
+        mongoose.disconnect()
+          .on('error', err => {
+            mongoose.disconnect();
+            console.log(err);
+            reject(err);
+          });
       });
     });
   });
-}
-  
+} 
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
@@ -171,7 +174,6 @@ if (require.main === module) {
 
   
 module.exports = {app, runServer, closeServer};
-
 
 
 

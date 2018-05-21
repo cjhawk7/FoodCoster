@@ -1,5 +1,5 @@
 
-function getNumbeoData(cityName, budgetTotal, timeTotal, callback) {
+function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
     const settings = {
         url: '/makeRequest/' + cityName,
@@ -22,7 +22,7 @@ function round(number, precision) {
       return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
     };
     return shift(Math.round(shift(number, precision, false)), precision, true);
-  }
+}
 
 function displayNumbeoData(response) {
     let calcResult = 0;
@@ -62,7 +62,7 @@ function displayNumbeoData(response) {
 
 }
 
-function sendSearchData() {
+function sendSearchData(callback) {
     
     let post = {
         budget: 1,
@@ -75,11 +75,15 @@ function sendSearchData() {
         url: '/searchData',
         dataType: 'json',
         type: 'POST',
-        data: post,
+        data: JSON.stringify(post),
         success: callback,
+        contentType: 'application/json'
     };
     
     $.ajax(settings);  
+}
+function successFunction() {
+    console.log('success');
 }
 
 
@@ -91,13 +95,18 @@ function setupClickHandlers() {
         const time = $(event.currentTarget).find('#time').val();
         const meals = $(event.currentTarget).find('#meals').val();
         $('.container-results p').text('');
-        getNumbeoData(location, budget, time, displayNumbeoData);
+        getNumbeoData(location, budget, time, meals, displayNumbeoData);
     });
-    $('.savedelete').submit(function() { 
+    $('.save').on('click', function() { 
+        $('.container-results').addClass('hidden');
+        //create and object with bud/loc/time/meals params to pass into sendsearchdata 
+        const budget = $(event.currentTarget).find('#budget').val();
+        const location = $(event.currentTarget).find('#location').val();
+        const time = $(event.currentTarget).find('#time').val();
+        const meals = $(event.currentTarget).find('#meals').val();
         console.log('hi');
-        sendSearchData();
+        sendSearchData(successFunction);
     });
-
     $('.about').on('click', function(){
         $('.signup').addClass('hidden');
         $('.login').addClass('hidden');
@@ -120,9 +129,6 @@ function setupClickHandlers() {
     });
     $('.js-search-btn').on('click', function(){
         $('.container-results').removeClass('hidden');
-    });
-    $('.savedelete').on('click', function(){
-        $('.container-results').addClass('hidden');
     });
 
     // $('.loginlink').on('click', function(){
