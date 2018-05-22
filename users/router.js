@@ -4,8 +4,10 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const {authList} = require('./models')
 
+// api/users... is this the same endpoint? 
+//meed to create post request on client to this endpoint
 router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['firstName', 'lastName', 'username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
