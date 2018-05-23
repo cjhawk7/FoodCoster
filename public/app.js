@@ -1,9 +1,17 @@
-let postVal = {
+const postVal = {
     budget: 0,
     location: '',
     time: 1,
     meals: 1
 }
+
+const userData = {
+    firstName: 'a',
+    lastName: 'b',
+    username: 'c',
+    password: 'd'
+}
+
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -17,7 +25,20 @@ function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
     $.ajax(settings);  
 }
 
+function createUser(data, callback) {
+    
 
+    const settings = {
+        url: '/api/users',
+        dataType: 'json',
+        type: 'POST',
+        data: JSON.stringify(data),
+        success: callback,
+        contentType: 'application/json'
+    };
+    
+    $.ajax(settings);  
+}
 
 function round(number, precision) {
     var shift = function (number, precision, reverseShift) {
@@ -82,8 +103,13 @@ function sendSearchData(post, callback) {
     
     $.ajax(settings);  
 }
+
 function successFunction() {
     console.log('success');
+}
+
+function userCreated() {
+    console.log('new user created');
 }
 
 function setupClickHandlers() {
@@ -95,12 +121,20 @@ function setupClickHandlers() {
         postVal.meals = $(event.currentTarget).find('#meals').val();
         const unit = $('#unit').val();
         $('.container-results').text('');
-        // $('.container-history').text('');
         getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
     });
 
+    $('.signup').submit(event => { 
+        event.preventDefault();
+        userData.firstName = $(event.currentTarget).find('#firstName').val();
+        userData.lastName = $(event.currentTarget).find('#lastName').val();
+        userData.username = $(event.currentTarget).find('#email').val();
+        userData.password = $(event.currentTarget).find('#password').val();
+        createUser(userData, userCreated);
+    });
+
+
     $('.save').on('click', function() { 
-        // $('.container-history').removeClass('hidden');
         $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
         console.log('hi');
         sendSearchData(postVal, successFunction);

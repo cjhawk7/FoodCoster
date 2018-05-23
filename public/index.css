@@ -105,19 +105,18 @@ h1 {
   }
 
 .js-signup-btn {
-width: 100px;
-height: 35px;
-font-family: Open-sans;
-font-size:20px;
-border-radius: 3px;
-background-color: white;
-color: black;
-margin: auto;
-display: block;
+    width: 100px;
+    height: 35px;
+    font-family: Open-sans;
+    font-size:20px;
+    border-radius: 3px;
+    background-color: white;
+    color: black;
+    margin: auto;
+    display: block;
 }
 
 button {
-    
     width: 50px;
     height: 25px;
     font-family: Open-sans;

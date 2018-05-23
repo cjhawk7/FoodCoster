@@ -4,13 +4,14 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const {authList} = require('./models')
 
-// api/users... is this the same endpoint? 
-//meed to create post request on client to this endpoint
+
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['firstName', 'lastName', 'username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
+    
+  
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -25,6 +26,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (nonStringField) {
+    console.log('go');
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -68,6 +70,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (tooSmallField || tooLargeField) {
+    console.log('sajida');
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -84,10 +87,11 @@ router.post('/', jsonParser, (req, res) => {
   firstName = firstName.trim();
   lastName = lastName.trim();
 
-  return User.find({username})
+  return authList.find({username})
     .count()
     .then(count => {
       if (count > 0) {
+         // need to return validation erroer to the client
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
@@ -95,10 +99,10 @@ router.post('/', jsonParser, (req, res) => {
           location: 'username'
         });
       }
-      return User.hashPassword(password);
+      return authList.hashPassword(password);
     })
     .then(hash => {
-      return User.create({
+      return authList.create({
         username,
         password: hash,
         firstName,
