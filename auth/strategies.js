@@ -8,7 +8,7 @@ console.log('JWT_SECRET', JWT_SECRET);
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
   let user;
-  User.findOne({ username: username })
+  authList.findOne({ username: username })
     .then(_user => {
       user = _user;
       if (!user) {

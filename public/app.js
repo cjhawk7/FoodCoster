@@ -12,6 +12,14 @@ const userData = {
     password: 'd'
 }
 
+const loginData = {
+    username: 'a',
+    password: 'b'
+}
+
+const refresh = {
+    password: 'a'
+}
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -27,7 +35,6 @@ function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
 
 function createUser(data, callback) {
     
-
     const settings = {
         url: '/api/users',
         dataType: 'json',
@@ -38,6 +45,35 @@ function createUser(data, callback) {
     };
     
     $.ajax(settings);  
+}
+
+function loginUser(data, callback) {
+
+    const settings = {
+        url: '/api/auth/login',
+        dataType: 'json',
+        type: 'POST',
+        data: JSON.stringify(data),
+        success: callback,
+        contentType: 'application/json'
+    };
+    
+    $.ajax(settings);  
+}
+
+function tokenRefresh(data, callback) {
+    
+    const settings = {
+        url: '/api/auth/refresh',
+        dataType: 'json',
+        type: 'POST',
+        data: JSON.stringify(data),
+        success: callback,
+        contentType: 'application/json'
+    };
+    
+    $.ajax(settings);  
+
 }
 
 function round(number, precision) {
@@ -112,6 +148,14 @@ function userCreated() {
     console.log('new user created');
 }
 
+function userLoggedIn() {
+    console.log('user logged in');
+}
+
+function refreshedToken() {
+    console.log('token refreshed');
+}
+
 function setupClickHandlers() {
     $('.search').submit(event => {
         event.preventDefault();
@@ -126,6 +170,7 @@ function setupClickHandlers() {
 
     $('.signup').submit(event => { 
         event.preventDefault();
+        // $('.signup-form')[0].checkValidity();
         userData.firstName = $(event.currentTarget).find('#firstName').val();
         userData.lastName = $(event.currentTarget).find('#lastName').val();
         userData.username = $(event.currentTarget).find('#email').val();
@@ -133,6 +178,14 @@ function setupClickHandlers() {
         createUser(userData, userCreated);
     });
 
+    $('.login').submit(event => { 
+        event.preventDefault();
+        loginData.username = $(event.currentTarget).find('#email-login').val();
+        loginData.password = $(event.currentTarget).find('#password-login').val();
+        refresh.password = $(event.currentTarget).find('#password-login').val();
+        loginUser(loginData, userLoggedIn);
+        tokenRefresh(refresh, refreshedToken);
+    });
 
     $('.save').on('click', function() { 
         $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());

@@ -23,6 +23,7 @@ passport.use(jwtStrategy);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 
+
 console.log('db url', DATABASE_URL);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
