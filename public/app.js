@@ -17,10 +17,6 @@ const loginData = {
     password: 'b'
 }
 
-const refresh = {
-    password: 'a'
-}
-
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
     const settings = {
@@ -64,6 +60,7 @@ function loginUser(data, callback) {
 function tokenRefresh(data, callback) {
     
     const settings = {
+        headers: {'authorization': `Bearer ${token}`},
         url: '/api/auth/refresh',
         dataType: 'json',
         type: 'POST',
@@ -182,9 +179,8 @@ function setupClickHandlers() {
         event.preventDefault();
         loginData.username = $(event.currentTarget).find('#email-login').val();
         loginData.password = $(event.currentTarget).find('#password-login').val();
-        refresh.password = $(event.currentTarget).find('#password-login').val();
         loginUser(loginData, userLoggedIn);
-        tokenRefresh(refresh, refreshedToken);
+        tokenRefresh(loginData, refreshedToken);
     });
 
     $('.save').on('click', function() { 

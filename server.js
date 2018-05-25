@@ -28,6 +28,7 @@ console.log('db url', DATABASE_URL);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
+// not sure how this endpoint is working
 app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({
     data: 'rosebud'

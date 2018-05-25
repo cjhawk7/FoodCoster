@@ -1,7 +1,6 @@
 const { Strategy: LocalStrategy } = require('passport-local');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { authList } = require('../users/models');
-//config or .env file?
 const { JWT_SECRET } = require('../config');
 
 console.log('JWT_SECRET', JWT_SECRET);
@@ -36,6 +35,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
     });
 });
 
+//how is JWT being supplied to strategy? 
 const jwtStrategy = new JwtStrategy(
     {
       secretOrKey: JWT_SECRET,
