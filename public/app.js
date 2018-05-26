@@ -57,21 +57,21 @@ function loginUser(data, callback) {
     $.ajax(settings);  
 }
 
-function tokenRefresh(data, callback) {
+// function tokenRefresh(data, callback) {
     
-    const settings = {
-        headers: {'authorization': `Bearer ${token}`},
-        url: '/api/auth/refresh',
-        dataType: 'json',
-        type: 'POST',
-        data: JSON.stringify(data),
-        success: callback,
-        contentType: 'application/json'
-    };
+//     const settings = {
+//         headers: {'Authorization': `Bearer ${token}`},
+//         url: '/api/auth/refresh',
+//         dataType: 'json',
+//         type: 'POST',
+//         data: JSON.stringify(data),
+//         success: callback,
+//         contentType: 'application/json'
+//     };
     
-    $.ajax(settings);  
+//     $.ajax(settings);  
 
-}
+// }
 
 function round(number, precision) {
     var shift = function (number, precision, reverseShift) {
@@ -92,16 +92,15 @@ function displayNumbeoData(response) {
     const unit = $('#unit').val();
     const meals = $('#meals').val();
     let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.'
-    let a = $('<p></p>');
+    
     
     if  (unit === 'Weeks') {
 
         calcResult = response.data['average_price'] * 7 * time * meals;
         let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.';
-        let a = $('<p></p>');
-        a.text('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
-        $('.container-results').html(a); 
-
+        let p = $('.container-results p')
+        p.html('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
+       
 
     } else if (unit === 'Days') {
 
@@ -109,17 +108,17 @@ function displayNumbeoData(response) {
         // p is coming from index.html
         // need to remove to prevent duplicate calcResult string below
         // buttons being pushed off results div
-        a.text('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
-        $('.container-results').html(a);
+        $('.container-results p').html('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
     }
+
     if (calcResult <= budget) {
         
         $('.container-results p').append(' Nice, you are within your budget!'); 
 
     }
     else {
-        
-        $('.container-results').append(' Whoops, might want to increase your budget!') 
+        console.log('here 1');
+        $('.container-results p').append(' Whoops, might want to increase your budget!') 
     }
 }
 
@@ -155,13 +154,14 @@ function refreshedToken() {
 
 function setupClickHandlers() {
     $('.search').submit(event => {
+        console.log('here');
         event.preventDefault();
         postVal.location = $(event.currentTarget).find('#location').val();
         postVal.budget = $(event.currentTarget).find('#budget').val();
         postVal.time = $(event.currentTarget).find('#time').val();
         postVal.meals = $(event.currentTarget).find('#meals').val();
         const unit = $('#unit').val();
-        $('.container-results').text('');
+        $('.container-results p').text('');
         getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
     });
 
