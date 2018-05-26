@@ -41,7 +41,11 @@ function createUser(data, callback) {
     };
     
     $.ajax(settings);  
+    $('.signup').addClass('hidden');
+    $('.login').removeClass('hidden');
 }
+
+
 
 function loginUser(data, callback) {
 
@@ -55,23 +59,12 @@ function loginUser(data, callback) {
     };
     
     $.ajax(settings);  
+    console.log($('.historystore').html());
+    $('.login').addClass('hidden');
+    $('.search').removeClass('hidden');
+    $('.historystore').removeAttr('hidden')
+    $('.logout').removeAttr('hidden');
 }
-
-// function tokenRefresh(data, callback) {
-    
-//     const settings = {
-//         headers: {'Authorization': `Bearer ${token}`},
-//         url: '/api/auth/refresh',
-//         dataType: 'json',
-//         type: 'POST',
-//         data: JSON.stringify(data),
-//         success: callback,
-//         contentType: 'application/json'
-//     };
-    
-//     $.ajax(settings);  
-
-// }
 
 function round(number, precision) {
     var shift = function (number, precision, reverseShift) {
@@ -105,9 +98,7 @@ function displayNumbeoData(response) {
     } else if (unit === 'Days') {
 
         calcResult = response.data['average_price'] * time * meals;
-        // p is coming from index.html
-        // need to remove to prevent duplicate calcResult string below
-        // buttons being pushed off results div
+
         $('.container-results p').html('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
     }
 
@@ -117,7 +108,7 @@ function displayNumbeoData(response) {
 
     }
     else {
-        console.log('here 1');
+        
         $('.container-results p').append(' Whoops, might want to increase your budget!') 
     }
 }
@@ -148,10 +139,6 @@ function userLoggedIn() {
     console.log('user logged in');
 }
 
-function refreshedToken() {
-    console.log('token refreshed');
-}
-
 function setupClickHandlers() {
     $('.search').submit(event => {
         console.log('here');
@@ -167,7 +154,6 @@ function setupClickHandlers() {
 
     $('.signup').submit(event => { 
         event.preventDefault();
-        // $('.signup-form')[0].checkValidity();
         userData.firstName = $(event.currentTarget).find('#firstName').val();
         userData.lastName = $(event.currentTarget).find('#lastName').val();
         userData.username = $(event.currentTarget).find('#email').val();
@@ -179,7 +165,12 @@ function setupClickHandlers() {
         event.preventDefault();
         loginData.username = $(event.currentTarget).find('#email-login').val();
         loginData.password = $(event.currentTarget).find('#password-login').val();
+        $('.home').removeClass('hidden');   
         loginUser(loginData, userLoggedIn);
+        $('.topnav p').append('Welcome, ', $(event.currentTarget).find('#email-login').val());
+        if (status === X) {
+            alert('oops, sorry');
+        }
     });
 
     $('.save').on('click', function() { 
@@ -206,37 +197,26 @@ function setupClickHandlers() {
 
     $('.home').on('click', function(){
         $('.login').addClass('hidden');
-        $('.signup').addClass('hidden');
-        $('.search').removeClass('hidden');
+        $('.signup').removeClass('hidden');
+        $('.search').addClass('hidden');
         $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
     });
 
-    $('.js-signup-btn').submit(event => {
-        $('.signup').addClass('hidden');
+    $('.logout').on('click', function(){
         $('.login').removeClass('hidden');
+        $('.signup').addClass('hidden');
+        $('.search').addClass('hidden');
+        $('.aboutpage').addClass('hidden');
+        $('.container-history').addClass('hidden');
+        $('.container-results').addClass('hidden');
+        $('.topnav p').text('');
     });
-
-    // $('.js-signup-btn').on('click', function(){
-    //     $('.signup').addClass('hidden');
-    //     $('.login').removeClass('hidden');
-    // });
-
-    $('.js-login-btn').submit(event => {
-        $('.login').addClass('hidden');
-        $('.search').removeClass('hidden');
-    });
-
-    // $('.js-login-btn').on('click', function(){
-    //     $('.login').addClass('hidden');
-    //     $('.search').removeClass('hidden');
-    // });
 
     $('.js-search-btn').on('click', function(){
         $('.container-results').removeClass('hidden');
     });
-    
 };
 
 $(function() {

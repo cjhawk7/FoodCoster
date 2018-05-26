@@ -12,6 +12,7 @@ body {
     overflow: hidden;
     width: 100%;
     opacity: 0.90;
+    height: 132px;
 }
 
 .topnav a {
@@ -223,4 +224,8 @@ background-color: rgb(59, 57, 57);
 
 .hidden {
 display: none;
+}
+
+.topnav p {
+float: right;
 }

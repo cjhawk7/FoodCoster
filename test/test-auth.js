@@ -208,7 +208,7 @@ describe('Auth endpoints', function () {
         {
           algorithm: 'HS256',
           subject: username,
-          expiresIn: '7d'
+          expiresIn: 10
         }
       );
       const decoded = jwt.decode(token);
