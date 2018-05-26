@@ -180,7 +180,6 @@ function setupClickHandlers() {
         loginData.username = $(event.currentTarget).find('#email-login').val();
         loginData.password = $(event.currentTarget).find('#password-login').val();
         loginUser(loginData, userLoggedIn);
-        tokenRefresh(loginData, refreshedToken);
     });
 
     $('.save').on('click', function() { 
@@ -214,15 +213,25 @@ function setupClickHandlers() {
         $('.container-results').addClass('hidden');
     });
 
-    $('.js-signup-btn').on('click', function(){
+    $('.js-signup-btn').submit(event => {
         $('.signup').addClass('hidden');
         $('.login').removeClass('hidden');
     });
 
-    $('.js-login-btn').on('click', function(){
+    // $('.js-signup-btn').on('click', function(){
+    //     $('.signup').addClass('hidden');
+    //     $('.login').removeClass('hidden');
+    // });
+
+    $('.js-login-btn').submit(event => {
         $('.login').addClass('hidden');
         $('.search').removeClass('hidden');
     });
+
+    // $('.js-login-btn').on('click', function(){
+    //     $('.login').addClass('hidden');
+    //     $('.search').removeClass('hidden');
+    // });
 
     $('.js-search-btn').on('click', function(){
         $('.container-results').removeClass('hidden');
