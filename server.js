@@ -28,12 +28,6 @@ console.log('db url', DATABASE_URL);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-// not sure how this endpoint is working
-app.get('/api/protected', jwtAuth, (req, res) => {
-  return res.json({
-    data: 'rosebud'
-  });
-});
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -46,7 +40,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/makeRequest/:cityName', function (req, res) {
+app.get('/makeRequest/:cityName', jwtAuth, function (req, res) {
   console.log('/makeRequest/:cityName');
   var instance = axios.create();
 
@@ -69,7 +63,7 @@ app.get('/makeRequest/:cityName', function (req, res) {
   });
 });
 
-app.get('/searchData', (req, res) => {
+app.get('/searchData', jwtAuth, (req, res) => {
   userList
     .find()
     .then(posts => {
@@ -82,7 +76,7 @@ app.get('/searchData', (req, res) => {
 });
 
 
-app.post('/searchData', jsonParser, (req, res) => {
+app.post('/searchData', jsonParser, jwtAuth, (req, res) => {
 console.log('reqbody', req.body);
 console.log(req);
   const requiredFields = ['budget', 'location', 'time', 'meals'];
@@ -112,7 +106,7 @@ console.log(req);
 });
 
 
-app.put('/searchData/:id', (req, res) => {
+app.put('/searchData/:id', jwtAuth, (req, res) => {
 
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -137,7 +131,7 @@ app.put('/searchData/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-app.delete('/searchData/:id', (req, res) => {
+app.delete('/searchData/:id', jwtAuth, (req, res) => {
   userList
     .findByIdAndRemove(req.params.id)
     .then(() => res.status(204).end())

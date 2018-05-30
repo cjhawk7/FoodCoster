@@ -28,8 +28,8 @@ describe('Auth endpoints', function () {
   });
 
   beforeEach(function() {
-    return User.hashPassword(password).then(password =>
-      User.create({
+    return authList.hashPassword(password).then(password =>
+      authList.create({
         username,
         password,
         firstName,
@@ -39,7 +39,7 @@ describe('Auth endpoints', function () {
   });
 
   afterEach(function () {
-    return User.remove({});
+    return authList.remove({});
   });
 
   describe('/api/auth/login', function () {
@@ -182,7 +182,7 @@ describe('Auth endpoints', function () {
       return chai
         .request(app)
         .post('/api/auth/refresh')
-        .set('authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${token}`)
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
         )
@@ -216,7 +216,7 @@ describe('Auth endpoints', function () {
       return chai
         .request(app)
         .post('/api/auth/refresh')
-        .set('authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${token}`)
         .then(res => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');

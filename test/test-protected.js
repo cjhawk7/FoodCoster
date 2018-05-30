@@ -28,8 +28,8 @@ describe('Protected endpoint', function() {
   });
 
   beforeEach(function() {
-    return User.hashPassword(password).then(password =>
-      User.create({
+    return authList.hashPassword(password).then(password =>
+      authList.create({
         username,
         password,
         firstName,
@@ -39,7 +39,7 @@ describe('Protected endpoint', function() {
   });
 
   afterEach(function() {
-    return User.remove({});
+    return authList.remove({});
   });
 
   describe('/api/protected', function() {

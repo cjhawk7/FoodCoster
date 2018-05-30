@@ -31,7 +31,7 @@ describe('/api/user', function() {
   beforeEach(function() {});
 
   afterEach(function() {
-    return User.remove({});
+    return authList.remove({});
   });
 
   describe('/api/users', function() {
@@ -329,7 +329,7 @@ describe('/api/user', function() {
       });
       it('Should reject users with duplicate username', function() {
         // Create an initial user
-        return User.create({
+        return authList.create({
           username,
           password,
           firstName,
@@ -382,7 +382,7 @@ describe('/api/user', function() {
             expect(res.body.username).to.equal(username);
             expect(res.body.firstName).to.equal(firstName);
             expect(res.body.lastName).to.equal(lastName);
-            return User.findOne({
+            return authList.findOne({
               username
             });
           })
@@ -438,7 +438,7 @@ describe('/api/user', function() {
         });
       });
       it('Should return an array of users', function() {
-        return User.create(
+        return authList.create(
           {
             username,
             password,

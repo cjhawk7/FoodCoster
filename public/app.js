@@ -17,6 +17,10 @@ const loginData = {
     password: 'b'
 }
 
+let authToken;
+
+
+
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
     const settings = {
@@ -44,8 +48,6 @@ function createUser(data, callback) {
     $('.signup').addClass('hidden');
     $('.login').removeClass('hidden');
 }
-
-
 
 function loginUser(data, callback) {
 
@@ -135,6 +137,7 @@ function sendSearchData(post, callback) {
 function getSearchData(post, callback) {
     
     const settings = {
+        headers: {'Authorization': `Bearer ${authToken.authToken}`},
         url: '/searchData',
         dataType: 'json',
         type: 'GET',
@@ -155,7 +158,10 @@ function userCreated() {
     console.log('new user created');
 }
 
-function userLoggedIn() {
+function userLoggedIn(data) {
+    authToken = data;
+    console.log(data);
+
     console.log('user logged in');
 }
 
@@ -203,7 +209,7 @@ function setupClickHandlers() {
         $('.container-history').removeClass('hidden');   
         $('.search').addClass('hidden');
         $('.searchnav').removeAttr('hidden');
-        getSearchData(displaySearchData)
+        getSearchData(displaySearchData);
     });
     
     $('.about').on('click', function(){
@@ -233,6 +239,7 @@ function setupClickHandlers() {
         $('.container-results').addClass('hidden');
         $('.topnav p').text('');
         $('.searchnav').attr('hidden', 'true');
+        authToken = undefined;
     });
 
     $('.searchnav').on('click', function(){
@@ -244,7 +251,6 @@ function setupClickHandlers() {
         $('.container-results').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
     });
-
 
     $('.js-search-btn').on('click', function(){
         $('.container-results').removeClass('hidden');
