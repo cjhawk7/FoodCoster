@@ -64,6 +64,7 @@ function loginUser(data, callback) {
     $('.search').removeClass('hidden');
     $('.historystore').removeAttr('hidden')
     $('.logout').removeAttr('hidden');
+    $('.search').removeAttr('hidden');
 }
 
 function round(number, precision) {
@@ -92,14 +93,14 @@ function displayNumbeoData(response) {
         calcResult = response.data['average_price'] * 7 * time * meals;
         let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.';
         let p = $('.container-results p')
-        p.html('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
+        p.html(' It will be roughly ' + round(calcResult, 2)  + currencyLocation);
        
 
     } else if (unit === 'Days') {
 
         calcResult = response.data['average_price'] * time * meals;
 
-        $('.container-results p').html('It will be roughly ' + round(calcResult, 2)  + currencyLocation);
+        $('.container-results p').html(' It will be roughly ' + round(calcResult, 2)  + currencyLocation);
     }
 
     if (calcResult <= budget) {
@@ -111,6 +112,10 @@ function displayNumbeoData(response) {
         
         $('.container-results p').append(' Whoops, might want to increase your budget!') 
     }
+}
+
+function displaySearchData (data) {
+    
 }
 
 function sendSearchData(post, callback) {
@@ -126,6 +131,21 @@ function sendSearchData(post, callback) {
     
     $.ajax(settings);  
 }
+
+function getSearchData(post, callback) {
+    
+    const settings = {
+        url: '/searchData',
+        dataType: 'json',
+        type: 'GET',
+        data: JSON.stringify(post),
+        success: callback,
+        contentType: 'application/json'
+    };
+    
+    $.ajax(settings);  
+}
+
 
 function successFunction() {
     console.log('success');
@@ -168,9 +188,6 @@ function setupClickHandlers() {
         $('.home').removeClass('hidden');   
         loginUser(loginData, userLoggedIn);
         $('.topnav p').append('Welcome, ', $(event.currentTarget).find('#email-login').val());
-        if (status === X) {
-            alert('oops, sorry');
-        }
     });
 
     $('.save').on('click', function() { 
@@ -185,6 +202,8 @@ function setupClickHandlers() {
         $('.aboutpage').addClass('hidden');
         $('.container-history').removeClass('hidden');   
         $('.search').addClass('hidden');
+        $('.searchnav').removeAttr('hidden');
+        getSearchData(displaySearchData)
     });
     
     $('.about').on('click', function(){
@@ -193,6 +212,7 @@ function setupClickHandlers() {
         $('.aboutpage').removeClass('hidden');  
         $('.search').addClass('hidden');
         $('.container-history').addClass('hidden');
+        $('.searchnav').removeAttr('hidden');
     });
 
     $('.home').on('click', function(){
@@ -212,7 +232,19 @@ function setupClickHandlers() {
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
         $('.topnav p').text('');
+        $('.searchnav').attr('hidden', 'true');
     });
+
+    $('.searchnav').on('click', function(){
+        $('.login').addClass('hidden');
+        $('.signup').addClass('hidden');
+        $('.search').removeClass('hidden');
+        $('.aboutpage').addClass('hidden');
+        $('.container-history').addClass('hidden');
+        $('.container-results').addClass('hidden');
+        $('.searchnav').attr('hidden', 'true');
+    });
+
 
     $('.js-search-btn').on('click', function(){
         $('.container-results').removeClass('hidden');

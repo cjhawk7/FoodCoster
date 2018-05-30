@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/makeRequest/:cityName', jwtAuth, function (req, res) {
+app.get('/makeRequest/:cityName', function (req, res) {
   console.log('/makeRequest/:cityName');
   var instance = axios.create();
 
@@ -69,7 +69,20 @@ app.get('/makeRequest/:cityName', jwtAuth, function (req, res) {
   });
 });
 
-app.post('/searchData', jsonParser, jwtAuth, (req, res) => {
+app.get('/searchData', (req, res) => {
+  userList
+    .find()
+    .then(posts => {
+      res.json(posts.map(post => post.serialize()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
+
+app.post('/searchData', jsonParser, (req, res) => {
 console.log('reqbody', req.body);
 console.log(req);
   const requiredFields = ['budget', 'location', 'time', 'meals'];

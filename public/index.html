@@ -14,6 +14,7 @@
         <a href="#" class="about">About</a>
         <a href="#" class="historystore" hidden>Search History</a>
         <a href="#" class="logout" hidden>Log out</a>
+        <a href="#" class="searchnav" hidden>back to search...</a>
         <p></p>
     </div>  
 
@@ -83,7 +84,13 @@
         </div>
     </div>
 
-    <div class="container-history hidden"></div>
+    <div class="container-history hidden">
+        <div class = "wrapper">
+            <button class="history delete">
+                <span class="button-label">remove</span>
+            </button>
+        </div>
+    </div>
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
