@@ -154,7 +154,7 @@ function displaySearchData (data) {
                     $.each(array[i], function (key, value) {
                         html += ('<li>' + key + ': ' + value + '</li>');
                     });
-                        html += '<br><br>';
+                        html += '</ul></div>';
                         $('.container-history').html(html);
                 });
             }
