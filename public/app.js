@@ -116,10 +116,6 @@ function displayNumbeoData(response) {
     }
 }
 
-function displaySearchData (data) {
-    
-}
-
 function sendSearchData(post, callback) {
     
     const settings = {
@@ -135,14 +131,13 @@ function sendSearchData(post, callback) {
     $.ajax(settings);  
 }
 
-function getSearchData(post, callback) {
+function getSearchData(callback) {
     
     const settings = {
         headers: {'Authorization': `Bearer ${authToken.authToken}`},
         url: '/searchData',
         dataType: 'json',
         type: 'GET',
-        data: JSON.stringify(post),
         success: callback,
         contentType: 'application/json'
     };
@@ -150,6 +145,21 @@ function getSearchData(post, callback) {
     $.ajax(settings);  
 }
 
+function displaySearchData (data) {
+
+    let html = '';
+        var array = data.posts;
+            if (array) {
+                $.each(array, function (i) {
+                    $.each(array[i], function (key, value) {
+                        html += ('<li>' + key + ': ' + value + '</li>');
+                    });
+                        html += '<br><br>';
+                        $('.container-history').html(html);
+                });
+            }
+
+}
 
 function successFunction() {
     console.log('success');
@@ -168,7 +178,6 @@ function userLoggedIn(data) {
 
 function setupClickHandlers() {
     $('.search').submit(event => {
-        console.log('here');
         event.preventDefault();
         postVal.location = $(event.currentTarget).find('#location').val();
         postVal.budget = $(event.currentTarget).find('#budget').val();
@@ -199,14 +208,12 @@ function setupClickHandlers() {
     });
 
     $('.save').on('click', function() { 
-        $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
-        console.log('hi');
+        // $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
         sendSearchData(postVal, successFunction);
     });
 
     $('.historyremove').on('click', function() { 
-        $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
-        console.log('hi');
+        // $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
         sendSearchData(postVal, successFunction);
     });
 
