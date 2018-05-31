@@ -59,8 +59,8 @@
         <div class="container-search">
             <h2>Find your food costs</h2>
             <form class='search-form' action="" method ='post'>
+                    <input type= "text" class= "query-search" id= "location" placeholder = "Desired city"required >
                 <input type= "number" class= "query-search" id= "budget" placeholder = "Budget (USD)" required>
-                <input type= "text" class= "query-search" id= "location" placeholder = "Desired city"required >
                 <input type= "number" class= "query-search" id= "meals" placeholder = "Meals a day (eating out)" required>
                 <input type= "number" class= "query-search" id= "time" placeholder = "Length of stay" required>
                 <select name="text" class= "query-search" id="unit"> <!--Supplement an id here instead of using 'text'-->
@@ -85,6 +85,7 @@
     </div>
 
     <div class="container-history hidden">
+        <p></p>
         <div class = "wrapper">
             <button class="historyremove">
                 <span class="button-label">remove</span>

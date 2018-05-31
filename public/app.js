@@ -146,8 +146,20 @@ function getSearchData(callback) {
 }
 
 function displaySearchData (data) {
+    let p = $('.container-history p')
+    let renderingPosts = data.posts.map((post) => ({
+        budget: post.budget, 
+        location: post.location,
+        meals: post.meals,
+        time: post.time
+    }));
+    console.log(renderingPosts);
 
-    let html = '';
+    for (let i = 0; i < data.posts.length; i++) {
+
+        delete postsCopy[i]._id
+    }
+        let html = '';
         var array = data.posts;
             if (array) {
                 $.each(array, function (i) {
@@ -155,7 +167,7 @@ function displaySearchData (data) {
                         html += ('<li>' + key + ': ' + value + '</li>');
                     });
                         html += '</ul></div>';
-                        $('.container-history').html(html);
+                        $('.container-history p').html(html);
                 });
             }
 
