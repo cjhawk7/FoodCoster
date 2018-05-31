@@ -14,14 +14,17 @@ const authSchema = mongoose.Schema({
       required: true
     },
     firstName: {type: String, default: ''},
-    lastName: {type: String, default: ''}
+    lastName: {type: String, default: ''},
+    posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'userList'}]
   });
   
   authSchema.methods.serialize = function() {
     return {
+      _id: this._id || '',
       username: this.username || '',
       firstName: this.firstName || '',
-      lastName: this.lastName || ''
+      lastName: this.lastName || '',
+      posts: this.posts || []
     };
   };
   

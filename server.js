@@ -11,6 +11,7 @@ const {PORT, DATABASE_URL} = require('./config');
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 const {userList} = require('./models');
+const {authList} = require('./users/models');
 const passport = require('passport');
 mongoose.Promise = global.Promise;
 
@@ -40,14 +41,14 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/makeRequest/:cityName', jwtAuth, function (req, res) {
+app.get('/makeRequest/:cityName', function (req, res) {
   console.log('/makeRequest/:cityName');
   var instance = axios.create();
 
   instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${req.params.cityName}&currency=USD`, {
     headers: {'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': 'Content-Type',
-              'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
+              'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE',
     }
   })
   .then(function (response) {
@@ -64,10 +65,12 @@ app.get('/makeRequest/:cityName', jwtAuth, function (req, res) {
 });
 
 app.get('/searchData', jwtAuth, (req, res) => {
-  userList
-    .find()
+  console.log(req.user);
+  authList
+    .findById(req.user._id)
+    .populate('posts')
     .then(posts => {
-      res.json(posts.map(post => post.serialize()));
+      res.status(200).json(posts)
     })
     .catch(err => {
       console.error(err);
@@ -89,7 +92,7 @@ console.log(req);
     }
   }
 
-  userList
+  return userList
     .create({
       budget: req.body.budget,
       location: req.body.location,
@@ -97,7 +100,14 @@ console.log(req);
       time: req.body.time
     })
     .then(
-      searchObject => res.status(201).json(searchObject.serialize()))
+      searchObject => {
+        authList.findByIdAndUpdate(req.user._id, 
+          { $push : {posts:searchObject._id}}
+        )
+        .then(()=>res.status(201).json(searchObject.serialize()))
+      })
+      
+    
 
     .catch(err => {
       console.error(err);

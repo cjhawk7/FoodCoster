@@ -123,6 +123,7 @@ function displaySearchData (data) {
 function sendSearchData(post, callback) {
     
     const settings = {
+        headers: {'Authorization': `Bearer ${authToken.authToken}`},
         url: '/searchData',
         dataType: 'json',
         type: 'POST',
@@ -194,6 +195,7 @@ function setupClickHandlers() {
         $('.home').removeClass('hidden');   
         loginUser(loginData, userLoggedIn);
         $('.topnav p').append('Welcome, ', $(event.currentTarget).find('#email-login').val());
+        $('.historystore').removeClass('hidden');
     });
 
     $('.save').on('click', function() { 
@@ -201,6 +203,13 @@ function setupClickHandlers() {
         console.log('hi');
         sendSearchData(postVal, successFunction);
     });
+
+    $('.historyremove').on('click', function() { 
+        $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
+        console.log('hi');
+        sendSearchData(postVal, successFunction);
+    });
+
 
     $('.historystore').on('click', function(){
         $('.signup').addClass('hidden');    
@@ -237,6 +246,7 @@ function setupClickHandlers() {
         $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
+        $('.historystore').addClass('hidden');
         $('.topnav p').text('');
         $('.searchnav').attr('hidden', 'true');
         authToken = undefined;
