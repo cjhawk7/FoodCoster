@@ -2,7 +2,8 @@ const postVal = {
     budget: 0,
     location: '',
     time: 1,
-    meals: 1
+    meals: 1,
+    info: ''
 }
 
 const userData = {
@@ -19,7 +20,7 @@ const loginData = {
 
 let authToken;
 
-
+let info;
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -82,14 +83,19 @@ function round(number, precision) {
 
 function displayNumbeoData(response) {
     let calcResult = 0;
+
+
     const location = $('#location').val();
     const budget = $('#budget').val();
     const time = $('#time').val();
     const unit = $('#unit').val();
     const meals = $('#meals').val();
+
+    
     let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.'
+
     
-    
+
     if  (unit === 'Weeks') {
 
         calcResult = response.data['average_price'] * 7 * time * meals;
@@ -114,8 +120,15 @@ function displayNumbeoData(response) {
         
         $('.container-results p').append(' Whoops, might want to increase your budget!') 
     }
+
+    let m = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation;
+
+    info = m;
+
+    console.log(info);
 }
 
+// getting 500 when sending after adding info property
 function sendSearchData(post, callback) {
     
     const settings = {
@@ -145,13 +158,29 @@ function getSearchData(callback) {
     $.ajax(settings);  
 }
 
+function deleteSearchData(callback) {
+    
+    const settings = {
+        headers: {'Authorization': `Bearer ${authToken.authToken}`},
+        url: '/searchData:/id',
+        dataType: 'json',
+        type: 'DELETE',
+        success: callback,
+        contentType: 'application/json'
+    };
+    
+    $.ajax(settings);  
+}
+
+
 function displaySearchData (data) {
     let p = $('.container-history p')
     let renderingPosts = data.posts.map((post) => ({
-        budget: post.budget, 
         location: post.location,
-        meals: post.meals,
-        time: post.time
+        budget: post.budget, 
+        meals_a_day: post.meals,
+        length_of_stay: post.time,
+        result: post.info
     }));
     console.log(renderingPosts);
 
@@ -192,6 +221,11 @@ function userLoggedIn(data) {
     console.log('user logged in');
 }
 
+function deleteData(data) {
+
+     console.log(data);
+}
+
 function setupClickHandlers() {
     $('.search').submit(event => {
         event.preventDefault();
@@ -224,13 +258,15 @@ function setupClickHandlers() {
     });
 
     $('.save').on('click', function() { 
-        // $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
+        postVal.info = info;
+        
         sendSearchData(postVal, successFunction);
     });
 
     $('.historyremove').on('click', function() { 
-        // $('.container-history').append(' Location: ' + postVal.location + ' Budget: $' + postVal.budget + ' Meals: ' + postVal.meals  + ' Time: ' + postVal.time, $('.container-results p').html());
-        sendSearchData(postVal, successFunction);
+       console.log('delete');
+        deleteSearchData(deleteData);
+        
     });
 
 
@@ -244,8 +280,8 @@ function setupClickHandlers() {
         getSearchData(displaySearchData);
     });
     
-    $('.about').on('click', function(){
-        $('.signup').addClass('hidden');
+    $('.home').on('click', function(){
+        $('.signup').removeClass('hidden');
         $('.login').addClass('hidden');
         $('.aboutpage').removeClass('hidden');  
         $('.search').addClass('hidden');
@@ -253,17 +289,26 @@ function setupClickHandlers() {
         $('.searchnav').removeAttr('hidden');
     });
 
-    $('.home').on('click', function(){
-        $('.login').addClass('hidden');
-        $('.signup').removeClass('hidden');
+    // $('.register').on('click', function(){
+    //     $('.login').addClass('hidden');
+    //     $('.signup').removeClass('hidden');
+    //     $('.search').addClass('hidden');
+    //     $('.aboutpage').addClass('hidden');
+    //     $('.container-history').addClass('hidden');
+    //     $('.container-results').addClass('hidden');
+    // });
+
+    $('.signin').on('click', function(){
+        $('.login').removeClass('hidden');
+        $('.signup').addClass('hidden');
         $('.search').addClass('hidden');
         $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
     });
 
+
     $('.logout').on('click', function(){
-        $('.login').removeClass('hidden');
         $('.signup').addClass('hidden');
         $('.search').addClass('hidden');
         $('.aboutpage').addClass('hidden');
@@ -272,6 +317,8 @@ function setupClickHandlers() {
         $('.historystore').addClass('hidden');
         $('.topnav p').text('');
         $('.searchnav').attr('hidden', 'true');
+        $('.logout').addClass('hidden');
+        $('.login').removeClass('hidden');
         authToken = undefined;
     });
 

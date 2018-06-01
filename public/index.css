@@ -1,23 +1,22 @@
 body {
-
     color: white;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
-    background-image: url("https://images6.alphacoders.com/876/876171.jpg");
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://images6.alphacoders.com/876/876171.jpg");
     background-size: cover;
   }
 
 .topnav {
-    background-color: rgb(59, 57, 57);
+    background-color: white;
     overflow: hidden;
     width: 100%;
     opacity: 0.90;
-    height: 132px;
+    height: 50px;
 }
 
 .topnav a {
     float: left;
-    color: #f2f2f2;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -36,24 +35,15 @@ body {
 
 h1 {
     text-align: center;
-}
-
-.aboutpage p {
-    font-size: 20px;
     margin-top: 100px;
+    font-family: 'Pacifico', cursive;
 }
-
-.aboutcontent {
-    background-color: rgb(59, 57, 57);
-      display: block;
-      border: 2px solid;
-      width: 800px;
-      height: 250px;
-      margin: auto;
-      margin-top: 50px;
-      opacity: 0.90;
-      position: relative;
-  }
+.signup h2 {
+    font-size: 30px;
+    margin-top: 150px;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Bowlby One SC', cursive;
+}
 
 .container {
     background-color: rgb(82, 78, 78);
@@ -62,7 +52,7 @@ h1 {
     width: 400px;
     height: 500px;    
     margin: auto;
-    margin-top: 200px;
+    margin-top: 125px;
     border-radius: 3px;
     opacity: 0.90;
 }
@@ -225,10 +215,14 @@ float: right;
     display: block;
     border: 2px solid;
     width: 400px;
-    height: 120px;
+    height: 150px;
     margin: auto;
     margin-top: 15px;
     opacity: 0.90;
     position: relative;
     text-align: center;
+}
+
+ul {
+    list-style: none;
 }

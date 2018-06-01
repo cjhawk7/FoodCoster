@@ -82,7 +82,7 @@ app.get('/searchData', jwtAuth, (req, res) => {
 app.post('/searchData', jsonParser, jwtAuth, (req, res) => {
 console.log('reqbody', req.body);
 console.log(req);
-  const requiredFields = ['budget', 'location', 'time', 'meals'];
+  const requiredFields = ['budget', 'location', 'time', 'meals', 'info'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -97,7 +97,8 @@ console.log(req);
       budget: req.body.budget,
       location: req.body.location,
       meals: req.body.meals,
-      time: req.body.time
+      time: req.body.time,
+      info: req.body.info
     })
     .then(
       searchObject => {
@@ -144,6 +145,7 @@ app.put('/searchData/:id', jwtAuth, (req, res) => {
 app.delete('/searchData/:id', jwtAuth, (req, res) => {
   userList
     .findByIdAndRemove(req.params.id)
+    console.log(req.params.id)
     .then(() => res.status(204).end())
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
