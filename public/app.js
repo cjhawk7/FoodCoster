@@ -155,18 +155,22 @@ function displaySearchData (data) {
     }));
     console.log(renderingPosts);
 
-    for (let i = 0; i < data.posts.length; i++) {
-
-        delete postsCopy[i]._id
-    }
+    
         let html = '';
-        var array = data.posts;
+        var array = renderingPosts;
             if (array) {
                 $.each(array, function (i) {
+                    //beginning of search object
+                    
+
+                    html += ('<div class = "searchwrap"><ul><div class ="wrapper"><button class = "historyremove"><span class ="button-label">remove</span></button></div>')
                     $.each(array[i], function (key, value) {
+
                         html += ('<li>' + key + ': ' + value + '</li>');
                     });
-                        html += '</ul></div>';
+                    html += ('</ul></div>')
+                        html += '<br></br>';
+                        
                         $('.container-history p').html(html);
                 });
             }

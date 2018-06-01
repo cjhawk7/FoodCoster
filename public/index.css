@@ -209,7 +209,19 @@ background-color: rgb(59, 57, 57);
 }
 
 .container-history {
-background-color: rgb(59, 57, 57);
+
+}
+
+.hidden {
+display: none;
+}
+
+.topnav p {
+float: right;
+}
+
+.searchwrap {
+    background-color: rgb(59, 57, 57);
     display: block;
     border: 2px solid;
     width: 400px;
@@ -219,12 +231,4 @@ background-color: rgb(59, 57, 57);
     opacity: 0.90;
     position: relative;
     text-align: center;
-}
-
-.hidden {
-display: none;
-}
-
-.topnav p {
-float: right;
 }
