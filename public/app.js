@@ -255,6 +255,9 @@ function setupClickHandlers() {
         loginUser(loginData, userLoggedIn);
         $('.topnav p').append('Welcome, ', $(event.currentTarget).find('#email-login').val());
         $('.historystore').removeClass('hidden');
+        $('.title').addClass('hidden');
+        $('.signin').addClass('hidden');
+        $('.logout').removeClass('hidden');
     });
 
     $('.save').on('click', function() { 
@@ -286,7 +289,8 @@ function setupClickHandlers() {
         $('.aboutpage').removeClass('hidden');  
         $('.search').addClass('hidden');
         $('.container-history').addClass('hidden');
-        $('.searchnav').removeAttr('hidden');
+        $('.searchnav').attr('hidden', 'true');
+        
     });
 
     // $('.register').on('click', function(){
@@ -318,6 +322,7 @@ function setupClickHandlers() {
         $('.topnav p').text('');
         $('.searchnav').attr('hidden', 'true');
         $('.logout').addClass('hidden');
+        $('.signin').removeClass('hidden');
         $('.login').removeClass('hidden');
         authToken = undefined;
     });

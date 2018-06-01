@@ -33,14 +33,16 @@ body {
     color: white;
 }
 
-h1 {
+.title h1 {
+    font-size: 50px;
     text-align: center;
-    margin-top: 100px;
-    font-family: 'Pacifico', cursive;
+    margin-top: 65px;
+    font-family: 'Source Serif Pro', serif;
 }
+
 .signup h2 {
     font-size: 30px;
-    margin-top: 150px;
+    margin-top: 125px;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Bowlby One SC', cursive;
 }
@@ -208,6 +210,7 @@ display: none;
 
 .topnav p {
 float: right;
+color: black;
 }
 
 .searchwrap {
