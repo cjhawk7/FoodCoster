@@ -136,17 +136,18 @@ app.put('/searchData/:id', jwtAuth, (req, res) => {
     }
   });
 
-  userList
+  authList
     .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
     .then(searchObject => res.status(204).end())
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 app.delete('/searchData/:id', jwtAuth, (req, res) => {
+  console.log(`${req.params.id}`)
   userList
     .findByIdAndRemove(req.params.id)
-    console.log(req.params.id)
-    .then(() => res.status(204).end())
+    .exec()
+    .then((obj) => res.status(200).json(obj))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 

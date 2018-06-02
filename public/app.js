@@ -50,7 +50,7 @@ function createUser(data, callback) {
     $('.login').removeClass('hidden');
 }
 
-function loginUser(data, callback) {
+function loginUser(data, callback, err) {
 
     const settings = {
         url: '/api/auth/login',
@@ -58,13 +58,12 @@ function loginUser(data, callback) {
         type: 'POST',
         data: JSON.stringify(data),
         success: callback,
+        error: err,
         contentType: 'application/json'
     };
     
     $.ajax(settings);  
     console.log($('.historystore').html());
-    $('.login').addClass('hidden');
-    $('.search').removeClass('hidden');
     $('.historystore').removeAttr('hidden')
     $('.logout').removeAttr('hidden');
     $('.search').removeAttr('hidden');
@@ -91,6 +90,7 @@ function displayNumbeoData(response) {
     const unit = $('#unit').val();
     const meals = $('#meals').val();
 
+    $('.container-results').removeClass('hidden');
     
     let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.'
 
@@ -128,7 +128,7 @@ function displayNumbeoData(response) {
     console.log(info);
 }
 
-// getting 500 when sending after adding info property
+
 function sendSearchData(post, callback) {
     
     const settings = {
@@ -158,11 +158,11 @@ function getSearchData(callback) {
     $.ajax(settings);  
 }
 
-function deleteSearchData(callback) {
+function deleteSearchData(id, callback) {
     
     const settings = {
         headers: {'Authorization': `Bearer ${authToken.authToken}`},
-        url: '/searchData:/id',
+        url: '/searchData/' + id,
         dataType: 'json',
         type: 'DELETE',
         success: callback,
@@ -180,31 +180,41 @@ function displaySearchData (data) {
         budget: post.budget, 
         meals_a_day: post.meals,
         length_of_stay: post.time,
-        result: post.info
+        result: post.info,
+        id: post._id
     }));
     console.log(renderingPosts);
 
-    
-        let html = '';
-        var array = renderingPosts;
-            if (array) {
-                $.each(array, function (i) {
-                    //beginning of search object
-                    
+    let html = '';
+    var array = renderingPosts;
+        if (array) {
 
-                    html += ('<div class = "searchwrap"><ul><div class ="wrapper"><button class = "historyremove"><span class ="button-label">remove</span></button></div>')
-                    $.each(array[i], function (key, value) {
+            $.each(array, function (i) {
 
-                        html += ('<li>' + key + ': ' + value + '</li>');
-                    });
-                    html += ('</ul></div>')
-                        html += '<br></br>';
-                        
-                        $('.container-history p').html(html);
+                html += ('<div class="searchwrap"><ul><div class="wrapper"><button class="historyremove" data-id="'+array[i].id+'"><span class="button-label">remove</span></button></div>')
+                delete array[i].id;
+                $.each(array[i], function (key, value) {
+                    html += ('<li>' + key + ': ' + value + '</li>');
                 });
-            }
 
+                html += ('</ul></div>')
+                html += '<br></br>';    
+            });
+
+                $('.container-history p').html(html);
+
+                $('.historyremove').on('click', function() { 
+                console.log('delete');
+                    deleteSearchData($(this).data('id'), function (obj) { removeSearchData(obj)});
+                });
+        }
 }
+
+function removeSearchData(obj) {
+
+    $(`button[data-id="${obj._id}"]`).closest('.searchwrap').remove();
+}
+
 
 function successFunction() {
     console.log('success');
@@ -216,9 +226,22 @@ function userCreated() {
 
 function userLoggedIn(data) {
     authToken = data;
+    $('.home').removeClass('hidden');   
+    $('.topnav p').append('Welcome, ', loginData.username);
+    $('.historystore').removeClass('hidden');
+    $('.title').addClass('hidden');
+    $('.signin').addClass('hidden');
+    $('.logout').removeClass('hidden');
+    $('.login').addClass('hidden');
+    $('.search').removeClass('hidden');
     console.log(data);
-
     console.log('user logged in');
+}
+
+function loginError() {
+
+ alert('nope');   
+    
 }
 
 function deleteData(data) {
@@ -227,6 +250,7 @@ function deleteData(data) {
 }
 
 function setupClickHandlers() {
+
     $('.search').submit(event => {
         event.preventDefault();
         postVal.location = $(event.currentTarget).find('#location').val();
@@ -235,6 +259,11 @@ function setupClickHandlers() {
         postVal.meals = $(event.currentTarget).find('#meals').val();
         const unit = $('#unit').val();
         $('.container-results p').text('');
+
+        
+
+        
+
         getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
     });
 
@@ -251,27 +280,20 @@ function setupClickHandlers() {
         event.preventDefault();
         loginData.username = $(event.currentTarget).find('#email-login').val();
         loginData.password = $(event.currentTarget).find('#password-login').val();
-        $('.home').removeClass('hidden');   
-        loginUser(loginData, userLoggedIn);
-        $('.topnav p').append('Welcome, ', $(event.currentTarget).find('#email-login').val());
-        $('.historystore').removeClass('hidden');
-        $('.title').addClass('hidden');
-        $('.signin').addClass('hidden');
-        $('.logout').removeClass('hidden');
+        loginUser(loginData, userLoggedIn, loginError);
     });
 
     $('.save').on('click', function() { 
         postVal.info = info;
-        
+        $('.container-results').addClass('hidden');
         sendSearchData(postVal, successFunction);
+        alert('saved to history!');
     });
 
-    $('.historyremove').on('click', function() { 
-       console.log('delete');
-        deleteSearchData(deleteData);
-        
-    });
+    $('.delete').on('click', function() { 
+        $('.container-results').addClass('hidden');    
 
+    });
 
     $('.historystore').on('click', function(){
         $('.signup').addClass('hidden');    
@@ -280,8 +302,15 @@ function setupClickHandlers() {
         $('.container-history').removeClass('hidden');   
         $('.search').addClass('hidden');
         $('.searchnav').removeAttr('hidden');
+        $('.title').addClass('hidden');
         getSearchData(displaySearchData);
     });
+
+    $('.historyremove').on('click', function() { 
+        console.log('delete');
+         deleteSearchData(deleteData);
+    });
+ 
     
     $('.home').on('click', function(){
         $('.signup').removeClass('hidden');
@@ -290,17 +319,9 @@ function setupClickHandlers() {
         $('.search').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
-        
+        $('.title').removeClass('hidden');
     });
 
-    // $('.register').on('click', function(){
-    //     $('.login').addClass('hidden');
-    //     $('.signup').removeClass('hidden');
-    //     $('.search').addClass('hidden');
-    //     $('.aboutpage').addClass('hidden');
-    //     $('.container-history').addClass('hidden');
-    //     $('.container-results').addClass('hidden');
-    // });
 
     $('.signin').on('click', function(){
         $('.login').removeClass('hidden');
@@ -324,6 +345,7 @@ function setupClickHandlers() {
         $('.logout').addClass('hidden');
         $('.signin').removeClass('hidden');
         $('.login').removeClass('hidden');
+        $('.title').removeClass('hidden');
         authToken = undefined;
     });
 
@@ -337,10 +359,11 @@ function setupClickHandlers() {
         $('.searchnav').attr('hidden', 'true');
     });
 
-    $('.js-search-btn').on('click', function(){
-        $('.container-results').removeClass('hidden');
-    });
+    // $('.js-search-btn').on('click', function(){
+    //     $('.container-results').removeClass('hidden');
+    // });
 };
+
 
 $(function() {
     setupClickHandlers();

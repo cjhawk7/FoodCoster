@@ -13,7 +13,7 @@
         <a href="#" class="signin">Sign in</a>
         <a href="#" class="historystore" hidden>Search History</a>
         <a href="#" class="logout" hidden>Log out</a>
-        <a href="#" class="searchnav" hidden>back to search...</a>
+        <a href="#" class="searchnav" hidden>Back to search...</a>
         <p></p>
     </div>  
 
@@ -22,17 +22,17 @@
     </div>
     
     <div class="signup">
-            <h2>Know your food costs before you get to your destination.</h2>
+            <h2>Plan your food costs before you get to your destination.</h2>
             <div class="container">
                 <form class='signup-form' action='' method ='post'>
                     <label for="email">First name</label>
-                    <input type= "text" class= "js-query" id= "firstName" placeholder = "First name"  >
+                    <input type= "text" class= "js-query" id= "firstName" placeholder = "First name" required  >
                     <label for="email">Last name</label>
-                    <input type= "text" class= "js-query" id= "lastName" placeholder = "Last name"  >
+                    <input type= "text" class= "js-query" id= "lastName" placeholder = "Last name" required >
                     <label for="email">Email</label>
-                    <input type= "text" class= "js-query" id= "email" placeholder = "email/username"  >
+                    <input type= "text" class= "js-query" id= "email" placeholder = "email/username" required  >
                     <label for="password">Password</label>
-                    <input type= "text" class= "js-query" id= "password" placeholder = "password"  >
+                    <input type= "text" class= "js-query" id= "password" placeholder = "password" required >
                     <button type="submit" class="js-signup-btn">Signup</button>
                 </form>
                 <p><a href="/login" class="loginlink">Log in</a> if you already have an account.</p>
@@ -55,10 +55,15 @@
         <div class="container-search">
             <h2>Find your food costs</h2>
             <form class='search-form' action="" method ='post'>
-                    <input type= "text" class= "query-search" id= "location" placeholder = "Desired city"required >
+                <label for="desiredcity">Location</label>
+                <input type= "text" class= "query-search" id= "location" placeholder = "Desired city"required >
+                <label for="budget">Budget</label>
                 <input type= "number" class= "query-search" id= "budget" placeholder = "Budget (USD)" required>
+                <label for="meals">Meals</label>
                 <input type= "number" class= "query-search" id= "meals" placeholder = "Meals a day (eating out)" required>
+                <label for="time">Length of stay</label>
                 <input type= "number" class= "query-search" id= "time" placeholder = "Length of stay" required>
+                <label for="unit">Unit</label>
                 <select name="text" class= "query-search" id="unit"> <!--Supplement an id here instead of using 'text'-->
                     <option value="Days">Days</option> 
                     <option value="Weeks" selected>Weeks</option>
