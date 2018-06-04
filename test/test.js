@@ -130,7 +130,7 @@ describe('userList', function () {
         location: 'Athens',
         meals: 1,
         time: 1,
-        info: 'hi'
+        
       };
 
       return userList
