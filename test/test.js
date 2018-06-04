@@ -6,7 +6,7 @@ const should = chai.should();
 const { userList } = require('../models');
 
 const { app, runServer, closeServer } = require('../server');
-const { TEST_DATABASE_URL } = require('../config')
+const { DATABASE_URL } = require('../config')
 
 const expect = chai.expect;
 
@@ -18,10 +18,11 @@ function seedUserListData() {
   const seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
-      budget: faker.random.number({ min: 1, max: 5000 }),
-      location: faker.address.city(),
-      meals: faker.random.number({ min : 1, max: 4 }),
-      time: faker.random.number({ min: 1, max: 8 })
+      budget: 1,
+      location: 'Phoenix',
+      meals: 1,
+      time: 1,
+      info: 'hi'
     });
   }
 
@@ -29,19 +30,19 @@ function seedUserListData() {
 }
 
 function tearDownDb() {
-  return new Promise((resolve, reject) => {
-    console.warn('Deleting database');
-    mongoose.connection.dropDatabase()
-      .then(result => resolve(result))
-      .catch(err => reject(err));
-  });
+  // return new Promise((resolve, reject) => {
+  //   console.warn('Deleting database');
+  //   mongoose.connection.dropDatabase()
+  //     .then(result => resolve(result))
+  //     .catch(err => reject(err));
+  // });
 }
 
 
 describe('userList', function () {
 
   before(function () {
-    return runServer(TEST_DATABASE_URL);
+    return runServer(DATABASE_URL);
   });
 
   beforeEach(function () {
@@ -64,14 +65,14 @@ describe('userList', function () {
         .then(function (res) {
           expect(res).to.have.status(200);
           expect(res).to.be.html;
-          expect(res.text).to.contain('Food Cost Finder')
+          expect(res.text).to.contain('Cool App Name')
         });
     });
 
     it('should list average price on GET', function () {
       let res;
       return chai.request(app)
-        .get('/makeRequest/Phoenix')
+        .get('/makeRequest/Chicago')
         .then(function (_res) {
           res = _res;
           expect(res).to.have.status(200);
@@ -88,7 +89,8 @@ describe('userList', function () {
         budget: faker.random.number({ min: 1, max: 5000 }),
         location: faker.address.city(),
         meals: faker.random.number({ min : 1, max: 4 }),
-        time: faker.random.number({ min: 1, max: 8 }) 
+        time: faker.random.number({ min: 1, max: 8 }),
+        info: faker.random.words() 
       }
 
 
@@ -100,11 +102,13 @@ describe('userList', function () {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'budget', 'location', 'time', 'meals');
+            'budget', 'location', 'time', 'meals', 'info' );
           expect(res.body.id).to.not.be.null;
           expect(res.body.budget).to.equal(newListItem.budget);
           expect(res.body.location).to.equal(newListItem.location);
           expect(res.body.time).to.equal(newListItem.time);
+          expect(res.body.meals).to.equal(newListItem.meals);
+          expect(res.body.info).to.equal(newListItem.info);
 
           return userList.findById(res.body.id);
         })
@@ -113,6 +117,7 @@ describe('userList', function () {
         expect(listItem.location).to.equal(newListItem.location);
         expect(listItem.meals).to.equal(newListItem.meals);
         expect(listItem.time).to.equal(newListItem.time);
+        expect(listItem.info).to.equal(newListItem.info);
         });
     })
   });
@@ -121,10 +126,11 @@ describe('userList', function () {
 
     it('should update fields you send over', function () {
       const updateData = {
-        budget: 500,
-        location: 'Chicago',
-        meals: 2,
-        time: 1
+        budget: 1,
+        location: 'Athens',
+        meals: 1,
+        time: 1,
+        info: 'hi'
       };
 
       return userList
@@ -142,10 +148,13 @@ describe('userList', function () {
         return userList.findById(updateData.id);
       })
       .then(function(listItem) {
+        
+        console.log(listItem.location);
         expect(listItem.location).to.equal(updateData.location);
         expect(listItem.budget).to.equal(updateData.budget);
         expect(listItem.meals).to.equal(updateData.meals);
         expect(listItem.time).to.equal(updateData.time);
+        expect(listItem.info).to.equal(updateData.info);
       });
     });
   });
@@ -163,7 +172,7 @@ describe('userList', function () {
           return chai.request(app).delete(`/searchData/${post.id}`);
         })
         .then(res => {
-          res.should.have.status(204);
+          res.should.have.status(200);
           return userList.findById(post.id);
         })
         .then(_post => {

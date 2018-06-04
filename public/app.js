@@ -240,7 +240,7 @@ function userLoggedIn(data) {
 
 function loginError() {
 
- alert('nope');   
+ $('.containerLogin p').append('Username or password is incorrect.')
     
 }
 
@@ -281,6 +281,7 @@ function setupClickHandlers() {
         loginData.username = $(event.currentTarget).find('#email-login').val();
         loginData.password = $(event.currentTarget).find('#password-login').val();
         loginUser(loginData, userLoggedIn, loginError);
+        $('.containerLogin p').text('');
     });
 
     $('.save').on('click', function() { 

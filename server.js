@@ -81,7 +81,6 @@ app.get('/searchData', jwtAuth, (req, res) => {
 
 app.post('/searchData', jsonParser, jwtAuth, (req, res) => {
 console.log('reqbody', req.body);
-console.log(req);
   const requiredFields = ['budget', 'location', 'time', 'meals', 'info'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -117,7 +116,7 @@ console.log(req);
 });
 
 
-app.put('/searchData/:id', jwtAuth, (req, res) => {
+app.put('/searchData/:id', (req, res) => {
 
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -128,7 +127,7 @@ app.put('/searchData/:id', jwtAuth, (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['budget', 'location', 'time', 'meals'];
+  const updateableFields = ['budget', 'location', 'time', 'meals', 'info'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
@@ -142,7 +141,7 @@ app.put('/searchData/:id', jwtAuth, (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-app.delete('/searchData/:id', jwtAuth, (req, res) => {
+app.delete('/searchData/:id', (req, res) => {
   console.log(`${req.params.id}`)
   userList
     .findByIdAndRemove(req.params.id)
@@ -153,8 +152,8 @@ app.delete('/searchData/:id', jwtAuth, (req, res) => {
 
 
 let server;
-
 function runServer(databaseUrl, port = PORT) {
+  console.log(databaseUrl);
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {
@@ -175,7 +174,8 @@ function runServer(databaseUrl, port = PORT) {
       });
     });
   });
-} 
+}
+
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
