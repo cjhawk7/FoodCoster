@@ -127,7 +127,7 @@ app.put('/searchData/:id', (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['budget', 'location', 'time', 'meals', 'info'];
+  const updateableFields = ['budget', 'location', 'time', 'meals'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
@@ -135,7 +135,7 @@ app.put('/searchData/:id', (req, res) => {
     }
   });
 
-  authList
+  userList
     .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
     .then(searchObject => res.status(204).end())
     .catch(err => res.status(500).json({message: 'Internal server error'}));
