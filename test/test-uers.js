@@ -1,5 +1,5 @@
 'use strict';
-global.DATABASE_URL = 'mongodb://cjhawk7:Vageta01!@ds259778.mlab.com:59778/travel-app';
+global.DATABASE_URL = 'mongodb://admin:admin01@ds259778.mlab.com:59778/travel-app';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 

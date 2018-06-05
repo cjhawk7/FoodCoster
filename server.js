@@ -153,6 +153,7 @@ app.delete('/searchData/:id', (req, res) => {
 
 let server;
 function runServer(databaseUrl, port = PORT) {
+  console.log('XXXXXXXXXXXXXXX');
   console.log(databaseUrl);
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
