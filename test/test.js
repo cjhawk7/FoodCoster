@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const should = chai.should();
 const { userList } = require('../models');
 const { app, runServer, closeServer } = require('../server');
-const { TEST_DATABASE_URL } = require('../config')
+const { DATABASE_URL } = require('../config')
 
 const expect = chai.expect;
 
@@ -43,18 +43,18 @@ function seedUserListData() {
 }
 
 function tearDownDb() {
-  return new Promise((resolve, reject) => {
-    console.warn('Deleting database');
-    mongoose.connection.dropDatabase()
-      .then(result => resolve(result))
-      .catch(err => reject(err));
-  });
+  // return new Promise((resolve, reject) => {
+  //   console.warn('Deleting database');
+  //   mongoose.connection.dropDatabase()
+  //     .then(result => resolve(result))
+  //     .catch(err => reject(err));
+  // });
 }
 
 
 describe('userList', function () {
   before(function () {
-  return runServer(TEST_DATABASE_URL);
+  return runServer(DATABASE_URL);
    
   });
   
@@ -78,7 +78,7 @@ describe('userList', function () {
         .then(function (res) {
           expect(res).to.have.status(200);
           expect(res).to.be.html;
-          expect(res.text).to.contain('Cool App Name')
+          expect(res.text).to.contain('FoodCoster')
         });
     });
 
