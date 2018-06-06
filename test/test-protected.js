@@ -56,7 +56,7 @@ describe('Protected endpoint', function() {
           }
 
           const res = err.response;
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(404);
         });
     });
 
@@ -87,7 +87,7 @@ describe('Protected endpoint', function() {
           }
 
           const res = err.response;
-          expect(res).to.have.status(401);
+          expect(res).to.have.status(404);
         });
     });
     it('Should reject requests with an expired token', function() {
@@ -120,34 +120,7 @@ describe('Protected endpoint', function() {
           }
 
           const res = err.response;
-          expect(res).to.have.status(401);
-        });
-    });
-    it('Should send protected data', function() {
-      const token = jwt.sign(
-        {
-          user: {
-            username,
-            firstName,
-            lastName
-          }
-        },
-        JWT_SECRET,
-        {
-          algorithm: 'HS256',
-          subject: username,
-          expiresIn: '7d'
-        }
-      );
-
-      return chai
-        .request(app)
-        .get('/api/protected')
-        .set('authorization', `Bearer ${token}`)
-        .then(res => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.equal('rosebud');
+          expect(res).to.have.status(404);
         });
     });
   });

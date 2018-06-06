@@ -287,8 +287,9 @@ function setupClickHandlers() {
     $('.save').on('click', function() { 
         postVal.info = info;
         $('.container-results').addClass('hidden');
+        
         sendSearchData(postVal, successFunction);
-        alert('saved to history!');
+    
     });
 
     $('.delete').on('click', function() { 
@@ -347,6 +348,7 @@ function setupClickHandlers() {
         $('.signin').removeClass('hidden');
         $('.login').removeClass('hidden');
         $('.title').removeClass('hidden');
+        $('.js-query').text('');
         authToken = undefined;
     });
 
@@ -369,7 +371,3 @@ function setupClickHandlers() {
 $(function() {
     setupClickHandlers();
 })
-
-
-
-

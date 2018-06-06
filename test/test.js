@@ -4,9 +4,8 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 const should = chai.should();
 const { userList } = require('../models');
-
 const { app, runServer, closeServer } = require('../server');
-const { DATABASE_URL } = require('../config')
+const { TEST_DATABASE_URL } = require('../config')
 
 const expect = chai.expect;
 
@@ -27,8 +26,14 @@ function seedUserListData() {
     });
   }
 
-  return userList.insertMany(seedData)
-  .then((data)=>{chai.request(app).post('/api/auth/login').send({
+  return chai.request(app).post('/api/users').send({
+    firstName: "m",
+    lastName: "m",
+    password: "user",
+    username: "user"
+
+  }).then((o) => {return userList.insertMany(seedData)})
+  .then((data)=> {return chai.request(app).post('/api/auth/login').send({
     username: 'user',
     password: 'user'
   })
@@ -38,18 +43,18 @@ function seedUserListData() {
 }
 
 function tearDownDb() {
-  // return new Promise((resolve, reject) => {
-  //   console.warn('Deleting database');
-  //   mongoose.connection.dropDatabase()
-  //     .then(result => resolve(result))
-  //     .catch(err => reject(err));
-  // });
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err));
+  });
 }
 
 
 describe('userList', function () {
   before(function () {
-  return runServer(DATABASE_URL);
+  return runServer(TEST_DATABASE_URL);
    
   });
   
@@ -89,6 +94,24 @@ describe('userList', function () {
     });
   });
 
+  it('should return search data with right fields', function () {
+
+    let resPost;
+    return chai.request(app)
+      .get('/searchData')
+      .set('Authorization', 'Bearer ' + authToken)
+      .then(function (res) {
+        console.log('burrito')
+        console.log(res.body);
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('object');
+        expect(res.body.firstName).to.have.length.of.at.least(1)
+        expect(res.body).to.include.keys('firstName', 'lastName', 'password', 'username', 'posts')
+      
+      })
+  });
+
   describe('POST endpoint', function () {
 
     it('should add search data on post', function () {
@@ -101,7 +124,7 @@ describe('userList', function () {
         info: faker.random.words(),
     
       }
-    
+      console.log(authToken);
 
       return chai.request(app)
         .post('/searchData')
@@ -151,6 +174,7 @@ describe('userList', function () {
         
         return chai.request(app)
           .put(`/searchData/${post.id}`)
+          .set('Authorization', 'Bearer ' + authToken)
           .send(updateData);
       })
       .then(function(res) {
@@ -179,7 +203,8 @@ describe('userList', function () {
         .findOne()
         .then(_post => {
           post = _post;
-          return chai.request(app).delete(`/searchData/${post.id}`);
+          return chai.request(app).delete(`/searchData/${post.id}`)
+          .set('Authorization', 'Bearer ' + authToken)
         })
         .then(res => {
           res.should.have.status(200);

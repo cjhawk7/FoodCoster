@@ -41,6 +41,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (nonTrimmedField) {
+    console.log('m');
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -54,7 +55,7 @@ router.post('/', jsonParser, (req, res) => {
       min: 1
     },
     password: {
-      min: 10,
+      min: 1,
       max: 72
     }
   };
@@ -70,7 +71,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (tooSmallField || tooLargeField) {
-    console.log('sajida');
+    console.log('s');
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -92,6 +93,7 @@ router.post('/', jsonParser, (req, res) => {
     .then(count => {
       if (count > 0) {
          // need to return validation erroer to the client
+       console.log('x');
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
