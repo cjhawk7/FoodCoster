@@ -176,6 +176,7 @@ function deleteSearchData(id, callback) {
     
     $.ajax(settings);  
 }
+console.log('what');
 
 
 function displaySearchData (data) {

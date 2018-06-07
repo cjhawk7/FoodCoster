@@ -107,7 +107,7 @@ describe('userList', function () {
         expect(res).to.be.json;
         expect(res.body).to.be.a('object');
         expect(res.body.firstName).to.have.length.of.at.least(1)
-        expect(res.body).to.include.keys('firstName', 'lastName', 'password', 'username', 'posts')
+        expect(res.body).to.include.keys('firstName', 'lastName', 'password', 'username', 'posts', 'unit')
       
       })
   });
