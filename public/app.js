@@ -240,6 +240,7 @@ function userLoggedIn(data) {
     $('.logout').removeClass('hidden');
     $('.login').addClass('hidden');
     $('.search').removeClass('hidden');
+    $('.home').addClass('hidden');
     console.log(data);
     console.log('user logged in');
 }
@@ -356,6 +357,7 @@ function setupClickHandlers() {
         $('.login').removeClass('hidden');
         $('.title').removeClass('hidden');
         $('.js-query').text('');
+        $('.home').removeClass('hidden');
         authToken = undefined;
     });
 
