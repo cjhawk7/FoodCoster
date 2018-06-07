@@ -3,7 +3,8 @@ const postVal = {
     location: '',
     time: 1,
     meals: 1,
-    info: ''
+    info: '',
+    unit: ''
 }
 
 const userData = {
@@ -21,6 +22,8 @@ const loginData = {
 let authToken;
 
 let info;
+
+let unit;
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -87,7 +90,7 @@ function displayNumbeoData(response) {
     const location = $('#location').val();
     const budget = $('#budget').val();
     const time = $('#time').val();
-    const unit = $('#unit').val();
+    unit = $('#unit').val();
     const meals = $('#meals').val();
 
     $('.container-results').removeClass('hidden');
@@ -125,6 +128,8 @@ function displayNumbeoData(response) {
 
     info = m;
 
+    
+    console.log('QQQQQQQQQQQQQQQQ');
     console.log(info);
 }
 
@@ -176,11 +181,11 @@ function deleteSearchData(id, callback) {
 function displaySearchData (data) {
     let p = $('.container-history p')
     let renderingPosts = data.posts.map((post) => ({
-        location: post.location,
-        budget: post.budget, 
-        meals_a_day: post.meals,
-        length_of_stay: post.time,
-        result: post.info,
+        Location: post.location,
+        Budget: post.budget + ' USD', 
+        Meals_a_day: post.meals + ' (eating out)',
+        Length_of_stay: post.time + '' + post.unit,
+        Result: post.info,
         id: post._id
     }));
     console.log(renderingPosts);
@@ -257,13 +262,7 @@ function setupClickHandlers() {
         postVal.budget = $(event.currentTarget).find('#budget').val();
         postVal.time = $(event.currentTarget).find('#time').val();
         postVal.meals = $(event.currentTarget).find('#meals').val();
-        const unit = $('#unit').val();
         $('.container-results p').text('');
-
-        
-
-        
-
         getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
     });
 
@@ -286,15 +285,14 @@ function setupClickHandlers() {
 
     $('.save').on('click', function() { 
         postVal.info = info;
+        postVal.unit = unit;
         $('.container-results').addClass('hidden');
         
         sendSearchData(postVal, successFunction);
-    
     });
 
     $('.delete').on('click', function() { 
         $('.container-results').addClass('hidden');    
-
     });
 
     $('.historystore').on('click', function(){
@@ -324,6 +322,14 @@ function setupClickHandlers() {
         $('.title').removeClass('hidden');
     });
 
+    $('.login-link').on('click', function(){
+        $('.login').removeClass('hidden');
+        $('.signup').addClass('hidden');
+        $('.search').addClass('hidden');
+        $('.aboutpage').addClass('hidden');
+        $('.container-history').addClass('hidden');
+        $('.container-results').addClass('hidden');
+    });
 
     $('.signin').on('click', function(){
         $('.login').removeClass('hidden');

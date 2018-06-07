@@ -48,7 +48,7 @@ router.get('/', jwtAuth, (req, res) => {
   router.post('/', jsonParser, jwtAuth, (req, res) => {
   console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOO');
   console.log('reqbody', req.body);
-    const requiredFields = ['budget', 'location', 'time', 'meals', 'info'];
+    const requiredFields = ['budget', 'location', 'time', 'meals', 'info', 'unit'];
     for (let i=0; i<requiredFields.length; i++) {
       const field = requiredFields[i];
       if (!(field in req.body)) {
@@ -64,7 +64,8 @@ router.get('/', jwtAuth, (req, res) => {
         location: req.body.location,
         meals: req.body.meals,
         time: req.body.time,
-        info: req.body.info
+        info: req.body.info,
+        unit: req.body.unit
       })
       .then(
         searchObject => {

@@ -135,7 +135,7 @@ describe('userList', function () {
           expect(res).to.be.json;
           expect(res.body).to.be.a('object');
           expect(res.body).to.include.keys(
-            'budget', 'location', 'time', 'meals', 'info' );
+            'budget', 'location', 'time', 'meals', 'info', 'unit' );
           expect(res.body.id).to.not.be.null;
           expect(res.body.budget).to.equal(newListItem.budget);
           expect(res.body.location).to.equal(newListItem.location);

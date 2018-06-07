@@ -7,7 +7,8 @@ const searchSchema = mongoose.Schema({
     location: {type: String, required: true},
     meals: {type: Number, required: true},
     time: {type: Number, required: true},
-    info: {type: String, required: true}
+    info: {type: String, required: true},
+    unit: {type: String, required: true}
   });
 
  // need to use virtuals?  
@@ -18,7 +19,8 @@ searchSchema.methods.serialize = function() {
     location: this.location,
     meals: this.meals,
     time: this.time,
-    info: this.info
+    info: this.info,
+    unit: this.info
   };
 }
 
