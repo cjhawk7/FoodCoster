@@ -20,7 +20,7 @@ searchSchema.methods.serialize = function() {
     meals: this.meals,
     time: this.time,
     info: this.info,
-    unit: this.info
+    unit: this.unit
   };
 }
 

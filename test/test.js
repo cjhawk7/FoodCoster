@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const should = chai.should();
 const { userList } = require('../models');
 const { app, runServer, closeServer } = require('../server');
-const { DATABASE_URL } = require('../config')
+const { TEST_DATABASE_URL } = require('../config')
 
 const expect = chai.expect;
 
@@ -22,7 +22,8 @@ function seedUserListData() {
       location: 'Phoenix',
       meals: 1,
       time: 1,
-      info: 'hi'
+      info: 'hi',
+      unit: 'Weeks'
     });
   }
 
@@ -43,18 +44,18 @@ function seedUserListData() {
 }
 
 function tearDownDb() {
-  // return new Promise((resolve, reject) => {
-  //   console.warn('Deleting database');
-  //   mongoose.connection.dropDatabase()
-  //     .then(result => resolve(result))
-  //     .catch(err => reject(err));
-  // });
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err));
+  });
 }
 
 
 describe('userList', function () {
   before(function () {
-  return runServer(DATABASE_URL);
+  return runServer(TEST_DATABASE_URL);
    
   });
   
@@ -107,8 +108,7 @@ describe('userList', function () {
         expect(res).to.be.json;
         expect(res.body).to.be.a('object');
         expect(res.body.firstName).to.have.length.of.at.least(1)
-        expect(res.body).to.include.keys('firstName', 'lastName', 'password', 'username', 'posts', 'unit')
-      
+        expect(res.body).to.include.keys('__v', '_id', 'firstName', 'lastName', 'password', 'posts', 'username')
       })
   });
 
@@ -122,6 +122,7 @@ describe('userList', function () {
         meals: faker.random.number({ min : 1, max: 4 }),
         time: faker.random.number({ min: 1, max: 8 }),
         info: faker.random.words(),
+        unit: faker.random.words()
     
       }
       console.log(authToken);
@@ -142,18 +143,10 @@ describe('userList', function () {
           expect(res.body.time).to.equal(newListItem.time);
           expect(res.body.meals).to.equal(newListItem.meals);
           expect(res.body.info).to.equal(newListItem.info);
+          expect(res.body.unit).to.equal(newListItem.unit);
 
           return userList.findById(res.body.id);
         })
-        // .then(function(listItem) {
-        // console.log('XXXXXXXXXXXXXXXXXXXXX');
-        // console.log(listItem);
-        // expect(listItem.budget).to.equal(newListItem.budget);
-        // expect(listItem.location).to.equal(newListItem.location);
-        // expect(listItem.meals).to.equal(newListItem.meals);
-        // expect(listItem.time).to.equal(newListItem.time);
-        // expect(listItem.info).to.equal(newListItem.info);
-        // });
     })
   });
 
