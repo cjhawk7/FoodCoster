@@ -9,6 +9,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://images6.alphacoders.com/876/876171.jpg");
     margin: 0px;
+    background-size: cover;
   }
 
 .topnav {
@@ -54,6 +55,13 @@ body {
     color: white;
     margin-top: 8px;
     font-size: 17px;
+    font-family: 'Bowlby One SC', cursive;
+    margin-right: 15px;
+}
+
+.resetlink {
+    margin-top: 8px;
+    font-size: 10px;
     font-family: 'Bowlby One SC', cursive;
 }
 
@@ -188,9 +196,6 @@ body {
     opacity: 0.85;
 }
 
-
-
-
 .js-query {
     text-align: center;
     height: 20px;
@@ -296,6 +301,7 @@ p {
     margin: auto;
     display: block;
     background: rgb(255, 140, 0);
+    margin-top: 10px;
 }
 
 .js-return-btn {

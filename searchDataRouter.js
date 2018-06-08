@@ -99,7 +99,6 @@ router.put('/:id', jwtAuth, (req, res) => {
     }
   });
   
-  
   userList
     .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
     .then(searchObject => res.status(204).end())

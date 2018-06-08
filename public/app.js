@@ -256,6 +256,7 @@ function userLoggedIn(data) {
     $('.login').addClass('hidden');
     $('.search').removeClass('hidden');
     $('.home').addClass('hidden');
+    $('.resetlink').removeClass('hidden');
     console.log(data);
     console.log('user logged in');
 }
@@ -397,6 +398,7 @@ function setupClickHandlers() {
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
         $('.containerReset').removeClass('hidden');
+        $('.searchnav').removeattr('hidden');
     });
 
     $('.signin').on('click', function(){
@@ -424,6 +426,8 @@ function setupClickHandlers() {
         $('.title').removeClass('hidden');
         $('.js-query').text('');
         $('.home').removeClass('hidden');
+        $('.containerReset').addClass('hidden');
+        
         authToken = undefined;
     });
 
