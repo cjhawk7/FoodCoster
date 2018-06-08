@@ -15,41 +15,76 @@
         <a href="#" class="historystore" hidden>Search History</a>
         <a href="#" class="logout" hidden>Log out</a>
         <a href="#" class="searchnav" hidden>Back to search...</a>
+        <h4 class="loginlink">Want to update your password?
+                <span class="reset-link">Reset</span>
+            </h4>
         <p></p>
     </div>  
 
     <div class="signup">
         <h2>Know your food costs before you get to your destination.</h2>
         <div class="container">
-            <h2>Signup</h2>
+            <h3>Signup</h3>
             <form class='signup-form' action='' method ='post'>
                 <label for="email">First name</label>
                 <input type= "text" class= "js-query" id= "firstName" placeholder = "First name" required  >
                 <label for="email">Last name</label>
                 <input type= "text" class= "js-query" id= "lastName" placeholder = "Last name" required >
-                <label for="email">Email</label>
-                <input type= "text" class= "js-query" id= "email" placeholder = "email/username" required  >
+                <label for="email">Username</label>
+                <input type= "text" class= "js-query" id= "email" placeholder = "username" required  >
                 <label for="password">Password</label>
-                <input type= "text" class= "js-query" id= "password" placeholder = "password" required >
+                <input type="password"  class= "js-query" value="" id= "password" placeholder = "password" required>
+                <div class ="boxchecked">
+                    <input type="checkbox" class= "hidepassword" onclick="signupPassword()">
+                    <span class= "passwordshow">Show password</span>
+                </div>
                 <button type="submit" class="js-signup-btn">Signup</button>
             </form>
-                <p class="loginlink">Already have an account?
+                <h4 class="loginlink">Already have an account?
                     <span class="login-link">Login</span>
-                </p>
+                </h4>
+                <p></p>
         </div>
     </div>   
+
+    <div class = "reset">
+        <div class ="containerReset hidden">
+            <form class='reset-form' action='' method ='put'>
+                    <label for="username">Username</label>
+                    <input type="username"  class= "js-query" value="" id= "username" placeholder = "username" required>
+                    <label for="oldpassword">Old Password</label>
+                    <input type="oldpassword"  class= "js-query" value="" id= "oldpassword" placeholder = "password" required>
+                    <label for="newpassword">New Password</label>
+                    <input type="newpassword"  class= "js-query" value="" id= "newpassword" placeholder = "password" required>
+                    <div class ="boxchecked">
+                        <input type="checkbox" class= "hidepassword" onclick="resetPassword()">
+                        <span class= "passwordshow">Show password</span>
+                    </div>
+                    <button type="submit" class="js-reset-btn">Reset</button>
+            </form>
+        </div>
+    </div>
 
     <div class="login hidden">
             <div class="containerLogin">
                 <h2>Login</h2>
                 <form class='login-form' action="" method ='post'>
                     <label for="email">Username</label>
-                    <input type= "text" class= "js-query" id= "email-login" placeholder = "email/username" required>
+                    <input type= "text" class= "js-query" id= "email-login" placeholder = "username" required>
                     <label for="password">Password</label>
-                    <input type= "text" class= "js-query" id= "password-login" placeholder = "password" required>
+
+                    <input type="password"  class= "js-query" value="" id= "password-login" placeholder = "password" required>
+                    <div class ="boxchecked">
+                        <input type="checkbox" class= "hidepassword" onclick="loginPassword()">
+                        <span class= "passwordshow">Show password</span>
+                    </div>
+                    <!-- <input type= "text" class= "js-query" id= "password-login" placeholder = "password" required> -->
                     <button type="submit" class="js-login-btn">Login</button>
                     <p></p>
                 </form>
+                <h4 class="loginlink">Forgot your password?
+                    <span class="reset-link">Reset</span>
+                </h4>
             </div>
     </div>  
 

@@ -29,92 +29,91 @@ app.use('/api/auth/', authRouter);
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
-
 router.get('/', jwtAuth, (req, res) => {
-    console.log(req.user);
-    authList
-      .findById(req.user._id)
-      .populate('posts')
-      .then(posts => {
-        res.status(200).json(posts)
-      })
-      .catch(err => {
-        console.error(err);
-        res.status(500).json({ error: 'something went terribly wrong' });
-      });
-  });
+  authList
+    .findById(req.user._id)
+    .populate('posts')
+    .then(posts => {
+      res.status(200).json(posts)
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
   
   
-  router.post('/', jsonParser, jwtAuth, (req, res) => {
-    const requiredFields = ['budget', 'location', 'time', 'meals', 'info', 'unit'];
-    for (let i=0; i<requiredFields.length; i++) {
-      const field = requiredFields[i];
-      if (!(field in req.body)) {
-        const message = `Missing \`${field}\` in request body`
-        console.error(message);
-        return res.status(400).send(message);
-      }
+router.post('/', jsonParser, jwtAuth, (req, res) => {
+  const requiredFields = ['budget', 'location', 'time', 'meals', 'info', 'unit'];
+  for (let i=0; i<requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`
+      console.error(message);
+      return res.status(400).send(message);
     }
+  }
   
-    return userList
-      .create({
-        budget: req.body.budget,
-        location: req.body.location,
-        meals: req.body.meals,
-        time: req.body.time,
-        info: req.body.info,
-        unit: req.body.unit
+  return userList
+    .create({
+      budget: req.body.budget,
+      location: req.body.location,
+      meals: req.body.meals,
+      time: req.body.time,
+      info: req.body.info,
+      unit: req.body.unit
+    })
+    .then(
+      searchObject => {
+        authList.findByIdAndUpdate(req.user._id, 
+          { $push : {posts:searchObject._id}}
+        )
+        .then(()=>res.status(201).json(searchObject.serialize()))
       })
-      .then(
-        searchObject => {
-          authList.findByIdAndUpdate(req.user._id, 
-            { $push : {posts:searchObject._id}}
-          )
-          .then(()=>res.status(201).json(searchObject.serialize()))
-        })
         
       
   
-      .catch(err => {
-        console.error(err);
-        res.status(500).json({error: 'Internal server error'});
-      });
-  });
-  
-  
-  router.put('/:id', jwtAuth, (req, res) => {
-  
-    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-      const message = (
-        `Request path id (${req.params.id}) and request body id ` +
-        `(${req.body.id}) must match`);
-      console.error(message);
-      return res.status(400).json({message: message});
-    }
-  
-    const toUpdate = {};
-    const updateableFields = ['budget', 'location', 'time', 'meals'];
-  
-    updateableFields.forEach(field => {
-      if (field in req.body) {
-        toUpdate[field] = req.body[field];
-      }
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({error: 'Internal server error'});
     });
+});
   
-    userList
-      .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
-      .then(searchObject => res.status(204).end())
-      .catch(err => res.status(500).json({message: 'Internal server error'}));
+  
+router.put('/:id', jwtAuth, (req, res) => {
+
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`);
+    console.error(message);
+    return res.status(400).json({message: message});
+  }
+  
+  const toUpdate = {};
+  const updateableFields = ['password'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
   });
   
-  router.delete('/:id', jwtAuth, (req, res) => {
-    console.log(`${req.params.id}`)
-    userList
-      .findByIdAndRemove(req.params.id)
-      .exec()
-      .then((obj) => res.status(200).json(obj))
-      .catch(err => res.status(500).json({message: 'Internal server error'}));
-  });
+  
+  userList
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate}, {new: true})
+    .then(searchObject => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+  
+router.delete('/:id', jwtAuth, (req, res) => {
+  console.log(`${req.params.id}`)
+  userList
+    .findByIdAndRemove(req.params.id)
+    .exec()
+    .then((obj) => res.status(200).json(obj))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
 
 
   module.exports = router;

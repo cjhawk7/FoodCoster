@@ -29,9 +29,6 @@ app.use('/api/auth/', authRouter);
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 
-
-
-
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -40,7 +37,7 @@ app.use(function (req, res, next) {
   });
 
 router.get('/:cityName', function (req, res) {
-console.log('/makeRequest/:cityName');
+// console.log('/makeRequest/:cityName');
 var instance = axios.create();
 
 instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${req.params.cityName}&currency=USD`, {

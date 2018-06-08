@@ -19,6 +19,12 @@ const loginData = {
     password: 'b'
 }
 
+const reset = {
+    username: 'a',
+    oldpassword: 'b',
+    newpassword: 'c'
+}
+
 let authToken;
 
 let info;
@@ -37,7 +43,7 @@ function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
     $.ajax(settings);  
 }
 
-function createUser(data, callback) {
+function createUser(data, callback, err) {
     
     const settings = {
         url: '/api/users',
@@ -45,6 +51,7 @@ function createUser(data, callback) {
         type: 'POST',
         data: JSON.stringify(data),
         success: callback,
+        error: err,
         contentType: 'application/json'
     };
     
@@ -127,10 +134,6 @@ function displayNumbeoData(response) {
     let m = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation;
 
     info = m;
-
-    
-    console.log('QQQQQQQQQQQQQQQQ');
-    console.log(info);
 }
 
 
@@ -176,8 +179,20 @@ function deleteSearchData(id, callback) {
     
     $.ajax(settings);  
 }
-console.log('what');
 
+function resetPassword(post, callback) {
+    const settings = {
+        // headers: {'Authorization': `Bearer ${authToken.authToken}`},
+        url: '/searchData/' + id,
+        dataType: 'json',
+        type: 'PUT',
+        data: JSON.stringify(post),
+        success: callback,
+        contentType: 'application/json'
+    };
+    
+    $.ajax(settings);
+}
 
 function displaySearchData (data) {
     let p = $('.container-history p')
@@ -210,7 +225,7 @@ function displaySearchData (data) {
                 $('.container-history p').html(html);
 
                 $('.historyremove').on('click', function() { 
-                console.log('delete');
+                
                     deleteSearchData($(this).data('id'), function (obj) { removeSearchData(obj)});
                 });
         }
@@ -245,16 +260,45 @@ function userLoggedIn(data) {
     console.log('user logged in');
 }
 
+function createError() {
+
+    $('.container p').append('Username is already taken')
+}
+
 function loginError() {
 
- $('.containerLogin p').append('Username or password is incorrect.')
-    
+    $('.containerLogin p').append('Username or password is incorrect.') 
 }
 
 function deleteData(data) {
 
      console.log(data);
 }
+
+function passwordChange() {
+
+console.log('password changed');
+
+}
+
+function signupPassword() {
+    let x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
+function loginPassword() {
+    let x = document.getElementById("password-login");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 
 function setupClickHandlers() {
 
@@ -274,7 +318,8 @@ function setupClickHandlers() {
         userData.lastName = $(event.currentTarget).find('#lastName').val();
         userData.username = $(event.currentTarget).find('#email').val();
         userData.password = $(event.currentTarget).find('#password').val();
-        createUser(userData, userCreated);
+        createUser(userData, userCreated, createError);
+        $('.container p').text('');
     });
 
     $('.login').submit(event => { 
@@ -284,6 +329,16 @@ function setupClickHandlers() {
         loginUser(loginData, userLoggedIn, loginError);
         $('.containerLogin p').text('');
     });
+
+    $('.js-reset-btn').submit(event => { 
+        event.preventDefault();
+        reset.username = $(event.currentTarget).find('#username').val();
+        reset.oldpassword = $(event.currentTarget).find('#oldpassword').val();
+        reset.newpassword = $(event.currentTarget).find('#newpassword').val();
+        resetPassword(reset, passwordChange);
+        $('.containerLogin p').text('');
+    });
+
 
     $('.save').on('click', function() { 
         postVal.info = info;
@@ -322,6 +377,7 @@ function setupClickHandlers() {
         $('.container-history').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
         $('.title').removeClass('hidden');
+        $('.container p').text('');
     });
 
     $('.login-link').on('click', function(){
@@ -331,6 +387,16 @@ function setupClickHandlers() {
         $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
+    });
+
+    $('.reset-link').on('click', function(){
+        $('.login').addClass('hidden');
+        $('.signup').addClass('hidden');
+        $('.search').addClass('hidden');
+        $('.aboutpage').addClass('hidden');
+        $('.container-history').addClass('hidden');
+        $('.container-results').addClass('hidden');
+        $('.containerReset').removeClass('hidden');
     });
 
     $('.signin').on('click', function(){
@@ -370,10 +436,6 @@ function setupClickHandlers() {
         $('.container-results').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
     });
-
-    // $('.js-search-btn').on('click', function(){
-    //     $('.container-results').removeClass('hidden');
-    // });
 };
 
 

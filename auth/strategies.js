@@ -35,7 +35,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
     });
 });
 
-//how is JWT being supplied to strategy? 
+
 const jwtStrategy = new JwtStrategy(
     {
       secretOrKey: JWT_SECRET,

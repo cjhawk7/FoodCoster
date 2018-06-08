@@ -176,8 +176,6 @@ describe('userList', function () {
         return userList.findById(updateData.id);
       })
       .then(function(listItem) {
-        console.log('ZZZZZZZZZZZZZZ');
-        console.log(listItem);
         expect(listItem.location).to.equal(updateData.location);
         expect(listItem.budget).to.equal(updateData.budget);
         expect(listItem.meals).to.equal(updateData.meals);

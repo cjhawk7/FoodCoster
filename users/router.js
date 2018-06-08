@@ -10,8 +10,8 @@ router.post('/', jsonParser, (req, res) => {
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
-    
-  
+    console.log(req.body);
+    console.log('ERROR A');
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -26,7 +26,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (nonStringField) {
-    console.log('go');
+    console.log('ERROR B')
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -41,7 +41,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (nonTrimmedField) {
-    console.log('m');
+    console.log('ERROR C')
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -71,7 +71,7 @@ router.post('/', jsonParser, (req, res) => {
   );
 
   if (tooSmallField || tooLargeField) {
-    console.log('s');
+    console.log('ERROR D')
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
@@ -92,8 +92,7 @@ router.post('/', jsonParser, (req, res) => {
     .count()
     .then(count => {
       if (count > 0) {
-         // need to return validation erroer to the client
-       console.log('x');
+        console.log('ERROR E')
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',

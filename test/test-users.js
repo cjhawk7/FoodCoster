@@ -139,7 +139,7 @@ describe('/api/user', function() {
           });
       });
       it('Should reject users with duplicate username', function() {
-        // Create an initial user
+      
         return authList.create({
           username,
           password,
@@ -147,7 +147,7 @@ describe('/api/user', function() {
           lastName
         })
           .then(() =>
-            // Try to create a second user with the same username
+            
             chai.request(app).post('/api/users').send({
               username,
               password,

@@ -21,13 +21,9 @@ app.use('/searchData', searchDataRouter);
 app.use('/makeRequest', makeRequestRouter);
 
 
-console.log('db url', DATABASE_URL);
-
 
 let server;
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {
-  console.log('XXXXXXXXXXXXXXX');
-  console.log(databaseUrl);
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {

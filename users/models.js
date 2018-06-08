@@ -24,7 +24,6 @@ const authSchema = mongoose.Schema({
       username: this.username || '',
       firstName: this.firstName || '',
       lastName: this.lastName || '',
-      // need to update tests to include posts
       posts: this.posts || []
     };
   };
