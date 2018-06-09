@@ -126,7 +126,6 @@ body {
     color: red;
     text-align: center;
     margin-top: 10px;
-    border: 1px solid black;
 }
 
 .containerLogin {
@@ -167,7 +166,6 @@ body {
     text-align: center;
 }
 
-
 .container-history p {
     font-size: 20px;
     font-family: 'Bowlby One SC', cursive;
@@ -196,6 +194,7 @@ body {
 
 .containerReset p {
     color: white;
+    text-align: center;
 }
 
 .js-query {
@@ -245,7 +244,7 @@ button:hover {
 }
 
 
-label[for="firstname"], [for="password"], [for="lastname"]      {
+label[for="firstname"], [for="password"], [for="lastname"] {
     display: block;
     text-align: center;
     padding-top: 50px;
@@ -261,10 +260,6 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     text-align: center;
     padding-top: 50px;
 }
-
-/* p {
-    text-align: center;
-} */
 
 .container-search {
     background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
@@ -362,7 +357,7 @@ h2 {
 }
 
 .hidden {
-display: none;
+    display: none;
 }
 
 .searchwrap {
@@ -397,10 +392,10 @@ ul {
 
 }
 a.reset-link {
-     float: right;
-     font-size: 12px;
-     margin-top: 0px;
- }
+    float: right;
+    font-size: 12px;
+    margin-top: 0px;
+}
 
 .reset-link:hover {
     color: orange;
@@ -413,7 +408,6 @@ a.reset-link {
 
 
 a:hover {
-    
     color: orange;
 }
 

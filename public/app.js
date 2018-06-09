@@ -56,8 +56,6 @@ function createUser(data, callback, err) {
     };
     
     $.ajax(settings);  
-    $('.signup').addClass('hidden');
-    $('.login').removeClass('hidden');
 }
 
 function loginUser(data, callback, err) {
@@ -73,8 +71,6 @@ function loginUser(data, callback, err) {
     };
     
     $.ajax(settings);  
-    $('.historystore').removeAttr('hidden')
-    $('.logout').removeAttr('hidden');
     $('.search').removeAttr('hidden');
 }
 
@@ -232,24 +228,26 @@ function removeSearchData(obj) {
 }
 
 function successFunction() {
+
     console.log('success');
 }
 
 function userCreated() {
+    $('.signup').addClass('hidden');
+    $('.login').removeClass('hidden');
     $('.reset-link').removeClass('hidden');
 }
 
 function userLoggedIn(data) {
     authToken = data;
-    $('.home').removeClass('hidden');   
+    $('.home').attr('hidden', 'true');   
     $('.topnav p').append('Welcome, ', loginData.username);
-    $('.historystore').removeClass('hidden');
+    $('.historystore').removeAttr('hidden');
     $('.title').addClass('hidden');
     $('.signin').addClass('hidden');
-    $('.logout').removeClass('hidden');
+    $('.logout').removeAttr('hidden');
     $('.login').addClass('hidden');
     $('.search').removeClass('hidden');
-    $('.home').addClass('hidden');
     $('.reset-link').removeAttr('hidden');
 }
 
@@ -260,8 +258,9 @@ function loginError() {
 
 function createError() {
     console.log('an error be here')
-    
+    $('.container p').text('');
     $('.container p').append('Username is already taken')
+    console.log('testing')
 }
 
 
@@ -314,7 +313,7 @@ function setupClickHandlers() {
         userData.username = $(event.currentTarget).find('#email').val();
         userData.password = $(event.currentTarget).find('#password').val();
         createUser(userData, userCreated, createError);
-        // $('.container p').text('');
+
     });
 
     $('.login').submit(event => { 
@@ -363,13 +362,11 @@ function setupClickHandlers() {
  
     $('.home').on('click', function(){
         $('.signup').removeClass('hidden');
-        $('.login').addClass('hidden');
-        $('.aboutpage').removeClass('hidden');  
+        $('.login').addClass('hidden'); 
         $('.search').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
         $('.title').removeClass('hidden');
-        $('.container p').text('');
     });
 
     $('.login-link').on('click', function(){
@@ -403,15 +400,15 @@ function setupClickHandlers() {
         $('.search').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
-        $('.historystore').addClass('hidden');
+        $('.historystore').attr('hidden', 'true');
         $('.topnav p').text('');
         $('.searchnav').attr('hidden', 'true');
-        $('.logout').addClass('hidden');
+        $('.logout').attr('hidden', 'true');
         $('.signin').removeClass('hidden');
         $('.login').removeClass('hidden');
         $('.title').removeClass('hidden');
         $('.js-query').text('');
-        $('.home').removeClass('hidden');
+        $('.home').removeAttr('hidden');
         $('.reset').addClass('hidden');
         $('.reset-link').attr('hidden', 'true');
         authToken = undefined;

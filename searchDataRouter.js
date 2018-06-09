@@ -42,7 +42,6 @@ router.get('/', jwtAuth, (req, res) => {
 });
   
 router.post('/', jsonParser, jwtAuth, (req, res) => {
-  console.log('YYYYYYYYYYYYY')
   console.log(req.user._id);
   const requiredFields = ['budget', 'location', 'time', 'meals', 'info', 'unit'];
   for (let i=0; i<requiredFields.length; i++) {
