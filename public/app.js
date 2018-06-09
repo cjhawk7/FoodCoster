@@ -19,10 +19,10 @@ const loginData = {
     password: 'b'
 }
 
-const reset = {
+const update = {
     username: 'a',
-    oldpassword: 'b',
-    newpassword: 'c'
+    firstName: 'b',
+    lastName: 'c'
 }
 
 let authToken;
@@ -73,7 +73,6 @@ function loginUser(data, callback, err) {
     };
     
     $.ajax(settings);  
-    console.log($('.historystore').html());
     $('.historystore').removeAttr('hidden')
     $('.logout').removeAttr('hidden');
     $('.search').removeAttr('hidden');
@@ -92,8 +91,6 @@ function round(number, precision) {
 
 function displayNumbeoData(response) {
     let calcResult = 0;
-
-
     const location = $('#location').val();
     const budget = $('#budget').val();
     const time = $('#time').val();
@@ -103,8 +100,6 @@ function displayNumbeoData(response) {
     $('.container-results').removeClass('hidden');
     
     let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.'
-
-    
 
     if  (unit === 'Weeks') {
 
@@ -180,9 +175,9 @@ function deleteSearchData(id, callback) {
     $.ajax(settings);  
 }
 
-function resetPassword(post, callback) {
+function updateUser(post, callback, id) {
     const settings = {
-        // headers: {'Authorization': `Bearer ${authToken.authToken}`},
+        headers: {'Authorization': `Bearer ${authToken.authToken}`},
         url: '/searchData/' + id,
         dataType: 'json',
         type: 'PUT',
@@ -236,13 +231,12 @@ function removeSearchData(obj) {
     $(`button[data-id="${obj._id}"]`).closest('.searchwrap').remove();
 }
 
-
 function successFunction() {
     console.log('success');
 }
 
 function userCreated() {
-    console.log('new user created');
+    $('.reset-link').removeClass('hidden');
 }
 
 function userLoggedIn(data) {
@@ -256,9 +250,7 @@ function userLoggedIn(data) {
     $('.login').addClass('hidden');
     $('.search').removeClass('hidden');
     $('.home').addClass('hidden');
-    $('.resetlink').removeClass('hidden');
-    console.log(data);
-    console.log('user logged in');
+    $('.reset-link').removeAttr('hidden');
 }
 
 function createError() {
@@ -276,9 +268,9 @@ function deleteData(data) {
      console.log(data);
 }
 
-function passwordChange() {
+function userUpdate() {
 
-console.log('password changed');
+$('.containerReset p').append('Updated successfully!');
 
 }
 
@@ -331,13 +323,18 @@ function setupClickHandlers() {
         $('.containerLogin p').text('');
     });
 
-    $('.js-reset-btn').submit(event => { 
+    $('.reset-form').submit(event => { 
         event.preventDefault();
-        reset.username = $(event.currentTarget).find('#username').val();
-        reset.oldpassword = $(event.currentTarget).find('#oldpassword').val();
-        reset.newpassword = $(event.currentTarget).find('#newpassword').val();
-        resetPassword(reset, passwordChange);
-        $('.containerLogin p').text('');
+        update.username = $(event.currentTarget).find('#username').val();
+        update.firstName = $(event.currentTarget).find('#firstname').val();
+        update.lastName = $(event.currentTarget).find('#lastname').val();
+        updateUser(update, userUpdate);
+        $('.containerReset p').text('');
+    });
+
+    $( "#username" ).focus(function() {
+        $('#firstname', '#lastname').blur;
+        
     });
 
 
@@ -356,16 +353,15 @@ function setupClickHandlers() {
     $('.historystore').on('click', function(){
         $('.signup').addClass('hidden');    
         $('.login').addClass('hidden');
-        $('.aboutpage').addClass('hidden');
         $('.container-history').removeClass('hidden');   
         $('.search').addClass('hidden');
         $('.searchnav').removeAttr('hidden');
         $('.title').addClass('hidden');
+        $('.reset').addClass('hidden');
         getSearchData(displaySearchData);
     });
 
     $('.historyremove').on('click', function() { 
-        console.log('delete');
          deleteSearchData(deleteData);
     });
  
@@ -385,7 +381,6 @@ function setupClickHandlers() {
         $('.login').removeClass('hidden');
         $('.signup').addClass('hidden');
         $('.search').addClass('hidden');
-        $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
     });
@@ -394,18 +389,16 @@ function setupClickHandlers() {
         $('.login').addClass('hidden');
         $('.signup').addClass('hidden');
         $('.search').addClass('hidden');
-        $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
-        $('.containerReset').removeClass('hidden');
-        $('.searchnav').removeattr('hidden');
+        $('.reset').removeClass('hidden');
+        $('.searchnav').removeAttr('hidden');
     });
 
     $('.signin').on('click', function(){
         $('.login').removeClass('hidden');
         $('.signup').addClass('hidden');
         $('.search').addClass('hidden');
-        $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
     });
@@ -414,7 +407,6 @@ function setupClickHandlers() {
     $('.logout').on('click', function(){
         $('.signup').addClass('hidden');
         $('.search').addClass('hidden');
-        $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
         $('.historystore').addClass('hidden');
@@ -426,8 +418,8 @@ function setupClickHandlers() {
         $('.title').removeClass('hidden');
         $('.js-query').text('');
         $('.home').removeClass('hidden');
-        $('.containerReset').addClass('hidden');
-        
+        $('.reset').addClass('hidden');
+        $('.reset-link').attr('hidden', 'true');
         authToken = undefined;
     });
 
@@ -435,10 +427,10 @@ function setupClickHandlers() {
         $('.login').addClass('hidden');
         $('.signup').addClass('hidden');
         $('.search').removeClass('hidden');
-        $('.aboutpage').addClass('hidden');
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
+        $('.reset').addClass('hidden');
     });
 };
 

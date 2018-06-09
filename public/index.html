@@ -15,6 +15,7 @@
         <a href="#" class="historystore" hidden>Search History</a>
         <a href="#" class="logout" hidden>Log out</a>
         <a href="#" class="searchnav" hidden>Back to search...</a>
+        <a href="#" class="reset-link" hidden>Update user info</a>
         <p></p>
     </div>  
 
@@ -23,11 +24,11 @@
         <div class="container">
             <h3>Signup</h3>
             <form class='signup-form' action='' method ='post'>
-                <label for="email">First name</label>
+                <label for="firstname">First name</label>
                 <input type= "text" class= "js-query" id= "firstName" placeholder = "First name" required  >
-                <label for="email">Last name</label>
+                <label for="lastname">Last name</label>
                 <input type= "text" class= "js-query" id= "lastName" placeholder = "Last name" required >
-                <label for="email">Username</label>
+                <label for="username">Username</label>
                 <input type= "text" class= "js-query" id= "email" placeholder = "username" required  >
                 <label for="password">Password</label>
                 <input type="password"  class= "js-query" value="" id= "password" placeholder = "password" required>
@@ -44,30 +45,28 @@
         </div>
     </div>   
 
-    <div class = "reset">
-        <div class ="containerReset hidden">
-            <form class='reset-form' action='' method ='put'>
+    <div class = "reset hidden">
+        <div class ="containerReset">
+            <h2>Update your info</h2>
+            <form class='reset-form' action='' method='get'>
                     <label for="username">Username</label>
                     <input type="username"  class= "js-query" value="" id= "username" placeholder = "username" required>
-                    <label for="oldpassword">Old Password</label>
-                    <input type="oldpassword"  class= "js-query" value="" id= "oldpassword" placeholder = "password" required>
-                    <label for="newpassword">New Password</label>
-                    <input type="newpassword"  class= "js-query" value="" id= "newpassword" placeholder = "password" required>
-                    <div class ="boxchecked">
-                        <input type="checkbox" class= "hidepassword" onclick="resetPassword()">
-                        <span class= "passwordshow">Show password</span>
-                    </div>
-                    <button type="submit" class="js-reset-btn">Reset</button>
+                    <label for="firstname">First Name</label>
+                    <input type="firstname"  class= "js-query" value="" id= "firstname" placeholder = "First Name" required>
+                    <label for="lastname">Last Name</label>
+                    <input type="lastname"  class= "js-query" value="" id= "lastname" placeholder = "Last Name" required>
+                    <button type="submit" class="js-reset-btn">Update</button>
             </form>
+            <p></p>
         </div>
-    </div>
+    </div>  
 
     <div class="login hidden">
             <div class="containerLogin">
                 <h2>Login</h2>
                 <form class='login-form' action="" method ='post'>
-                    <label for="email">Username</label>
-                    <input type= "text" class= "js-query" id= "email-login" placeholder = "username" required>
+                    <label for="username">Username</label>
+                    <input type= "text" class= "js-query" id= "email-login" placeholder = "username">
                     <label for="password">Password</label>
 
                     <input type="password"  class= "js-query" value="" id= "password-login" placeholder = "password" required>
@@ -75,7 +74,6 @@
                         <input type="checkbox" class= "hidepassword" onclick="loginPassword()">
                         <span class= "passwordshow">Show password</span>
                     </div>
-                    <!-- <input type= "text" class= "js-query" id= "password-login" placeholder = "password" required> -->
                     <button type="submit" class="js-login-btn">Login</button>
                     <p></p>
                 </form>
@@ -117,9 +115,6 @@
         </div>
     </div>
 
-    <h4 class="resetlink hidden">Need to update your password?
-        <span class="reset-link">Reset</span>
-    </h4>
 
     <div class="container-history hidden">
         <p></p>
