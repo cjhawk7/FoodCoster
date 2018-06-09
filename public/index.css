@@ -126,6 +126,7 @@ body {
     color: red;
     text-align: center;
     margin-top: 10px;
+    border: 1px solid black;
 }
 
 .containerLogin {
@@ -261,9 +262,9 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     padding-top: 50px;
 }
 
-p {
+/* p {
     text-align: center;
-}
+} */
 
 .container-search {
     background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");

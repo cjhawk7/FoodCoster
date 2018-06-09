@@ -28,7 +28,6 @@ app.use('/api/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-
 router.get('/', jwtAuth, (req, res) => {
   authList
     .findById(req.user._id)
@@ -42,7 +41,6 @@ router.get('/', jwtAuth, (req, res) => {
     });
 });
   
-  
 router.post('/', jsonParser, jwtAuth, (req, res) => {
   console.log('YYYYYYYYYYYYY')
   console.log(req.user._id);
@@ -55,7 +53,6 @@ router.post('/', jsonParser, jwtAuth, (req, res) => {
       return res.status(400).send(message);
     }
   }
-  
   return userList
     .create({
       budget: req.body.budget,
@@ -72,9 +69,6 @@ router.post('/', jsonParser, jwtAuth, (req, res) => {
         )
         .then(()=>res.status(201).json(searchObject.serialize()))
       })
-        
-      
-  
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'Internal server error'});
@@ -105,7 +99,6 @@ router.put('/:id', jwtAuth, (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
   
-
 router.delete('/:id', jwtAuth, (req, res) => {
   console.log(`${req.params.id}`)
   userList

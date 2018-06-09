@@ -253,16 +253,17 @@ function userLoggedIn(data) {
     $('.reset-link').removeAttr('hidden');
 }
 
-function createError() {
-
-    $('.container p').append('Username is already taken')
-
-}
-
 function loginError() {
-
+    
     $('.containerLogin p').append('Username or password is incorrect.') 
 }
+
+function createError() {
+    console.log('an error be here')
+    
+    $('.container p').append('Username is already taken')
+}
+
 
 function deleteData(data) {
 
