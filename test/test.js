@@ -4,6 +4,7 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 const should = chai.should();
 const { userList } = require('../models');
+const { authList } = require('../users/models');
 const { app, runServer, closeServer } = require('../server');
 const { TEST_DATABASE_URL } = require('../config')
 
@@ -154,13 +155,13 @@ describe('userList', function () {
 
     it('should update fields you send over', function () {
       const updateData = {
-        budget: 1,
-        location: 'Athens',
-        meals: 1,
-        time: 1,
+       username: 'goat',
+       firstName: 'mike',
+       lastName: 'smith'
       };
-
-      return userList
+      console.log(authList)
+      console.log('YYYYYYYYYYY')
+      return authList
       .findOne()
       .then(function(post) {
         updateData.id = post.id;
@@ -171,15 +172,16 @@ describe('userList', function () {
           .send(updateData);
       })
       .then(function(res) {
-        expect(res).to.have.status(204);
+        expect(res).to.have.status(200);
     
-        return userList.findById(updateData.id);
+        return authList.findById(updateData.id);
       })
-      .then(function(listItem) {
-        expect(listItem.location).to.equal(updateData.location);
-        expect(listItem.budget).to.equal(updateData.budget);
-        expect(listItem.meals).to.equal(updateData.meals);
-        expect(listItem.time).to.equal(updateData.time);
+      .then(function(post) {
+        console.log('XXXXXXXXXXXXXXXXX')
+        console.log(post);
+        expect(post.username).to.equal(updateData.username);
+        expect(post.firstName).to.equal(updateData.firstName);
+        expect(post.lastName).to.equal(updateData.lastName);
       });
     });
   });

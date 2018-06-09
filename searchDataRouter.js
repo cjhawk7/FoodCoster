@@ -101,7 +101,7 @@ router.put('/:id', jwtAuth, (req, res) => {
   }
   authList
     .findByIdAndUpdate(req.user._id, {$set: toUpdate}, {new: true})
-    .then(nameUpdate => res.json(nameUpdate).status(204).end())
+    .then(nameUpdate => res.json(nameUpdate).status(200).end())
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
   

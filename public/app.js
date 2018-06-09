@@ -256,6 +256,7 @@ function userLoggedIn(data) {
 function createError() {
 
     $('.container p').append('Username is already taken')
+
 }
 
 function loginError() {
@@ -312,7 +313,7 @@ function setupClickHandlers() {
         userData.username = $(event.currentTarget).find('#email').val();
         userData.password = $(event.currentTarget).find('#password').val();
         createUser(userData, userCreated, createError);
-        $('.container p').text('');
+        // $('.container p').text('');
     });
 
     $('.login').submit(event => { 
@@ -331,12 +332,6 @@ function setupClickHandlers() {
         updateUser(update, userUpdate);
         $('.containerReset p').text('');
     });
-
-    $( "#username" ).focus(function() {
-        $('#firstname', '#lastname').blur;
-        
-    });
-
 
     $('.save').on('click', function() { 
         postVal.info = info;
@@ -365,7 +360,6 @@ function setupClickHandlers() {
          deleteSearchData(deleteData);
     });
  
-    
     $('.home').on('click', function(){
         $('.signup').removeClass('hidden');
         $('.login').addClass('hidden');
@@ -402,7 +396,6 @@ function setupClickHandlers() {
         $('.container-history').addClass('hidden');
         $('.container-results').addClass('hidden');
     });
-
 
     $('.logout').on('click', function(){
         $('.signup').addClass('hidden');
