@@ -37,7 +37,6 @@ app.use(function (req, res, next) {
   });
 
 router.get('/:cityName', function (req, res) {
-// console.log('/makeRequest/:cityName');
 var instance = axios.create();
 
 instance.get(`https://www.numbeo.com/api/city_prices?api_key=4uxocu7eiqwid6&query=${req.params.cityName}&currency=USD`, {

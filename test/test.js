@@ -103,8 +103,6 @@ describe('userList', function () {
       .get('/searchData')
       .set('Authorization', 'Bearer ' + authToken)
       .then(function (res) {
-        console.log('burrito')
-        console.log(res.body);
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res.body).to.be.a('object');
@@ -126,8 +124,6 @@ describe('userList', function () {
         unit: faker.random.words()
     
       }
-      console.log(authToken);
-
       return chai.request(app)
         .post('/searchData')
         .set('Authorization', 'Bearer ' + authToken)
@@ -159,8 +155,6 @@ describe('userList', function () {
        firstName: 'mike',
        lastName: 'smith'
       };
-      console.log(authList)
-      console.log('YYYYYYYYYYY')
       return authList
       .findOne()
       .then(function(post) {
@@ -177,8 +171,7 @@ describe('userList', function () {
         return authList.findById(updateData.id);
       })
       .then(function(post) {
-        console.log('XXXXXXXXXXXXXXXXX')
-        console.log(post);
+  
         expect(post.username).to.equal(updateData.username);
         expect(post.firstName).to.equal(updateData.firstName);
         expect(post.lastName).to.equal(updateData.lastName);

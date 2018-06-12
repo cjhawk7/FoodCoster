@@ -150,7 +150,7 @@ describe('Auth endpoints', function () {
             firstName,
             lastName
           },
-          exp: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
+          exp: Math.floor(Date.now() / 1000) - 10 
         },
         JWT_SECRET,
         {
