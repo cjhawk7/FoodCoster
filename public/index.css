@@ -74,8 +74,8 @@ body {
 }
 
 .search h2 {
-    font-size: 15px;
-    margin-top: 100px;
+    font-size: 25px;
+    margin-top: 50px;
     font-family: 'Bowlby One SC', cursive;
 }
 
@@ -83,6 +83,7 @@ body {
     font-size: 20px;
     text-align: center;
     font-family: 'Bowlby One SC', cursive;
+    padding-top: 25px;
 }
 
 .container {
@@ -90,7 +91,7 @@ body {
     background-color: rgb(82, 78, 78);
     border: 2px solid;
     padding-bottom: 50px;
-    height: 600px;  
+    height: 550px;  
     max-width: 400px;  
     margin: auto;
     margin-top: 100px;
@@ -111,12 +112,12 @@ body {
     margin-bottom: 0px;
     font-family: 'Bowlby One SC', cursive;
     text-align: center;
+    padding-top: 25px;
 }
 
 .container h4 {
     text-align: center;
     font-size: 15px;
-    font-family: 'Bowlby One SC', cursive;
     margin-top: 10px;
     margin-bottom: -5px;
 
@@ -146,6 +147,7 @@ body {
     font-family: 'Bowlby One SC', cursive;
     margin-top: 5px;
     margin-bottom: 0px;
+    padding-top: 25px
 }
 
 .containerLogin h4 {
@@ -168,7 +170,6 @@ body {
 
 .container-history p {
     font-size: 20px;
-    font-family: 'Bowlby One SC', cursive;
 }
 
 
@@ -207,7 +208,6 @@ body {
     display: block;
     margin: auto;
     padding: 15px;
-    font-family: 'Bowlby One SC', cursive;
 } 
 
 .js-login-btn {
@@ -247,7 +247,7 @@ button:hover {
 label[for="firstname"], [for="password"], [for="lastname"] {
     display: block;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 25px;
 }
 
 label[for="desiredcity"], [for="budget"], [for="meals"], [for="time"], [for="unit"] {
@@ -258,7 +258,7 @@ label[for="desiredcity"], [for="budget"], [for="meals"], [for="time"], [for="uni
 label[for="username"], [for="oldpassword"], [for="newpassword"] {
     display: block;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 25px;
 }
 
 .container-search {
@@ -269,7 +269,7 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     width: 400px;
     height: 550px;    
     margin: auto;
-    margin-top: 110px;
+    margin-top: 75px;
     border-radius: 25px;
     opacity: 0.85;
 }
@@ -326,10 +326,10 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     display: block;
     margin: auto;
     margin-bottom: 30px;
-    border-radius: 6px;
+    border-radius: 5px;
     padding: 5px;
     text-align: center;
-    font-family: 'Bowlby One SC', cursive;
+    font-size: 15px;
 }
 
 h2 {
@@ -365,8 +365,8 @@ h2 {
     background-color: rgb(59, 57, 57);
     display: block;
     border: 2px solid;
-    width: 600px;
-    height: 200px;
+    width: 50%;
+    max-width: 600px;
     margin: auto;
     margin-top: 15px;
     opacity: 0.85;
@@ -411,7 +411,7 @@ a:hover {
     color: orange;
 }
 
-@media (min-width: 492px) {  
+@media (min-width: 400px) {  
     .topnav {
         overflow: hidden;
         height: 45px;
