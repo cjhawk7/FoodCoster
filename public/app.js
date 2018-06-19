@@ -4,7 +4,8 @@ const postVal = {
     time: 1,
     meals: 1,
     info: '',
-    unit: ''
+    unit: '',
+    deficit: '' 
 }
 
 const userData = {
@@ -30,6 +31,7 @@ let authToken;
 let info;
 
 let unit;
+
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -94,6 +96,8 @@ function displayNumbeoData(response) {
     const meals = $('#meals').val();
 
     $('.container-results').removeClass('hidden');
+    $('.search').addClass('hidden');
+    $('.searchnav').removeAttr('hidden');
     
     let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.'
 
@@ -102,29 +106,30 @@ function displayNumbeoData(response) {
         calcResult = response.data['average_price'] * 7 * time * meals;
         let currencyLocation = response.currency + ' to eat out in ' + location + ' for the duration of your stay.';
         let p = $('.container-results p')
-        p.html(' It will be roughly ' + round(calcResult, 2)  + currencyLocation);
-       
+
+        p.html(' The average cost to eat out in ' + location + ' at an inexpensive restaurant: <span class="cost"> ' + round(response.data['average_price'], 2) + '</span> ' + response.currency + '.' + '<br><br>' + ' It will be roughly <span class="price"> ' + round(calcResult, 2) + '</span> '  + currencyLocation);
+        
 
     } else if (unit === 'Days') {
 
         calcResult = response.data['average_price'] * time * meals;
 
-        $('.container-results p').html(' It will be roughly ' + round(calcResult, 2)  + currencyLocation);
+        $('.container-results p').html(' The average cost to eat out in ' + location + ' at an inexpensive restaurant: <span class="price"> ' + round(response.data['average_price'], 2) + '</span> ' + response.currency + '.' + '<br><br>' + ' It will be roughly <span class="price">  ' + round(calcResult, 2) + '</span> '  + currencyLocation);
     }
-
+    
     if (calcResult <= budget) {
-        
-        $('.container-results p').append(' Nice, you are within your budget!'); 
+        let surplusCash = budget - calcResult   
+        let n = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation + '<br><br>' + 'Surplus:<span class="surplus">  ' +  round(surplusCash, 2) + ' </span> ' + response.currency;
+        info = n;
+        $('.container-results p').append('<br><br>' + ' Nice, looks like you will have an extra <span class="surplus">  ' + round(surplusCash, 2) + '</span> ' + response.currency + ' to spend on stuff!' ); 
+    
+    }else {
+        let neededCash = calcResult - budget
+        let m = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation + '<br><br>' + ' Deficit: <span class="deficit"> ' +  round(neededCash, 2) + ' </span> ' + response.currency;
+        info = m;
+        $('.container-results p').append('<br><br>' + ' Whoops, looks like you will need an extra <span class="deficit"> ' + round(neededCash, 2) + '</span> ' + response.currency + ' to eat out that much!');
 
     }
-    else {
-        
-        $('.container-results p').append(' Whoops, might want to increase your budget!') 
-    }
-
-    let m = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation;
-
-    info = m;
 }
 
 
@@ -263,7 +268,6 @@ function createError() {
     console.log('testing')
 }
 
-
 function deleteData(data) {
 
      console.log(data);
@@ -293,7 +297,6 @@ function loginPassword() {
     }
 }
 
-
 function setupClickHandlers() {
 
     $('.search').submit(event => {
@@ -313,7 +316,6 @@ function setupClickHandlers() {
         userData.username = $(event.currentTarget).find('#email').val();
         userData.password = $(event.currentTarget).find('#password').val();
         createUser(userData, userCreated, createError);
-
     });
 
     $('.login').submit(event => { 
@@ -424,7 +426,6 @@ function setupClickHandlers() {
         $('.reset').addClass('hidden');
     });
 };
-
 
 $(function() {
     setupClickHandlers();
