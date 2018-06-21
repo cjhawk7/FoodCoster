@@ -132,6 +132,10 @@ function displayNumbeoData(response) {
     }
 }
 
+function displayComparison(data) {
+    console.log(data);
+}
+
 
 function sendSearchData(post, callback) {
     
@@ -307,6 +311,14 @@ function setupClickHandlers() {
         postVal.meals = $(event.currentTarget).find('#meals').val();
         $('.container-results p').text('');
         getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
+    });
+
+    $('.js-compare-btn').on('click', function() {
+        console.log('button working');
+        event.preventDefault();
+        cityCompare = $(event.currentTarget).find('#compare').val();
+        console.log(cityCompare)
+        getNumbeoData(cityCompare, postVal.budget, postVal.time, postVal.meals, displayComparison);
     });
 
     $('.signup').submit(event => { 

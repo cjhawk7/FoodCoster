@@ -137,7 +137,7 @@ body {
     padding-bottom: 50px;
     width: 100%;
     max-width: 400px;
-    height: 400px;    
+    height: 375px;    
     margin: auto;
     margin-top: 200px;
     border-radius: 25px;
@@ -295,6 +295,21 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     background: rgb(255, 140, 0);
 }
 
+.js-compare-btn {
+    width: 100px;
+    height: 35px;
+    font-family: Open-sans;
+    font-size:20px;
+    border-radius: 6px;
+    background-color: white;
+    color: white;
+    margin: auto;
+    display: block;
+    background: rgb(255, 140, 0);
+}
+
+
+
 .js-reset-btn {
     width: 100px;
     height: 35px;
@@ -354,6 +369,17 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     font-size: 15px;
 }
 
+.query-compare {
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-size: 15px;
+    margin-right: 80px;
+}
+
 h2 {
     text-align: center;
 }
@@ -364,7 +390,7 @@ h2 {
     display: block;
     border: 2px solid;
     width: 400px;
-    height: 250px;
+    height: 375px;
     margin: auto;
     margin-top: 15px;
     opacity: 0.85;
