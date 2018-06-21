@@ -27,11 +27,10 @@ const update = {
 }
 
 let authToken;
-
 let info;
-
 let unit;
-
+let firstCitySearch;
+let newCityComparison;
 
 function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
    
@@ -114,26 +113,26 @@ function displayNumbeoData(response) {
 
         calcResult = response.data['average_price'] * time * meals;
 
-        $('.container-results p').html(' The average cost to eat out in ' + location + ' at an inexpensive restaurant: <span class="price"> ' + round(response.data['average_price'], 2) + '</span> ' + response.currency + '.' + '<br><br>' + ' It will be roughly <span class="price">  ' + round(calcResult, 2) + '</span> '  + currencyLocation);
+        $('.container-results p').html(' The average cost to eat out in ' + location + ' at an inexpensive restaurant: <span class="cost"> ' + round(response.data['average_price'], 2) + '</span> ' + response.currency + '.' + '<br><br>' + ' It will be roughly <span class="price">  ' + round(calcResult, 2) + '</span> '  + currencyLocation);
     }
     
     if (calcResult <= budget) {
-        let surplusCash = budget - calcResult   
+        let surplusCash = budget - calcResult;   
         let n = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation + '<br><br>' + 'Surplus:<span class="surplus">  ' +  round(surplusCash, 2) + ' </span> ' + response.currency;
         info = n;
         $('.container-results p').append('<br><br>' + ' Nice, looks like you will have an extra <span class="surplus">  ' + round(surplusCash, 2) + '</span> ' + response.currency + ' to spend on stuff!' ); 
     
     }else {
-        let neededCash = calcResult - budget
+        let neededCash = calcResult - budget;
         let m = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation + '<br><br>' + ' Deficit: <span class="deficit"> ' +  round(neededCash, 2) + ' </span> ' + response.currency;
         info = m;
         $('.container-results p').append('<br><br>' + ' Whoops, looks like you will need an extra <span class="deficit"> ' + round(neededCash, 2) + '</span> ' + response.currency + ' to eat out that much!');
 
     }
-}
 
-function displayComparison(data) {
-    console.log(data);
+    let averagePrice = response.data['average_price'];
+    firstCitySearch = averagePrice;
+
 }
 
 
@@ -316,9 +315,8 @@ function setupClickHandlers() {
     $('.js-compare-btn').on('click', function() {
         console.log('button working');
         event.preventDefault();
-        cityCompare = $(event.currentTarget).find('#compare').val();
-        console.log(cityCompare)
-        getNumbeoData(cityCompare, postVal.budget, postVal.time, postVal.meals, displayComparison);
+        newCityComparison = $('#compare').val();
+        getNumbeoData(newCityComparison, postVal.budget, postVal.time, postVal.meals, displayComparison);
     });
 
     $('.signup').submit(event => { 
@@ -336,6 +334,8 @@ function setupClickHandlers() {
         loginData.password = $(event.currentTarget).find('#password-login').val();
         loginUser(loginData, userLoggedIn, loginError);
         $('.containerLogin p').text('');
+        let divisonTest = (3 / 5);
+        console.log(divisonTest);
     });
 
     $('.reset-form').submit(event => { 
@@ -351,7 +351,6 @@ function setupClickHandlers() {
         postVal.info = info;
         postVal.unit = unit;
         $('.container-results').addClass('hidden');
-        
         sendSearchData(postVal, successFunction);
     });
 
@@ -438,6 +437,24 @@ function setupClickHandlers() {
         $('.reset').addClass('hidden');
     });
 };
+
+function displayComparison(obj) {
+    console.log(firstCitySearch);
+    newCitySearch = obj.data.average_price;
+    console.log(newCitySearch);
+    console.log(newCityComparison);
+    let percentDifference = (firstCitySearch / newCitySearch);
+    console.log(percentDifference);
+    $('.container-results h3').text('');
+    if (newCitySearch > firstCitySearch) {
+
+        $('.container-results h3').append('Eating out in ' + newCityComparison + ' is about ' + round(percentDifference, 2) + 'x more expensive!')
+
+    }else{
+
+        $('.container-results h3').append('Eating out in ' + newCityComparison + ' is about ' + round(percentDifference, 2) + 'x cheaper!') 
+    }
+}
 
 $(function() {
     setupClickHandlers();

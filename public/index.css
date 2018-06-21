@@ -248,6 +248,7 @@ button {
     border-radius: 25px;
     margin-right: 10px;
     margin-bottom: 3px;
+
 }
 
 
@@ -267,6 +268,19 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     text-align: center;
     padding-top: 25px;
 }
+
+label[for="compare"] {
+    text-align: center;
+    padding-top: 25px;
+    margin: auto;
+
+}
+
+.save {
+    margin-left: 220px;
+    margin-bottom: 10px;
+}
+
 
 .container-search {
     background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
@@ -303,9 +317,9 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
     border-radius: 6px;
     background-color: white;
     color: white;
-    margin: auto;
     display: block;
     background: rgb(255, 140, 0);
+    margin: auto;
 }
 
 
@@ -372,16 +386,25 @@ label[for="username"], [for="oldpassword"], [for="newpassword"] {
 .query-compare {
     display: block;
     margin: auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-radius: 5px;
     padding: 5px;
     text-align: center;
     font-size: 15px;
-    margin-right: 80px;
+    display: block;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 10px;
 }
+
 
 h2 {
     text-align: center;
+}
+
+h3 {
+    font-size: 15px;
+    letter-spacing: 2px;
 }
 
 .container-results {
@@ -390,7 +413,7 @@ h2 {
     display: block;
     border: 2px solid;
     width: 400px;
-    height: 375px;
+    height: 450px;
     margin: auto;
     margin-top: 15px;
     opacity: 0.85;
