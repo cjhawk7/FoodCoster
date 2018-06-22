@@ -118,7 +118,7 @@ function displayNumbeoData(response) {
     
     if (calcResult <= budget) {
         let surplusCash = budget - calcResult;   
-        let n = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation + '<br><br>' + 'Surplus:<span class="surplus">  ' +  round(surplusCash, 2) + ' </span> ' + response.currency;
+        let n = ' It will be roughly ' + round(calcResult, 2)  + currencyLocation + '<br><br>' + 'Extra cash:<span class="surplus">  ' +  round(surplusCash, 2) + ' </span> ' + response.currency;
         info = n;
         $('.container-results p').append('<br><br>' + ' Nice, looks like you will have an extra <span class="surplus">  ' + round(surplusCash, 2) + '</span> ' + response.currency + ' to spend on stuff!' ); 
     
@@ -439,20 +439,20 @@ function setupClickHandlers() {
 };
 
 function displayComparison(obj) {
-    console.log(firstCitySearch);
     newCitySearch = obj.data.average_price;
-    console.log(newCitySearch);
-    console.log(newCityComparison);
     $('.container-results h3').text('');
     if (newCitySearch > firstCitySearch) {
         let percentDifference = (newCitySearch / firstCitySearch);
         $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x more expensive!')
-        console.log(percentDifference);
     }else{
         let percentDifference = (firstCitySearch / newCitySearch);
         $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x cheaper!') 
-        console.log(percentDifference);
     }
+    if (newCitySearch === firstCitySearch) {
+        $('.container-results h3').text('')
+        $('.container-results h3').append('Eating out here will be about the same!')
+    }
+    
 }
 
 $(function() {
