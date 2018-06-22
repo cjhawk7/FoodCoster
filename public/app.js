@@ -443,16 +443,15 @@ function displayComparison(obj) {
     newCitySearch = obj.data.average_price;
     console.log(newCitySearch);
     console.log(newCityComparison);
-    let percentDifference = (firstCitySearch / newCitySearch);
-    console.log(percentDifference);
     $('.container-results h3').text('');
     if (newCitySearch > firstCitySearch) {
-
-        $('.container-results h3').append('Eating out in ' + newCityComparison + ' is about ' + round(percentDifference, 2) + 'x more expensive!')
-
+        let percentDifference = (newCitySearch / firstCitySearch);
+        $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x more expensive!')
+        console.log(percentDifference);
     }else{
-
-        $('.container-results h3').append('Eating out in ' + newCityComparison + ' is about ' + round(percentDifference, 2) + 'x cheaper!') 
+        let percentDifference = (firstCitySearch / newCitySearch);
+        $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x cheaper!') 
+        console.log(percentDifference);
     }
 }
 
