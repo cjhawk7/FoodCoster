@@ -236,8 +236,7 @@ function removeSearchData(obj) {
 }
 
 function successFunction() {
-
-    console.log('success');
+  console.log('yay')
 }
 
 function userCreated() {
@@ -351,6 +350,8 @@ function setupClickHandlers() {
         postVal.info = info;
         postVal.unit = unit;
         $('.container-results').addClass('hidden');
+        $('.endpoint p').append('Check your history or try making another search!')
+        $('.endpoint').removeClass('hidden');
         sendSearchData(postVal, successFunction);
     });
 
@@ -435,6 +436,7 @@ function setupClickHandlers() {
         $('.container-results').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
         $('.reset').addClass('hidden');
+        $('.endpoint').addClass('hidden');
     });
 };
 

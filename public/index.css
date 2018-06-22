@@ -57,7 +57,7 @@ body {
 .resetlink {
     margin-top: 8px;
     font-size: 10px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
 }
 
 .title h1 {
@@ -70,21 +70,23 @@ body {
 .signup h2 {
     font-size: 30px;
     margin-top: -100px;
-    font-family: 'Bowlby One SC', cursive;
     color: white;
+    font-family: 'Source Serif Pro', serif;
+    letter-spacing: 1px;
 }
 
 .search h2 {
     font-size: 25px;
     margin-top: -150px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
+    letter-spacing: 1px;
 }
 
 .search h3 {
     font-size: 20px;
     text-align: center;
-    font-family: 'Bowlby One SC', cursive;
     padding-top: 25px;
+    font-family: 'Source Serif Pro', serif;
 }
 
 .container {
@@ -111,7 +113,7 @@ body {
     font-size: 20px;
     margin-top: 5px;
     margin-bottom: 0px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
     text-align: center;
     padding-top: 25px;
 }
@@ -146,7 +148,7 @@ body {
 
 .containerLogin h2 {
     font-size: 20px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
     margin-top: 5px;
     margin-bottom: 0px;
     padding-top: 25px
@@ -155,7 +157,7 @@ body {
 .containerLogin h4 {
     text-align: center;
     font-size: 15px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
     margin-top: 10px;
     margin-bottom: -5px;
 
@@ -189,7 +191,7 @@ body {
 
 .containerReset h2 {
     font-size: 20px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
     margin-top: 5px;
     margin-bottom: -20px;
 }
@@ -420,6 +422,22 @@ h3 {
     position: relative;
     text-align: center;
     border-radius: 25px;
+}
+
+.endpoint {
+    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
+    width: 350px;
+    height: 200px;
+    border-radius: 25px; 
+    border: 2px solid;
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+.endpoint p{
+        font-size: 20px; 
+        margin-top: 85px;
 }
 
 .container-results p {
