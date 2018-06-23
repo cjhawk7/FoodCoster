@@ -414,6 +414,7 @@ h3 {
     background-color: rgb(59, 57, 57);
     display: block;
     border: 2px solid;
+    max-width: 100%;
     width: 400px;
     height: 450px;
     margin: auto;

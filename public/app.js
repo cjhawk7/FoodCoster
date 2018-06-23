@@ -148,7 +148,6 @@ function sendSearchData(post, callback) {
         success: callback,
         contentType: 'application/json'
     };
-    console.log(settings)
     $.ajax(settings);  
 }
 
@@ -237,7 +236,7 @@ function removeSearchData(obj) {
 }
 
 function successFunction() {
-  console.log('yay')
+  console.log('success')
 }
 
 function userCreated() {
@@ -265,10 +264,10 @@ function loginError() {
 }
 
 function createError() {
-    console.log('an error be here')
+
     $('.container p').text('');
     $('.container p').append('Username is already taken')
-    console.log('testing')
+    
 }
 
 function deleteData(data) {
@@ -332,12 +331,8 @@ function setupClickHandlers() {
     });
 
     $('.js-compare-btn').on('click', function() {
-        console.log('button working');
-        event.preventDefault();
         newCityComparison = $('#compare').val();
         getNumbeoData(newCityComparison, displayComparison);
-        console.log(postVal);
-        console.log(newCityComparison);
     });
 
     $('.signup').submit(event => { 
@@ -373,7 +368,6 @@ function setupClickHandlers() {
         $('.endpoint p').append('Check your history or try making another search!')
         $('.endpoint').removeClass('hidden');
         sendSearchData(postVal, successFunction);
-        console.log(postVal);
     });
 
     $('.delete').on('click', function() { 
