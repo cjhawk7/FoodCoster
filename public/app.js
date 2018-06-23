@@ -5,7 +5,6 @@ const postVal = {
     meals: 1,
     info: '',
     unit: '',
-    deficit: '' 
 }
 
 const userData = {
@@ -32,7 +31,7 @@ let unit;
 let firstCitySearch;
 let newCityComparison;
 
-function getNumbeoData(cityName, budgetTotal, timeTotal, mealsTotal, callback) {
+function getNumbeoData(cityName, callback) {
    
     const settings = {
         url: '/makeRequest/' + cityName,
@@ -130,6 +129,8 @@ function displayNumbeoData(response) {
 
     }
 
+
+
     let averagePrice = response.data['average_price'];
     firstCitySearch = averagePrice;
 
@@ -147,7 +148,7 @@ function sendSearchData(post, callback) {
         success: callback,
         contentType: 'application/json'
     };
-    
+    console.log(settings)
     $.ajax(settings);  
 }
 
@@ -299,6 +300,22 @@ function loginPassword() {
     }
 }
 
+function displayComparison(obj) {
+    newCitySearch = obj.data.average_price;
+    $('.container-results h3').text('');
+    if (newCitySearch > firstCitySearch) {
+        let percentDifference = (newCitySearch / firstCitySearch);
+        $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x more expensive!')
+    }else{
+        let percentDifference = (firstCitySearch / newCitySearch);
+        $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x cheaper!') 
+    }
+    if (newCitySearch === firstCitySearch) {
+        $('.container-results h3').text('')
+        $('.container-results h3').append('Eating out here will be about the same!')
+    }
+}
+
 function setupClickHandlers() {
 
     $('.search').submit(event => {
@@ -308,14 +325,19 @@ function setupClickHandlers() {
         postVal.time = $(event.currentTarget).find('#time').val();
         postVal.meals = $(event.currentTarget).find('#meals').val();
         $('.container-results p').text('');
-        getNumbeoData(postVal.location, postVal.budget, postVal.time, postVal.meals, displayNumbeoData);
+        $('.container-results h3').text('')
+        $('.endpoint p').text('');
+        getNumbeoData(postVal.location, displayNumbeoData);
+
     });
 
     $('.js-compare-btn').on('click', function() {
         console.log('button working');
         event.preventDefault();
         newCityComparison = $('#compare').val();
-        getNumbeoData(newCityComparison, postVal.budget, postVal.time, postVal.meals, displayComparison);
+        getNumbeoData(newCityComparison, displayComparison);
+        console.log(postVal);
+        console.log(newCityComparison);
     });
 
     $('.signup').submit(event => { 
@@ -333,8 +355,6 @@ function setupClickHandlers() {
         loginData.password = $(event.currentTarget).find('#password-login').val();
         loginUser(loginData, userLoggedIn, loginError);
         $('.containerLogin p').text('');
-        let divisonTest = (3 / 5);
-        console.log(divisonTest);
     });
 
     $('.reset-form').submit(event => { 
@@ -346,13 +366,14 @@ function setupClickHandlers() {
         $('.containerReset p').text('');
     });
 
-    $('.save').on('click', function() { 
+    $('.save').on('click', function() {
         postVal.info = info;
         postVal.unit = unit;
         $('.container-results').addClass('hidden');
         $('.endpoint p').append('Check your history or try making another search!')
         $('.endpoint').removeClass('hidden');
         sendSearchData(postVal, successFunction);
+        console.log(postVal);
     });
 
     $('.delete').on('click', function() { 
@@ -367,6 +388,7 @@ function setupClickHandlers() {
         $('.searchnav').removeAttr('hidden');
         $('.title').addClass('hidden');
         $('.reset').addClass('hidden');
+        $('.endpoint').addClass('hidden');
         getSearchData(displaySearchData);
     });
 
@@ -381,6 +403,7 @@ function setupClickHandlers() {
         $('.container-history').addClass('hidden');
         $('.searchnav').attr('hidden', 'true');
         $('.title').removeClass('hidden');
+        $('.endpoint').addClass('hidden');
     });
 
     $('.login-link').on('click', function(){
@@ -425,6 +448,7 @@ function setupClickHandlers() {
         $('.home').removeAttr('hidden');
         $('.reset').addClass('hidden');
         $('.reset-link').attr('hidden', 'true');
+        $('.endpoint').addClass('hidden');
         authToken = undefined;
     });
 
@@ -439,23 +463,6 @@ function setupClickHandlers() {
         $('.endpoint').addClass('hidden');
     });
 };
-
-function displayComparison(obj) {
-    newCitySearch = obj.data.average_price;
-    $('.container-results h3').text('');
-    if (newCitySearch > firstCitySearch) {
-        let percentDifference = (newCitySearch / firstCitySearch);
-        $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x more expensive!')
-    }else{
-        let percentDifference = (firstCitySearch / newCitySearch);
-        $('.container-results h3').append('Eating out in ' + newCityComparison + ' would be about ' + round(percentDifference, 2) + 'x cheaper!') 
-    }
-    if (newCitySearch === firstCitySearch) {
-        $('.container-results h3').text('')
-        $('.container-results h3').append('Eating out here will be about the same!')
-    }
-    
-}
 
 $(function() {
     setupClickHandlers();
