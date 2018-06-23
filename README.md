@@ -6,8 +6,9 @@ I wanted to create an app that allows a user to know their food expenses when pl
 ![screenshot](https://user-images.githubusercontent.com/32127270/41195972-f8c0c49a-6beb-11e8-8388-3b85d4b1df34.png)
 ## Summary
 1. Allows a user create an account and login
-2. Users should be able to checked if their budget for food is sufficient for the places they plan on traveling to.
+2. Users should be able to check how much food expenses will be against their total travel budget.
 3. Users will be able to save and see their searches in search history and remove them if wanted.
+4. Users should be able to compare the cost of food between cities
 4. User should also be able to change their name or username as they please.
 ## Technology Used
 * HTML
