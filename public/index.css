@@ -47,8 +47,7 @@ body {
 }
 
 .logo {
-    display: table-cell;
-    display: inline;
+    
 }
 
 .topnav p {
@@ -505,21 +504,11 @@ a:hover {
     color: orange;
 }
 
-@media (min-width: 500px) {  
+@media (min-width: 450px) {  
     .topnav {
         overflow: hidden;
         height: 55px;
     }
-    .topnav h1 {
-        position: absolute;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%);
-        margin-top: 10px;
-        display: table-cell;
-        margin-bottom: 225px;
-    }
-
     .logo {
         position: absolute;
         left: 50%;
@@ -534,6 +523,15 @@ a:hover {
         margin-top: 150px
         }
     
+}
+
+@media (max-width: 450px) {  
+
+
+    .logo {
+      margin-left: 150px;
+    }
+
 }
 
 
