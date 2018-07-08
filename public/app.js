@@ -383,6 +383,7 @@ function setupClickHandlers() {
         $('.title').addClass('hidden');
         $('.reset').addClass('hidden');
         $('.endpoint').addClass('hidden');
+        $('.container-results').addClass('hidden');
         getSearchData(displaySearchData);
     });
 

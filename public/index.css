@@ -29,6 +29,7 @@ body {
   
 }
 
+
 .topnav a {
     float: left;
     color: white;
@@ -36,8 +37,8 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-    margin-top: -7px;
-    font-family: 'Bowlby One SC', cursive;
+    margin-top: 2px;
+    font-family: 'Source Serif Pro', serif;
 }
 
 .topnav a.active {
@@ -48,9 +49,8 @@ body {
 .topnav p {
     float: right;
     color: white;
-    margin-top: 8px;
     font-size: 17px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Source Serif Pro', serif;
     margin-right: 30px;
 }
 
@@ -63,7 +63,7 @@ body {
 .title h1 {
     font-size: 50px;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 50px
     font-family: 'Source Serif Pro', serif;
 }
 
@@ -71,14 +71,14 @@ body {
     font-size: 30px;
     margin-top: -100px;
     color: white;
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Almendra';
     letter-spacing: 1px;
 }
 
 .search h2 {
-    font-size: 25px;
+    font-size: 30px;
     margin-top: -150px;
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Almendra';
     letter-spacing: 1px;
 }
 
@@ -483,7 +483,7 @@ ul {
 a.reset-link {
     float: right;
     font-size: 12px;
-    margin-top: 0px;
+    margin-top: 6px;
 }
 
 .reset-link:hover {
@@ -503,7 +503,7 @@ a:hover {
 @media (min-width: 825px) {  
     .topnav {
         overflow: hidden;
-        height: 45px;
+        height: 55px;
     }
     .topnav h1 {
         position: absolute;
@@ -511,6 +511,16 @@ a:hover {
         margin-right: -50%;
         transform: translate(-50%);
         margin-top: 10px;
+        display: table-cell;
+        margin-bottom: 225px;
+    }
+
+    .logo {
+        position: absolute;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%);
+        margin-top: 6px;
         display: table-cell;
         margin-bottom: 225px;
     }
