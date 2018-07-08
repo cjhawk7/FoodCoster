@@ -46,6 +46,11 @@ body {
     color: white;
 }
 
+.logo {
+    display: table-cell;
+    display: inline;
+}
+
 .topnav p {
     float: right;
     color: white;
@@ -500,7 +505,7 @@ a:hover {
     color: orange;
 }
 
-@media (min-width: 825px) {  
+@media (min-width: 500px) {  
     .topnav {
         overflow: hidden;
         height: 55px;
