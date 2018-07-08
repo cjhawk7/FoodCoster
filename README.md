@@ -3,7 +3,7 @@ A tool to plan your food budget on your next trip.
 ## Motivation
 I wanted to create an app that allows a user to know their food expenses when planning a trip anywhere around the world and to create a budget that best suits them. As I am a pretty big foodie and enjoy travel, I was also very interested in creating a tool that allows a user to know the average cost of food in cities around the world. Ultimately, I'd like to implement other features like food type and recommend users restaurants in the area based on their budget. 
 ## Screenshots
-![screenshot](https://user-images.githubusercontent.com/32127270/41195972-f8c0c49a-6beb-11e8-8388-3b85d4b1df34.png)
+![screenshot](https://user-images.githubusercontent.com/32127270/42415616-89f981da-8209-11e8-84c9-7b6abe22c06a.png)
 ## Summary
 1. Allows a user create an account and login
 2. Users should be able to check how much food expenses will be against their total travel budget.
