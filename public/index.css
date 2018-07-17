@@ -6,6 +6,7 @@ body {
     box-sizing: border-box;
     color: white;
     font-size: 16px;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://images6.alphacoders.com/876/876171.jpg");
     font-family: 'Open Sans', sans-serif;
     margin: 0px;
     background-size: cover;
