@@ -1,222 +1,224 @@
-*, *:before, *:after {
-    box-sizing: border-box;  
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 body {
-    box-sizing: border-box;
-    color: white;
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
-    margin: 0px;
-    background-size: cover;
+  box-sizing: border-box;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("food.jpg");
+  color: white;
+  font-size: 16px;
+  font-family: "Oswald", sans-serif;
+  margin: 0px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .topnav {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: white;
-    width: 100%;
-    opacity: 0.90;
-    margin-bottom: 225px;
+  background-image: url("linenbackground.jpg");
+  background-color: white;
+  width: 100%;
+  opacity: 0.9;
+  margin-bottom: 225px;
 }
 
 .topnav h1 {
-    color:white;
-    font-size: 20px;
-    text-align: center;
-    margin: 0 auto;
-    vertical-align: middle;
-  
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  vertical-align: middle;
 }
 
-
 .topnav a {
-    float: left;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    margin-top: 2px;
-    font-family: 'Source Serif Pro', serif;
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin-top: 2px;
+  font-family: "Oswald", sans-serif;
 }
 
 .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4caf50;
+  color: white;
 }
 
 .topnav p {
-    float: right;
-    color: white;
-    font-size: 17px;
-    font-family: 'Source Serif Pro', serif;
-    margin-right: 30px;
+  float: right;
+  color: white;
+  font-size: 17px;
+  font-family: "Oswald", sans-serif;
+  margin-right: 30px;
 }
 
 .resetlink {
-    margin-top: 8px;
-    font-size: 10px;
-    font-family: 'Source Serif Pro', serif;
+  margin-top: 8px;
+  font-size: 10px;
+  font-family: "Oswald", sans-serif;
 }
 
 .title h1 {
-    font-size: 50px;
-    text-align: center;
-    margin-top: 50px;
-    font-family: 'Source Serif Pro', serif;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 50px;
+  font-family: "Oswald", sans-serif;
 }
 
 .signup h2 {
-    font-size: 30px;
-    margin-top: -100px;
-    color: white;
-    font-family: 'Almendra';
-    letter-spacing: 1px;
+  font-size: 30px;
+  margin-top: -100px;
+  color: white;
+  font-family: "Almendra";
+  letter-spacing: 1px;
 }
 
 .search h2 {
-    font-size: 30px;
-    margin-top: -110px;
-    font-family: 'Almendra';
-    letter-spacing: 1px;
+  font-size: 30px;
+  margin-top: -110px;
+  font-family: "Almendra";
+  letter-spacing: 1px;
 }
 
 .search h3 {
-    font-size: 20px;
-    text-align: center;
-    padding-top: 25px;
-    font-family: 'Source Serif Pro', serif;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 25px;
+  font-family: "Oswald", sans-serif;
 }
 
 .container {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: rgb(82, 78, 78);
-    border: 2px solid;
-    padding-bottom: 50px;
-    height: 550px;  
-    max-width: 400px;  
-    margin: auto;
-    margin-top: 100px;
-    border-radius: 25px;
-    opacity: 0.85;
+  background-image: url("linenbackground.jpg");
+  background-color: rgb(82, 78, 78);
+  border: 2px solid;
+  padding-bottom: 50px;
+  height: 550px;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 25px;
+  opacity: 0.85;
 }
 
 .boxchecked {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
 }
 
-
 .container h3 {
-    font-size: 20px;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    font-family: 'Source Serif Pro', serif;
-    text-align: center;
-    padding-top: 25px;
+  font-size: 20px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-family: "Oswald", sans-serif;
+  text-align: center;
+  padding-top: 25px;
 }
 
 .container h4 {
-    text-align: center;
-    font-size: 15px;
-    margin-top: 10px;
-    margin-bottom: -5px;
-
+  text-align: center;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 
 .container p {
-    color: red;
-    text-align: center;
-    margin-top: 10px;
+  color: red;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .containerLogin {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: rgb(82, 78, 78);
-    border: 2px solid;
-    padding-bottom: 50px;
-    width: 100%;
-    max-width: 400px;
-    height: 375px;    
-    margin: auto;
-    margin-top: 200px;
-    border-radius: 25px;
-    opacity: 0.85;
+  background-image: url("linenbackground.jpg");
+  background-color: rgb(82, 78, 78);
+  border: 2px solid;
+  padding-bottom: 50px;
+  width: 100%;
+  max-width: 400px;
+  height: 375px;
+  margin: auto;
+  margin-top: 200px;
+  border-radius: 25px;
+  opacity: 0.85;
 }
 
 .containerLogin h2 {
-    font-size: 20px;
-    font-family: 'Source Serif Pro', serif;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    padding-top: 25px
+  font-size: 20px;
+  font-family: "Oswald", sans-serif;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  padding-top: 25px;
 }
 
 .containerLogin h4 {
-    text-align: center;
-    font-size: 15px;
-    font-family: 'Source Serif Pro', serif;
-    margin-top: 10px;
-    margin-bottom: -5px;
-
+  text-align: center;
+  font-size: 15px;
+  font-family: "Oswald", sans-serif;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 
 .containerLogin p {
-    text-align: center;
-    color: #ff1a1a
+  text-align: center;
+  color: #ff1a1a;
 }
 
 .hidepassword {
-    text-align: center;
+  text-align: center;
 }
 
 .container-history p {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .containerReset {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: rgb(82, 78, 78);
-    border: 2px solid;
-    padding-bottom: 50px;
-    width: 400px;
-    height: 350px;    
-    margin: auto;
-    margin-top: 200px;
-    border-radius: 25px;
-    opacity: 0.85;
+  background-image: url("linenbackground.jpg");
+  background-color: rgb(82, 78, 78);
+  border: 2px solid;
+  padding-bottom: 50px;
+  width: 400px;
+  height: 350px;
+  margin: auto;
+  margin-top: 200px;
+  border-radius: 25px;
+  opacity: 0.85;
 }
 
 .containerReset h2 {
-    font-size: 20px;
-    font-family: 'Source Serif Pro', serif;
-    margin-top: 5px;
-    margin-bottom: -20px;
+  font-size: 20px;
+  font-family: "Oswald", sans-serif;
+  margin-top: 5px;
+  margin-bottom: -20px;
 }
 
 .containerReset p {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 }
 
 .js-query {
-    text-align: center;
-    height: 20px;
-    border-radius: 5px;
-    font-size: 15px;
-    color: black;
-    margin-top: -10px;
-    display: block;
-    margin: auto;
-    padding: 15px;
-} 
+  text-align: center;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 15px;
+  color: black;
+  margin-top: -10px;
+  display: block;
+  margin: auto;
+  padding: 15px;
+}
 
 .js-login-btn {
   width: 100px;
   height: 35px;
   font-family: Open-sans;
-  font-size:20px;
+  font-size: 20px;
   border-radius: 3px;
   background-color: white;
   color: white;
@@ -227,308 +229,324 @@ body {
 }
 
 .js-signup-btn {
-    width: 100px;
-    height: 35px;
-    font-family: Open-sans;
-    font-size:20px;
-    border-radius: 3px;
-    background-color: white;
-    color: white;
-    margin: auto;
-    display: block;
-    margin-top: 20px;
-    background: rgb(255, 140, 0);
+  width: 100px;
+  height: 35px;
+  font-family: Open-sans;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: white;
+  color: white;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+  background: rgb(255, 140, 0);
 }
 
 button:hover {
-    background-color: #ddd;
-    color: black;
+  background-color: rgb(233, 158, 20);
+  color: white;
+  cursor: pointer;
 }
 
 button {
-    border-radius: 25px;
-    margin-right: 10px;
-    margin-bottom: 3px;
-
+  border-radius: 25px;
+  margin-right: 10px;
+  margin-bottom: 3px;
 }
 
-
-label[for="firstname"], [for="password"], [for="lastname"] {
-    display: block;
-    text-align: center;
-    padding-top: 25px;
+label[for="firstname"],
+[for="password"],
+[for="lastname"] {
+  display: block;
+  text-align: center;
+  padding-top: 25px;
 }
 
-label[for="desiredcity"], [for="budget"], [for="meals"], [for="time"], [for="unit"] {
-    display: block;
-    text-align: center;
+label[for="desiredcity"],
+[for="budget"],
+[for="meals"],
+[for="time"],
+[for="unit"] {
+  display: block;
+  text-align: center;
 }
 
-label[for="username"], [for="oldpassword"], [for="newpassword"] {
-    display: block;
-    text-align: center;
-    padding-top: 25px;
+label[for="username"],
+[for="oldpassword"],
+[for="newpassword"] {
+  display: block;
+  text-align: center;
+  padding-top: 25px;
 }
 
 label[for="compare"] {
-    text-align: center;
-    padding-top: 25px;
-    margin: auto;
-    color: orange;
+  text-align: center;
+  padding-top: 25px;
+  margin: auto;
+  color: orange;
 }
 
 .save {
-    margin-left: 220px;
-    margin-bottom: 10px;
+  margin-left: 220px;
+  margin-bottom: 10px;
 }
 
-
 .container-search {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: rgb(59, 57, 57);
-    border: 2px solid;
-    padding-bottom: 50px;
-    width: 400px;
-    max-width: 100%;
-    height: 550px;    
-    margin: auto;
-    margin-top: 75px;
-    border-radius: 25px;
-    opacity: 0.85;
+  background-image: url("linenbackground.jpg");
+  background-color: rgb(59, 57, 57);
+  border: 2px solid;
+  padding-bottom: 50px;
+  width: 400px;
+  max-width: 100%;
+  height: 550px;
+  margin: auto;
+  margin-top: 75px;
+  border-radius: 25px;
+  opacity: 0.85;
 }
 
 .js-search-btn {
-    width: 100px;
-    height: 35px;
-    font-family: Open-sans;
-    font-size:20px;
-    border-radius: 6px;
-    background-color: white;
-    color: white;
-    margin: auto;
-    display: block;
-    background: rgb(255, 140, 0);
+  width: 100px;
+  height: 35px;
+  font-family: Open-sans;
+  font-size: 20px;
+  border-radius: 6px;
+  background-color: white;
+  color: white;
+  margin: auto;
+  display: block;
+  background: rgb(255, 140, 0);
 }
 
 .js-compare-btn {
-    width: 100px;
-    height: 35px;
-    font-family: Open-sans;
-    font-size:20px;
-    border-radius: 6px;
-    background-color: white;
-    color: white;
-    display: block;
-    background: rgb(255, 140, 0);
-    margin: auto;
+  width: 100px;
+  height: 35px;
+  font-family: Open-sans;
+  font-size: 20px;
+  border-radius: 6px;
+  background-color: white;
+  color: white;
+  display: block;
+  background: rgb(255, 140, 0);
+  margin: auto;
 }
 
-
-
 .js-reset-btn {
-    width: 100px;
-    height: 35px;
-    font-family: Open-sans;
-    font-size:20px;
-    border-radius: 6px;
-    background-color: white;
-    color: white;
-    margin: auto;
-    display: block;
-    background: rgb(255, 140, 0);
-    margin-top: 10px;
+  width: 100px;
+  height: 35px;
+  font-family: Open-sans;
+  font-size: 20px;
+  border-radius: 6px;
+  background-color: white;
+  color: white;
+  margin: auto;
+  display: block;
+  background: rgb(255, 140, 0);
+  margin-top: 10px;
 }
 
 .js-return-btn {
-    width: 100px;
-    height: 35px;
-    font-family: Open-sans;
-    font-size:20px;
-    border-radius: 6px;
-    background-color: white;
-    color: white;
-    margin: auto;
-    display: block;
+  width: 100px;
+  height: 35px;
+  font-family: Open-sans;
+  font-size: 20px;
+  border-radius: 6px;
+  background-color: white;
+  color: white;
+  margin: auto;
+  display: block;
 }
 
 .wrapper {
-    display: inline-block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .cost {
-    color: orange;
+  color: orange;
 }
 
 .price {
-    color: lightblue;
+  color: lightblue;
 }
 
 .deficit {
-    color: red;
+  color: red;
 }
 
 .surplus {
-    color: springgreen;
+  color: springgreen;
 }
 
 .query-search {
-    display: block;
-    margin: auto;
-    margin-bottom: 25px;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-    font-size: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  font-size: 15px;
 }
 
 .query-compare {
-    display: block;
-    margin: auto;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-    font-size: 15px;
-    display: block;
-    margin: auto;
-    margin-bottom: 25px;
-    margin-top: 10px;
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  font-size: 15px;
+  display: block;
+  margin: auto;
+  margin-bottom: 25px;
+  margin-top: 10px;
 }
 
-
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 h3 {
-    font-size: 15px;
-    letter-spacing: 2px;
+  font-size: 15px;
+  letter-spacing: 2px;
 }
 
 .container-results {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: rgb(59, 57, 57);
-    display: block;
-    border: 2px solid;
-    max-width: 100%;
-    width: 400px;
-    height: 450px;
-    margin: auto;
-    margin-top: 15px;
-    opacity: 0.85;
-    position: relative;
-    text-align: center;
-    border-radius: 25px;
+  background-image: url("linenbackground.jpg");
+  background-color: rgb(59, 57, 57);
+  display: block;
+  border: 2px solid;
+  max-width: 100%;
+  width: 400px;
+  height: 450px;
+  margin: auto;
+  margin-top: 15px;
+  opacity: 0.85;
+  position: relative;
+  text-align: center;
+  border-radius: 25px;
 }
 
 .endpoint {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    width: 350px;
-    height: 200px;
-    border-radius: 25px; 
-    border: 2px solid;
-    display: block;
-    text-align: center;
-    margin: auto;
+  background-image: url("linenbackground.jpg");
+  width: 350px;
+  height: 200px;
+  border-radius: 25px;
+  border: 2px solid;
+  display: block;
+  text-align: center;
+  margin: auto;
 }
 
-.endpoint p{
-    font-size: 20px; 
-    margin-top: 80px;
+.endpoint p {
+  font-size: 20px;
+  margin-top: 80px;
 }
 
 .container-results p {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .searchwrap {
-    background-image: url("https://www.vexels.com/media/users/2049/70206/raw/b0ff0ff2b99b382a90c25c2dce8bbcbf-grey-linen-texture-background.jpg");
-    background-color: rgb(59, 57, 57);
-    display: block;
-    border: 2px solid;
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    margin-top: 15px;
-    opacity: 0.85;
-    position: relative;
-    text-align: center;
-    border-radius: 25px;
+  background-image: url("linenbackground.jpg");
+  background-color: rgb(59, 57, 57);
+  display: block;
+  border: 2px solid;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 15px;
+  opacity: 0.85;
+  position: relative;
+  text-align: center;
+  border-radius: 25px;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 .saved {
-    border: 2px solid;
-    width: 50px;
-    height: 15px;
-    float: right; 
+  border: 2px solid;
+  width: 50px;
+  height: 15px;
+  float: right;
+}
+
+.landing {
+}
+
+.landing h1 {
+  text-align: center;
+  font-size: 70px;
+}
+
+.landing p {
+  text-align: center;
+  font-size: 25px;
 }
 
 .login-link:hover {
-    cursor: pointer;
-    color:  orange;
-
+  cursor: pointer;
+  color: orange;
 }
 
 a.reset-link {
-    float: right;
-    font-size: 12px;
-    margin-top: 6px;
+  float: right;
+  font-size: 12px;
+  margin-top: 6px;
 }
 
 .reset-link:hover {
-    color: orange;
+  color: orange;
 }
 
 .login-link:active {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4caf50;
+  color: white;
 }
 
+.footer {
+  background-image: url("linenbackground.jpg");
+  text-align: center;
+  padding: 1px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 
 a:hover {
-    color: orange;
+  color: orange;
 }
 
-@media (min-width: 450px) {  
-    .topnav {
-        overflow: hidden;
-        height: 55px;
-    }
-    .logo {
-        position: absolute;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%);
-        margin-top: 6px;
-        display: table-cell;
-        margin-bottom: 225px;
-    }
+@media (min-width: 450px) {
+  .topnav {
+    overflow: hidden;
+    height: 55px;
+  }
+  .logo {
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%);
+    margin-top: 6px;
+    display: table-cell;
+    margin-bottom: 225px;
+  }
 
-    .container-history {
-        margin-top: 150px
-        }
-    
+  .container-history {
+    margin-top: 150px;
+  }
 }
 
-@media (max-width: 450px) {  
-
-
-    .logo {
-      margin-left: 160px;
-    }
-
+@media (max-width: 450px) {
+  .logo {
+    margin-left: 160px;
+  }
 }
-
-
-
