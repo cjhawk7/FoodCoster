@@ -225,7 +225,7 @@ body {
   margin: auto;
   display: block;
   margin-top: 20px;
-  background: rgb(255, 140, 0);
+  background: #ff8646;
 }
 
 .js-signup-btn {
@@ -239,11 +239,11 @@ body {
   margin: auto;
   display: block;
   margin-top: 20px;
-  background: rgb(255, 140, 0);
+  background: #ff8646;
 }
 
 button:hover {
-  background-color: rgb(233, 158, 20);
+  background-color: #d8530c;
   color: white;
   cursor: pointer;
 }
@@ -315,7 +315,7 @@ label[for="compare"] {
   color: white;
   margin: auto;
   display: block;
-  background: rgb(255, 140, 0);
+  background: #ff8646;
 }
 
 .js-compare-btn {
@@ -327,7 +327,7 @@ label[for="compare"] {
   background-color: white;
   color: white;
   display: block;
-  background: rgb(255, 140, 0);
+  background: #ff8646;
   margin: auto;
 }
 
@@ -341,7 +341,7 @@ label[for="compare"] {
   color: white;
   margin: auto;
   display: block;
-  background: rgb(255, 140, 0);
+  background: #ff8646;
   margin-top: 10px;
 }
 
@@ -519,7 +519,7 @@ a.reset-link {
 }
 
 a:hover {
-  color: orange;
+  color: #ff8646;
 }
 
 .containerbtn {
@@ -540,8 +540,8 @@ a:hover {
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
-  box-shadow: 0 0 20px #eee;
-  border-radius: 10px;
+  box-shadow: 0 0 10px #bf921f;
+  border-radius: 5px;
 }
 
 .btn:hover {
@@ -552,17 +552,17 @@ a:hover {
 .btn-1 {
   background-image: linear-gradient(
     to right,
-    #f6d365 0%,
-    #fda085 51%,
-    #f6d365 100%
+    rgb(192, 21, 21) 0%,
+    #ff8646 51%,
+    rgb(192, 21, 21) 100%
   );
 }
 .btn-2 {
   background-image: linear-gradient(
     to right,
-    #fbc2eb 0%,
-    #a6c1ee 51%,
-    #fbc2eb 100%
+    rgb(192, 21, 21) 0%,
+    #ff8646 51%,
+    rgb(192, 21, 21) 100%
   );
 }
 @media (min-width: 450px) {

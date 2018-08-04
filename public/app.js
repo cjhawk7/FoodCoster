@@ -508,8 +508,8 @@ function setupClickHandlers() {
   });
 
   $(".btn-1").on("click", function() {
-    $(".login").removeClass("hidden");
-    $(".signup").addClass("hidden");
+    $(".login").add("hidden");
+    $(".signup").removeClass("hidden");
     $(".search").addClass("hidden");
     $(".container-history").addClass("hidden");
     $(".container-results").addClass("hidden");
