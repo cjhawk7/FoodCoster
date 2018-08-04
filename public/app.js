@@ -327,7 +327,40 @@ function deleteData(data) {
 }
 
 function userUpdate() {
-  $(".containerReset p").append("Updated successfully!");
+  if (
+    update.username === "" &&
+    update.firstName === "" &&
+    update.lastName === ""
+  ) {
+    $(".containerReset p").text("No changes made!");
+  } else {
+    updateUser(update, userUpdate);
+    $(".containerReset p").text("User info updated! Logging out...");
+    authToken = undefined;
+    setTimeout(function() {
+      logout();
+    }, 3000);
+  }
+}
+
+function logout() {
+  $(".signup").addClass("hidden");
+  $(".search").addClass("hidden");
+  $(".container-history").addClass("hidden");
+  $(".container-results").addClass("hidden");
+  $(".historystore").attr("hidden", "true");
+  $(".topnav p").text("");
+  $(".searchnav").attr("hidden", "true");
+  $(".logout").attr("hidden", "true");
+  $(".signin").removeClass("hidden");
+  $(".login").removeClass("hidden");
+  $(".title").removeClass("hidden");
+  $(".js-query").text("");
+  $(".home").removeAttr("hidden");
+  $(".reset").addClass("hidden");
+  $(".reset-link").attr("hidden", "true");
+  $(".endpoint").addClass("hidden");
+  $(".containerReset p").text("");
 }
 
 function signupPassword() {
@@ -444,8 +477,7 @@ function setupClickHandlers() {
     update.lastName = $(event.currentTarget)
       .find("#lastname")
       .val();
-    updateUser(update, userUpdate);
-    $(".containerReset p").text("");
+    userUpdate();
   });
 
   $(".save").on("click", function() {
