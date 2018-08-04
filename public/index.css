@@ -488,8 +488,14 @@ a.reset-link {
   margin-top: 6px;
 }
 
+.login-link:hover {
+  cursor: pointer;
+  color: #ff8646;
+}
+
 .reset-link:hover {
   color: #ff8646;
+  cursor: pointer;
 }
 
 .footer {
