@@ -19,10 +19,8 @@ body {
 }
 
 .topnav {
-  background-image: url("linenbackground.jpg");
-  background-color: white;
+  background-color: #2e2e2d;
   width: 100%;
-  opacity: 0.9;
   margin-bottom: 225px;
 }
 
@@ -75,14 +73,14 @@ body {
   font-size: 30px;
   margin-top: -100px;
   color: white;
-  font-family: "Almendra";
+  font-family: "Oswald", sans-serif;
   letter-spacing: 1px;
 }
 
 .search h2 {
   font-size: 30px;
   margin-top: -110px;
-  font-family: "Almendra";
+  font-family: "Oswald", sans-serif;
   letter-spacing: 1px;
 }
 
@@ -94,8 +92,7 @@ body {
 }
 
 .container {
-  background-image: url("linenbackground.jpg");
-  background-color: rgb(82, 78, 78);
+  background-color: #2e2e2d;
   border: 2px solid;
   padding-bottom: 50px;
   height: 550px;
@@ -135,8 +132,7 @@ body {
 }
 
 .containerLogin {
-  background-image: url("linenbackground.jpg");
-  background-color: rgb(82, 78, 78);
+  background-color: #2e2e2d;
   border: 2px solid;
   padding-bottom: 50px;
   width: 100%;
@@ -178,8 +174,7 @@ body {
 }
 
 .containerReset {
-  background-image: url("linenbackground.jpg");
-  background-color: rgb(82, 78, 78);
+  background-color: #2e2e2d;
   border: 2px solid;
   padding-bottom: 50px;
   width: 400px;
@@ -292,7 +287,6 @@ label[for="compare"] {
 }
 
 .container-search {
-  background-image: url("linenbackground.jpg");
   background-color: rgb(59, 57, 57);
   border: 2px solid;
   padding-bottom: 50px;
@@ -414,13 +408,12 @@ h3 {
 }
 
 .container-results {
-  background-image: url("linenbackground.jpg");
   background-color: rgb(59, 57, 57);
   display: block;
   border: 2px solid;
   max-width: 100%;
   width: 400px;
-  height: 450px;
+  height: 470px;
   margin: auto;
   margin-top: 15px;
   opacity: 0.85;
@@ -430,7 +423,6 @@ h3 {
 }
 
 .endpoint {
-  background-image: url("linenbackground.jpg");
   width: 350px;
   height: 200px;
   border-radius: 25px;
@@ -454,7 +446,7 @@ h3 {
 }
 
 .searchwrap {
-  background-image: url("linenbackground.jpg");
+  background-image: url("blackboard.jpg");
   background-color: rgb(59, 57, 57);
   display: block;
   border: 2px solid;
@@ -487,11 +479,7 @@ ul {
 .landing p {
   text-align: center;
   font-size: 25px;
-}
-
-.login-link:hover {
-  cursor: pointer;
-  color: orange;
+  margin-bottom: 65px;
 }
 
 a.reset-link {
@@ -501,16 +489,11 @@ a.reset-link {
 }
 
 .reset-link:hover {
-  color: orange;
-}
-
-.login-link:active {
-  background-color: #4caf50;
-  color: white;
+  color: #ff8646;
 }
 
 .footer {
-  background-image: url("linenbackground.jpg");
+  background-color: #2e2e2d;
   text-align: center;
   padding: 1px;
   width: 100%;
