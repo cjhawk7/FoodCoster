@@ -97,7 +97,7 @@ body {
 
   padding-bottom: 50px;
   height: 550px;
-  max-width: 400px;
+  max-width: 415px;
   margin: auto;
   margin-top: 100px;
   border-radius: 25px;
@@ -138,7 +138,7 @@ body {
 
   padding-bottom: 50px;
   width: 100%;
-  max-width: 400px;
+  max-width: 415px;
   height: 375px;
   margin: auto;
   margin-top: 200px;
@@ -178,9 +178,8 @@ body {
 .containerReset {
   background-color: #2e2e2d;
   border: 1px solid white;
-
   padding-bottom: 50px;
-  width: 400px;
+  max-width: 415px;
   height: 350px;
   margin: auto;
   margin-top: 200px;
@@ -313,6 +312,7 @@ label[for="compare"] {
   color: white;
   margin: auto;
   display: block;
+  border-radius: 0px;
   background: #ff8646;
 }
 
@@ -415,7 +415,6 @@ h3 {
   background-color: rgb(59, 57, 57);
   display: block;
   border: 1px solid white;
-
   max-width: 100%;
   width: 400px;
   height: 475px;
@@ -429,7 +428,7 @@ h3 {
 
 .endpoint {
   background-color: rgb(59, 57, 57);
-  width: 350px;
+  max-width: 415px;
   height: 200px;
   border-radius: 25px;
   border: 1px solid white;
@@ -507,11 +506,12 @@ a.reset-link {
 }
 
 .footer {
-  background-color: #858580;
+  background-color: #2e2e2d;
   padding: 1px;
   width: 100%;
   position: absolute;
   bottom: 0;
+  text-align: center;
 }
 
 a:hover {
@@ -524,7 +524,7 @@ a:hover {
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
-  max-width: 400px;
+  max-width: 415px;
   margin: 0 auto;
 }
 .btn {
@@ -633,6 +633,48 @@ a:hover {
     border-bottom: 1px solid white;
     padding-bottom: 50px;
     border-radius: 0px;
+  }
+
+  .containerReset {
+    border-top: 1px solid white;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid white;
+    padding-bottom: 50px;
+    height: 350px;
+    margin: auto;
+    margin-top: 200px;
+    border-radius: 0px;
+  }
+
+  .container-results {
+    background-color: rgb(59, 57, 57);
+    border-top: 1px solid white;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid white;
+    margin-top: 150px;
+    border-radius: 0px;
+  }
+
+  .endpoint {
+    background-color: rgb(59, 57, 57);
+    border-top: 1px solid white;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid white;
+    border-radius: 0px;
+    margin-top: 150px;
+  }
+
+  .searchwrap {
+    background-color: rgb(59, 57, 57);
+    border-top: 1px solid white;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid white;
+    border-radius: 0px;
+    margin-top: 150px;
   }
 
   .footer {
