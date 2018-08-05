@@ -507,8 +507,7 @@ a.reset-link {
 }
 
 .footer {
-  background-color: #2e2e2d;
-  text-align: center;
+  background-color: #858580;
   padding: 1px;
   width: 100%;
   position: absolute;
@@ -543,7 +542,7 @@ a:hover {
 
 .btn:hover {
   background-position: right center;
-  cursor: pointer; /* change the direction of the change here */
+  cursor: pointer;
 }
 
 .btn-1 {
@@ -637,7 +636,7 @@ a:hover {
   }
 
   .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
   }
 
