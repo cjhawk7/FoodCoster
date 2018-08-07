@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   box-sizing: border-box;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -678,8 +683,11 @@ a:hover {
   }
 
   .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
   }
 
   .signup-form {
