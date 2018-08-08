@@ -99,7 +99,6 @@ body {
 .container {
   background-color: #2e2e2d;
   border: 1px solid white;
-
   padding-bottom: 50px;
   height: 550px;
   max-width: 415px;
@@ -185,7 +184,7 @@ body {
   border: 1px solid white;
   padding-bottom: 50px;
   max-width: 415px;
-  height: 350px;
+  height: 360px;
   margin: auto;
   margin-top: 200px;
   border-radius: 25px;
@@ -216,34 +215,6 @@ body {
   padding: 15px;
 }
 
-.js-login-btn {
-  width: 100px;
-  height: 35px;
-  font-family: Open-sans;
-  font-size: 20px;
-  border-radius: 3px;
-  background-color: white;
-  color: white;
-  margin: auto;
-  display: block;
-  margin-top: 20px;
-  background: #ff8646;
-}
-
-.js-signup-btn {
-  width: 100px;
-  height: 35px;
-  font-family: Open-sans;
-  font-size: 20px;
-  border-radius: 3px;
-  background-color: white;
-  color: white;
-  margin: auto;
-  display: block;
-  margin-top: 20px;
-  background: #ff8646;
-}
-
 button:hover {
   background-color: #d8530c;
   color: white;
@@ -254,6 +225,18 @@ button {
   border-radius: 25px;
   margin-right: 10px;
   margin-bottom: 3px;
+  border: none;
+  width: 100px;
+  height: 35px;
+  font-family: Open-sans;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: white;
+  color: white;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+  background: #ff8646;
 }
 
 label[for="firstname"],
@@ -289,8 +272,14 @@ label[for="compare"] {
 }
 
 .save {
-  margin-left: 220px;
+  margin-right: 10px;
   margin-bottom: 10px;
+  background-color: #1a91ca;
+}
+
+button.historyremove {
+  margin-right: 15px;
+  margin-bottom: 5px;
 }
 
 .container-search {
@@ -305,59 +294,6 @@ label[for="compare"] {
   margin-top: 75px;
   border-radius: 25px;
   opacity: 0.85;
-}
-
-.js-search-btn {
-  width: 100px;
-  height: 35px;
-  font-family: Open-sans;
-  font-size: 20px;
-  border-radius: 6px;
-  background-color: white;
-  color: white;
-  margin: auto;
-  display: block;
-  border-radius: 0px;
-  background: #ff8646;
-}
-
-.js-compare-btn {
-  width: 100px;
-  height: 35px;
-  font-family: Open-sans;
-  font-size: 20px;
-  border-radius: 6px;
-  background-color: white;
-  color: white;
-  display: block;
-  background: #ff8646;
-  margin: auto;
-}
-
-.js-reset-btn {
-  width: 100px;
-  height: 35px;
-  font-family: Open-sans;
-  font-size: 20px;
-  border-radius: 6px;
-  background-color: white;
-  color: white;
-  margin: auto;
-  display: block;
-  background: #ff8646;
-  margin-top: 10px;
-}
-
-.js-return-btn {
-  width: 100px;
-  height: 35px;
-  font-family: Open-sans;
-  font-size: 20px;
-  border-radius: 6px;
-  background-color: white;
-  color: white;
-  margin: auto;
-  display: block;
 }
 
 .wrapper {
@@ -637,18 +573,6 @@ a:hover {
     border-right: 0;
     border-bottom: 1px solid white;
     padding-bottom: 50px;
-    border-radius: 0px;
-  }
-
-  .containerReset {
-    border-top: 1px solid white;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid white;
-    padding-bottom: 50px;
-    height: 350px;
-    margin: auto;
-    margin-top: 200px;
     border-radius: 0px;
   }
 
