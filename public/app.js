@@ -1,3 +1,5 @@
+'use strict'
+
 const postVal = {
   budget: 0,
   location: "",
@@ -72,7 +74,7 @@ function loginUser(data, callback, err) {
 }
 
 function round(number, precision) {
-  var shift = function(number, precision, reverseShift) {
+  var shift = function (number, precision, reverseShift) {
     if (reverseShift) {
       precision = -precision;
     }
@@ -115,34 +117,34 @@ function displayNumbeoData(response) {
 
     p.html(
       " The average cost to eat out in " +
-        location +
-        ' at an inexpensive restaurant: <span class="cost"> ' +
-        round(response.data["average_price"], 2) +
-        "</span> " +
-        response.currency +
-        "." +
-        "<br><br>" +
-        ' It will be roughly <span class="price"> ' +
-        round(calcResult, 2) +
-        "</span> " +
-        currencyLocation
+      location +
+      ' at an inexpensive restaurant: <span class="cost"> ' +
+      round(response.data["average_price"], 2) +
+      "</span> " +
+      response.currency +
+      "." +
+      "<br><br>" +
+      ' It will be roughly <span class="price"> ' +
+      round(calcResult, 2) +
+      "</span> " +
+      currencyLocation
     );
   } else if (unit === "Days") {
     calcResult = response.data["average_price"] * time * meals;
 
     $(".container-results p").html(
       " The average cost to eat out in " +
-        location +
-        ' at an inexpensive restaurant: <span class="cost"> ' +
-        round(response.data["average_price"], 2) +
-        "</span> " +
-        response.currency +
-        "." +
-        "<br><br>" +
-        ' It will be roughly <span class="price">  ' +
-        round(calcResult, 2) +
-        "</span> " +
-        currencyLocation
+      location +
+      ' at an inexpensive restaurant: <span class="cost"> ' +
+      round(response.data["average_price"], 2) +
+      "</span> " +
+      response.currency +
+      "." +
+      "<br><br>" +
+      ' It will be roughly <span class="price">  ' +
+      round(calcResult, 2) +
+      "</span> " +
+      currencyLocation
     );
   }
 
@@ -160,11 +162,11 @@ function displayNumbeoData(response) {
     info = n;
     $(".container-results p").append(
       "<br><br>" +
-        ' Nice, looks like you will have an extra <span class="surplus">  ' +
-        round(surplusCash, 2) +
-        "</span> " +
-        response.currency +
-        " to spend on stuff!"
+      ' Nice, looks like you will have an extra <span class="surplus">  ' +
+      round(surplusCash, 2) +
+      "</span> " +
+      response.currency +
+      " to spend on stuff!"
     );
   } else {
     let neededCash = calcResult - budget;
@@ -180,11 +182,11 @@ function displayNumbeoData(response) {
     info = m;
     $(".container-results p").append(
       "<br><br>" +
-        ' Whoops, looks like you will need an extra <span class="deficit"> ' +
-        round(neededCash, 2) +
-        "</span> " +
-        response.currency +
-        " to eat out that much!"
+      ' Whoops, looks like you will need an extra <span class="deficit"> ' +
+      round(neededCash, 2) +
+      "</span> " +
+      response.currency +
+      " to eat out that much!"
     );
   }
 
@@ -260,13 +262,13 @@ function displaySearchData(data) {
   let html = "";
   var array = renderingPosts;
   if (array) {
-    $.each(array, function(i) {
+    $.each(array, function (i) {
       html +=
         '<div class="searchwrap"><ul><div class="wrapper"><button class="historyremove" data-id="' +
         array[i].id +
         '"><span class="button-label">remove</span></button></div>';
       delete array[i].id;
-      $.each(array[i], function(key, value) {
+      $.each(array[i], function (key, value) {
         html += "<li>" + key + ": " + value + "</li>";
       });
 
@@ -276,8 +278,8 @@ function displaySearchData(data) {
 
     $(".container-history p").html(html);
 
-    $(".historyremove").on("click", function() {
-      deleteSearchData($(this).data("id"), function(obj) {
+    $(".historyremove").on("click", function () {
+      deleteSearchData($(this).data("id"), function (obj) {
         removeSearchData(obj);
       });
     });
@@ -337,7 +339,7 @@ function userUpdate() {
     updateUser(update, userUpdate);
     $(".containerReset p").text("User info updated! Logging out...");
     authToken = undefined;
-    setTimeout(function() {
+    setTimeout(function () {
       logout();
     }, 3000);
   }
@@ -388,19 +390,19 @@ function displayComparison(obj) {
     let percentDifference = newCitySearch / firstCitySearch;
     $(".container-results h3").append(
       "Eating out in " +
-        newCityComparison +
-        " would be about " +
-        round(percentDifference, 2) +
-        "x more expensive!"
+      newCityComparison +
+      " would be about " +
+      round(percentDifference, 2) +
+      "x more expensive!"
     );
   } else {
     let percentDifference = firstCitySearch / newCitySearch;
     $(".container-results h3").append(
       "Eating out in " +
-        newCityComparison +
-        " would be about " +
-        round(percentDifference, 2) +
-        "x cheaper!"
+      newCityComparison +
+      " would be about " +
+      round(percentDifference, 2) +
+      "x cheaper!"
     );
   }
   if (newCitySearch === firstCitySearch) {
@@ -419,11 +421,11 @@ function footerAlign() {
   $(".footer").css("height", footerHeight);
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   footerAlign();
 });
 
-$(window).resize(function() {
+$(window).resize(function () {
   footerAlign();
 });
 
@@ -448,7 +450,7 @@ function setupClickHandlers() {
     getNumbeoData(postVal.location, displayNumbeoData);
   });
 
-  $(".js-compare-btn").on("click", function() {
+  $(".js-compare-btn").on("click", function () {
     newCityComparison = $("#compare").val();
     getNumbeoData(newCityComparison, displayComparison);
   });
@@ -496,7 +498,7 @@ function setupClickHandlers() {
     userUpdate();
   });
 
-  $(".save").on("click", function() {
+  $(".save").on("click", function () {
     postVal.info = info;
     postVal.unit = unit;
     $(".container-results").addClass("hidden");
@@ -505,11 +507,11 @@ function setupClickHandlers() {
     sendSearchData(postVal, successFunction);
   });
 
-  $(".delete").on("click", function() {
+  $(".delete").on("click", function () {
     $(".container-results").addClass("hidden");
   });
 
-  $(".historystore").on("click", function() {
+  $(".historystore").on("click", function () {
     $(".signup").addClass("hidden");
     $(".login").addClass("hidden");
     $(".container-history").removeClass("hidden");
@@ -522,11 +524,11 @@ function setupClickHandlers() {
     getSearchData(displaySearchData);
   });
 
-  $(".historyremove").on("click", function() {
+  $(".historyremove").on("click", function () {
     deleteSearchData(deleteData);
   });
 
-  $(".home").on("click", function() {
+  $(".home").on("click", function () {
     $(".signup").addClass("hidden");
     $(".login").addClass("hidden");
     $(".search").addClass("hidden");
@@ -537,7 +539,7 @@ function setupClickHandlers() {
     $(".landing").removeClass("hidden");
   });
 
-  $(".login-link").on("click", function() {
+  $(".login-link").on("click", function () {
     $(".login").removeClass("hidden");
     $(".signup").addClass("hidden");
     $(".search").addClass("hidden");
@@ -545,7 +547,7 @@ function setupClickHandlers() {
     $(".container-results").addClass("hidden");
   });
 
-  $(".reset-link").on("click", function() {
+  $(".reset-link").on("click", function () {
     $(".login").addClass("hidden");
     $(".signup").addClass("hidden");
     $(".search").addClass("hidden");
@@ -555,7 +557,7 @@ function setupClickHandlers() {
     $(".searchnav").removeAttr("hidden");
   });
 
-  $(".btn-1").on("click", function() {
+  $(".btn-1").on("click", function () {
     $(".login").add("hidden");
     $(".signup").removeClass("hidden");
     $(".search").addClass("hidden");
@@ -564,7 +566,7 @@ function setupClickHandlers() {
     $(".landing").addClass("hidden");
   });
 
-  $(".btn-2").on("click", function() {
+  $(".btn-2").on("click", function () {
     $(".login").removeClass("hidden");
     $(".signup").addClass("hidden");
     $(".search").addClass("hidden");
@@ -573,7 +575,7 @@ function setupClickHandlers() {
     $(".landing").addClass("hidden");
   });
 
-  $(".logout").on("click", function() {
+  $(".logout").on("click", function () {
     $(".signup").addClass("hidden");
     $(".search").addClass("hidden");
     $(".container-history").addClass("hidden");
@@ -593,7 +595,7 @@ function setupClickHandlers() {
     authToken = undefined;
   });
 
-  $(".searchnav").on("click", function() {
+  $(".searchnav").on("click", function () {
     $(".login").addClass("hidden");
     $(".signup").addClass("hidden");
     $(".search").removeClass("hidden");
@@ -605,6 +607,6 @@ function setupClickHandlers() {
   });
 }
 
-$(function() {
+$(function () {
   setupClickHandlers();
 });
