@@ -384,7 +384,7 @@ function loginPassword() {
 }
 
 function displayComparison(obj) {
-  newCitySearch = obj.data.average_price;
+  let newCitySearch = obj.data.average_price;
   $(".container-results h3").text("");
   if (newCitySearch > firstCitySearch) {
     let percentDifference = newCitySearch / firstCitySearch;
